@@ -1,4 +1,5 @@
 ## Personal page for `alaa.sh`
 
 To do: 
-- Currently working on a personal blog.
+- Work on a personal blog.
+- Explore Jekyll & themes.
