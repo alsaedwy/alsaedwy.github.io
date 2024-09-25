@@ -146,7 +146,7 @@ table {
 body,
 html {
   font-family: 'Consolas', monospace;
-  font-size: 14px;
+  font-size: 14.5px;
   color: #e0e0e0; /* Light gray text color */
   background-color: #000000; /* Dark background color changed from 121212 */
   font-weight: 400;
@@ -218,6 +218,7 @@ strong {
 
 .section {
   margin-bottom: 1rem;
+  page-break-inside : avoid !important;
 }
 
 section .location {
@@ -237,7 +238,7 @@ section .location {
 #header > #profiles,
 #header > #contact,
 #skills,
-/* #languages, */
+#languages,
 #interests {
   display: flex;
   flex-flow: row wrap;
@@ -401,7 +402,7 @@ section .location {
   line-height: 1;
   color: #000000; /* Light blue text */
   background-color: #09ff00; /* Dark background */
-  border: 0 solid #000000;
+  border: 2 solid #ffffff;
   white-space: nowrap;
 }
 
@@ -750,6 +751,226 @@ section .location {
     	</section>
     
     <section class="section">
+    	<header>
+    		<h2 class='section-title'>Skills</h2>
+    	</header>
+    	<section id="skills">
+    		<div class="item">
+    			<h3 class="name">
+    				Programming and Scripting
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Python</li>
+    				<li>pytest</li>
+    				<li>Unit Testing</li>
+    				<li>Test Driven Development (TDD)</li>
+    				<li>Bash</li>
+    				<li>AWS Lambda</li>
+    				<li>AWS API Gateway</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Infrastructure as Code (IaC)
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Terraform</li>
+    				<li>CloudFormation</li>
+    				<li>Ansible</li>
+    				<li>Systems Manager</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Continous Integration/Deployment/Delivery (CI/CD)
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Jenkins</li>
+    				<li>GitHub Actions</li>
+    				<li>AWS CodeBuild</li>
+    				<li>AWS CodeDeploy</li>
+    				<li>AWS CodePipeline</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Containerization
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Docker</li>
+    				<li>Kubernetes</li>
+    				<li>AWS Fargate</li>
+    				<li>AWS EKS</li>
+    				<li>AWS ECS</li>
+    				<li>AWS ECR</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Version Control Systems
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Git</li>
+    				<li>GitHub Enterprise</li>
+    				<li>BitBucket Server</li>
+    				<li>GitLab</li>
+    				<li>AWS CodeCommit</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Monitoring, Logging and Alerting
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Datadog</li>
+    				<li>Splunk</li>
+    				<li>AWS CloudWatch</li>
+    				<li>AWS X-Ray</li>
+    				<li>AWS CloudTrail</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Data Serialization
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>YAML</li>
+    				<li>JSON</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Documentation
+    			</h3>
+    			 
+    			<div class="level advanced">
+    				<em>Advanced</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>Markdown</li>
+    				<li>draw.io</li>
+    				<li>Confluence</li>
+    				<li>Swagger</li>
+    			</ul>
+    		</div>
+    		<div class="item">
+    			<h3 class="name">
+    				Database Administration (SQL &amp; NoSQL)
+    			</h3>
+    			 
+    			<div class="level intermediate">
+    				<em>Intermediate</em>
+    				<div class="bar"></div>
+    			</div>
+    			<ul class="keywords">
+    				<li>MySQL</li>
+    				<li>DynamoDB</li>
+    				<li>AWS RDS</li>
+    			</ul>
+    		</div>
+    	</section>
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Education <span class="item-count">(2)</span></h2>
+      </header>
+    
+      <section id="education">
+        <section class="education-item">
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">
+              2009
+              </span>
+              <span class="endDate">
+              - 2013
+              </span>
+            </div>
+            <div class="header-left">
+              <div class="studyType">
+                Bachelor
+              </div>
+              <div class="area">
+                Computer Science
+              </div>
+              <div class="institution">
+                Future Academy
+              </div>
+            </div>
+          </header>
+    
+    
+    
+          <div class="item">
+          </div>
+        </section>
+        <section class="education-item">
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">
+              2015
+              </span>
+              <span class="endDate">
+              - 2018
+              </span>
+            </div>
+            <div class="header-left">
+              <div class="studyType">
+                Diploma
+              </div>
+              <div class="area">
+                Computer Science
+              </div>
+              <div class="institution">
+                Suez Canal University
+              </div>
+            </div>
+          </header>
+    
+    
+    
+          <div class="item">
+          </div>
+        </section>
+      </section>
+    </section>
+    <section class="section">
       <header>
         <h2 class='section-title'>Work Experience <span class="item-count">(7)</span></h2>
       </header>
@@ -832,14 +1053,10 @@ section .location {
           </ul>
           <div class="item" id="work-item">
             <ul class="highlights">
-              <li><p><p>Designed and built services for DevOps team, and other internal 3M development teams</p></p></li>
-              <li><p><p>Used Docker and Kubernetes to containerize services, GitHub Actions for CI/CD, and AWS Systems Manager for configuration management.</p></p></li>
-              <li><p><p>Automated recurring or essential jobs for existing and new development and deployment pipelines using Python, Bash, and AWS Lambda.</p></p></li>
-              <li><p><p>Participated in architectural designs for amending current infrastructure or creating new one(s)</p></p></li>
-              <li><p><p>Took lead in documenting using Confluence squad-owned tools &amp; creating usage guides through Markdown &amp; README files.</p></p></li>
-              <li><p><p>Worked on designing and building infrastructure for GitHub Enterprise Server migration for the internal use of 3M development teams.</p></p></li>
-              <li><p><p>Used Terraform for provisioning infrastructure. Designed a robust GitHub Enterprise environment to support large-scale development activities.</p></p></li>
-              <li><p><p>Utilized GitHub for code reviews, enforced coding standards using SonarQube, and fostered a culture of high code quality and collaborative improvement.</p></p></li>
+              <li><p><p>Designed and built services for 3M's DevOps and internal development teams, utilizing Docker, Kubernetes, GitHub Actions, and AWS Systems Manager for CI/CD and configuration management.</p></p></li>
+              <li><p><p>Automated essential jobs in development and deployment pipelines using Python, Bash, AWS Lambda, and participated in architectural designs to enhance infrastructure.</p></p></li>
+              <li><p><p>Led documentation efforts using Confluence, creating usage guides with draw.io Markdown &amp; README files, and contributed to GitHub Enterprise Server migration for internal development use.</p></p></li>
+              <li><p><p>Used Terraform for infrastructure provisioning, enforced coding standards with SonarQube, and promoted high code quality and collaboration through GitHub for code reviews.</p></p></li>
             </ul>
           </div>
         </section>
@@ -1002,17 +1219,10 @@ section .location {
           </ul>
           <div class="item" id="work-item">
             <ul class="highlights">
-              <li><p><p>Collaborated closely with software developers, laboratory technicians, and other stakeholders to ensure the LIS met all technical and operational requirements.</p></p></li>
-              <li><p><p>Deployed the Laboratory Information System (LIS) software onto servers, customizing application settings to meet specific laboratory workflows and requirements.</p></p></li>
-              <li><p><p>Installed and configured Linux servers, set up and fine-tuned PHP environments along with MySQL databases to support the LIS application, including configuring database replication and backup strategies, while ensuring optimal system settings and security protocols were in place for reliable and secure operation.</p></p></li>
-              <li><p><p>Customized LIS modules and configured detailed user permissions to align with the roles and responsibilities of different laboratory staff members, enhancing security and usability.</p></p></li>
-              <li><p><p>Connected laboratory testing machines to the network, setting up data mapping and ensuring accurate and efficient transfer of test results into the LIS for processing and reporting.</p></p></li>
-              <li><p><p>Implemented comprehensive security measures including firewalls, SSL certificates, and intrusion detection systems to protect sensitive patient and laboratory data from unauthorized access.</p></p></li>
-              <li><p><p>Performed regular system updates and patches to keep all software current, monitored system performance metrics, and resolved issues promptly to maintain high availability and reliability.</p></p></li>
-              <li><p><p>Provided training and technical support to laboratory staff on using the LIS, creating user guides, and conducting training sessions to improve user proficiency and system adoption.</p></p></li>
-              <li><p><p>Configured complex network settings, including VLANs and subnetting, and troubleshot connectivity issues to ensure stable and secure network communication between devices and servers.</p></p></li>
-              <li><p><p>Participated in regular meetings and planning sessions to discuss system requirements, updates, and coordinated deployment schedules to align with laboratory operations.</p></p></li>
-              <li><p><p>Documented all system configurations, procedures, and changes meticulously, maintaining accurate records for future reference, troubleshooting, and compliance purposes.</p></p></li>
+              <li><p><p>Collaborated with developers, technicians, and stakeholders to ensure the Laboratory Information System (LIS) met technical and operational requirements, customizing the software for specific workflows.</p></p></li>
+              <li><p><p>Installed and configured Linux servers, set up PHP environments with MySQL databases, and implemented security protocols including firewalls and SSL for secure LIS operation.</p></p></li>
+              <li><p><p>Connected laboratory machines to the LIS, ensured accurate data transfer, and provided training and support to staff, creating guides to enhance system adoption and usability.</p></p></li>
+              <li><p><p>Monitored system performance, performed updates, resolved issues, and documented configurations and procedures for compliance and future troubleshooting.</p></p></li>
             </ul>
           </div>
         </section>
@@ -1051,13 +1261,10 @@ section .location {
           </ul>
           <div class="item" id="work-item">
             <ul class="highlights">
-              <li><p><p>Participated in the design and rollout of a new wireless network infrastructure, including setting up access points and configuring WPA2 security protocols to secure wireless communication.</p></p></li>
-              <li><p><p>Configured routers and switches to establish foundational network connectivity across the company's local and wide area networks.</p></p></li>
-              <li><p><p>Implemented VLANs and inter-VLAN routing to enhance network segmentation and efficiency in handling traffic within the corporate environment.</p></p></li>
-              <li><p><p>Monitored network performance using SNMP tools to identify bottlenecks and optimize traffic flow, ensuring consistent network availability and reliability.</p></p></li>
-              <li><p><p>Collaborated with senior network engineers to upgrade network hardware and software, including firmware updates and patches to maintain network security and performance.</p></p></li>
-              <li><p><p>Assisted in troubleshooting network issues, resolving connectivity problems, and performing root cause analysis to prevent future occurrences.</p></p></li>
-              <li><p><p>Observed and documented the implementation of Layer 1 infrastructure, including the installation of cables, patch panels, and racks, to ensure compliance with physical network design standards.</p></p></li>
+              <li><p><p>Designed and deployed both wireless and wired network infrastructure for the university, configuring access points, routers, and switches while securing wireless communication with WPA2 protocols.</p></p></li>
+              <li><p><p>Implemented VLANs and inter-VLAN routing to enhance network segmentation and efficiency across both wired and wireless networks.</p></p></li>
+              <li><p><p>Monitored network performance using SNMP tools, resolved connectivity issues, and optimized traffic flow to ensure reliable and consistent network availability.</p></p></li>
+              <li><p><p>Documented the implementation of Layer 1 infrastructure, including cable installation, patch panels, and racks, ensuring compliance with physical network standards.</p></p></li>
             </ul>
           </div>
         </section>
@@ -1166,7 +1373,7 @@ section .location {
                       Cisco Certified Network Associate Routing and Switching (CCNA Routing and Switching)
                     </div>
                     <div class="issuer">
-                      Sololearn
+                      Cisco
                     </div>
                 </div>
               </header>
@@ -1180,162 +1387,6 @@ section .location {
             </section>
         </section>
       </section>
-    <section class="section">
-    	<header>
-    		<h2 class='section-title'>Skills</h2>
-    	</header>
-    	<section id="skills">
-    		<div class="item">
-    			<h3 class="name">
-    				Programming and Scripting
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Python</li>
-    				<li>pytest</li>
-    				<li>Unit Testing</li>
-    				<li>Test Driven Development (TDD)</li>
-    				<li>Bash</li>
-    				<li>AWS Lambda</li>
-    				<li>AWS API Gateway</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Infrastructure as Code (IaC)
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Terraform</li>
-    				<li>CloudFormation</li>
-    				<li>Ansible</li>
-    				<li>Systems Manager</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Continous Integration/Deployment/Delivery (CI/CD)
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Jenkins</li>
-    				<li>GitHub Actions</li>
-    				<li>AWS CodeBuild</li>
-    				<li>AWS CodeDeploy</li>
-    				<li>AWS CodePipeline</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Containerization
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Docker</li>
-    				<li>Kubernetes</li>
-    				<li>AWS Fargate</li>
-    				<li>AWS Elastic Kubernetes Service (EKS)</li>
-    				<li>AWS Elastic Container Service (ECS)</li>
-    				<li>AWS Elastic Container Registry (ECR)</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Version Control Systems
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Git</li>
-    				<li>GitHub Enterprise</li>
-    				<li>BitBucket Server</li>
-    				<li>GitLab</li>
-    				<li>AWS CodeCommit</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Monitoring, Logging and Alerting
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Datadog</li>
-    				<li>Splunk</li>
-    				<li>AWS CloudWatch</li>
-    				<li>AWS X-Ray</li>
-    				<li>AWS CloudTrail</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Data Serialization
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>YAML</li>
-    				<li>JSON</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Documentation
-    			</h3>
-    			 
-    			<div class="level advanced">
-    				<em>Advanced</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>Markdown</li>
-    				<li>draw.io</li>
-    				<li>Confluence</li>
-    				<li>Swagger</li>
-    			</ul>
-    		</div>
-    		<div class="item">
-    			<h3 class="name">
-    				Database Administration (SQL &amp; NoSQL)
-    			</h3>
-    			 
-    			<div class="level intermediate">
-    				<em>Intermediate</em>
-    				<div class="bar"></div>
-    			</div>
-    			<ul class="keywords">
-    				<li>MySQL</li>
-    				<li>DynamoDB</li>
-    				<li>AWS RDS</li>
-    			</ul>
-    		</div>
-    	</section>
-    </section>
     <section class="section">
       <header>
         <h2 class='section-title'>Publications</h2>
@@ -1392,70 +1443,6 @@ section .location {
             </div>
           </div>
         </div>
-      </section>
-    </section>
-    <section class="section">
-      <header>
-        <h2 class='section-title'>Education <span class="item-count">(2)</span></h2>
-      </header>
-    
-      <section id="education">
-        <section class="education-item">
-          <header class="clear">
-            <div class="date">
-              <span class="startDate">
-              2009
-              </span>
-              <span class="endDate">
-              - 2013
-              </span>
-            </div>
-            <div class="header-left">
-              <div class="studyType">
-                Bachelor
-              </div>
-              <div class="area">
-                Computer Science
-              </div>
-              <div class="institution">
-                Future Academy
-              </div>
-            </div>
-          </header>
-    
-    
-    
-          <div class="item">
-          </div>
-        </section>
-        <section class="education-item">
-          <header class="clear">
-            <div class="date">
-              <span class="startDate">
-              2015
-              </span>
-              <span class="endDate">
-              - 2018
-              </span>
-            </div>
-            <div class="header-left">
-              <div class="studyType">
-                Diploma
-              </div>
-              <div class="area">
-                Computer Science
-              </div>
-              <div class="institution">
-                Suez Canal University
-              </div>
-            </div>
-          </header>
-    
-    
-    
-          <div class="item">
-          </div>
-        </section>
       </section>
     </section>
     <section class="section">
