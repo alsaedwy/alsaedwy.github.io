@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page Loader</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the current path after '/blog/'
+            const blogPath = window.location.pathname.replace('/blog/', '');
+
+            // Construct the URL to the subdomain with the same path
+            const subdomainUrl = `https://blog.alaa.sh/${blogPath}`;
+
+            // Fetch the content from the subdomain
+            fetch(subdomainUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(htmlContent => {
+                    // Display the fetched content in the div with id 'content'
+                    document.getElementById('content').innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    document.getElementById('content').innerHTML = '<p>Failed to load the content.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
