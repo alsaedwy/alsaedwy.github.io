@@ -7,17 +7,17 @@
             let requestedPath = window.location.pathname;
             console.log(`Redirecting to default path 1: ${defaultPath}`);
             
-            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
-            if (requestedPath === "/blog" || requestedPath === "/blog/") {
-                window.location.assign = "https://alaa.sh";    
-                let requestedPath ="/blog/Salam!";
-                }
-            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
-            
             if (requestedPath != defaultPath) {
                 window.location.assign = "https://alaa.sh";
                 let requestedPath = defaultPath;
                 console.log(`Redirecting to requested path 1: ${requestedPath}`);
+            
+            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
+            if (requestedPath === "/blog" || requestedPath === "/blog/") {
+                window.location.replace("https://alaa.sh/blog/Salam!");
+            }
+            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
+                
             
         }
     })();
@@ -79,8 +79,6 @@
                 window.preloadPage= f(`https://publish-01.obsidian.md/access/2c5a68159068a224535763457f7212bf${requestedPath}.md`);
             })();
         </script>
-        <meta name="description" content="Welcome - Powered by Obsidian Publish.">
-        <meta property="og:description" content="Welcome - Powered by Obsidian Publish.">
     </script>
 </head>
 
