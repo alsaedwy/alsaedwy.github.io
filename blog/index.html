@@ -7,16 +7,18 @@
             let requestedPath = window.location.pathname;
             console.log(`Redirecting to default path 1: ${defaultPath}`);
             
-            if (requestedPath != defaultPath) {
+            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
+            if (requestedPath === "/blog" || requestedPath === "/blog/") {
+                window.location.replace("https://alaa.sh/blog/Salam!");
+                // let requestedPath = '';
+            }
+            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
+
+            else if (requestedPath != defaultPath) {
                 window.location.assign = "https://alaa.sh";
                 let requestedPath = defaultPath;
                 console.log(`Redirecting to requested path 1: ${requestedPath}`);
             
-            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
-            if (requestedPath === "/blog" || requestedPath === "/blog/") {
-                window.location.replace("https://alaa.sh/blog/Salam!");
-            }
-            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
                 
             
         }
