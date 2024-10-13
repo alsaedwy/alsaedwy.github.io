@@ -8,18 +8,17 @@
             console.log(`Redirecting to default path 1: ${defaultPath}`);
             
             // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
-            // if (requestedPath === "/blog" || requestedPath === "/blog/") {
-            //     window.location.replace("https://alaa.sh/blog/Salam!");
-            //     // let requestedPath = '';
-            // }
+            if (requestedPath === "/blog" || requestedPath === "/blog/" ) {
+                window.location.reload("https://alaa.sh/blog/Salam!");
+                console.log("Reloaded becase", ${requestedPath});
+                // let requestedPath = '/blog/Salam!';
+            }
             // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
 
             else if (requestedPath != defaultPath) {
                 window.location.assign = "https://alaa.sh";
                 let requestedPath = defaultPath;
                 console.log(`Redirecting to requested path 1: ${requestedPath}`);
-            
-                
             
         }
     })();
