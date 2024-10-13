@@ -9,14 +9,16 @@
             
             // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
             if (requestedPath === "/blog" || requestedPath === "/blog/") {
-                window.location.replace("/blog/Salam!");
-            }
+                window.location.assign = "https://alaa.sh";    
+                let requestedPath ="/blog/Salam!";
+                }
             // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
-
+            
             if (requestedPath != defaultPath) {
                 window.location.assign = "https://alaa.sh";
                 let requestedPath = defaultPath;
                 console.log(`Redirecting to requested path 1: ${requestedPath}`);
+            
         }
     })();
     </script>
@@ -71,14 +73,6 @@
         <script type="text/javascript">
             window.siteInfo={"uid":"2c5a68159068a224535763457f7212bf","host":"publish-01.obsidian.md","status":"active","slug":null,"redirect":1,"customurl":"alaa.sh"};
             (function(){
-                // let defaultPath = 'Welcome';
-                // let requestedPath = window.location.pathname;
-                // console.log(`Redirecting to default path: ${defaultPath}`);
-                
-                // if (requestedPath != defaultPath) {
-                //     let requestedPath = defaultPath;
-                //     console.log(`Redirecting to requested path: ${requestedPath}`);
-                // }
                 let f = u=>u&&fetch(u,{credentials: "include"});
                 window.preloadOptions=f("https://publish-01.obsidian.md/options/2c5a68159068a224535763457f7212bf");
                 window.preloadCache=f("https://publish-01.obsidian.md/cache/2c5a68159068a224535763457f7212bf");
