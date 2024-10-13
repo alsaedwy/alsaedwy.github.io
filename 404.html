@@ -6,7 +6,12 @@
             let defaultPath = '';
             let requestedPath = window.location.pathname;
             console.log(`Redirecting to default path 1: ${defaultPath}`);
-            
+
+            if (requestedPath === "/blog" || requestedPath === "/blog/") {
+
+                window.location.replace("https://alaa.sh/blog/Salam!");
+                console.log(`Reloaded because ${requestedPath}`);
+            }
         //     if (requestedPath != defaultPath) {
         //         window.location.assign = "https://blog.alaa.sh";
         //         let requestedPath = defaultPath;
