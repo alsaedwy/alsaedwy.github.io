@@ -9,7 +9,7 @@
             
             // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
             if (requestedPath === "/blog" || requestedPath === "/blog/" ) {
-                window.location.reload("https://alaa.sh/blog/Salam!");
+                window.location.assign("https://alaa.sh/blog/Salam!");
                 console.log("Reloaded becase", ${requestedPath});
                 // let requestedPath = '/blog/Salam!';
             }
