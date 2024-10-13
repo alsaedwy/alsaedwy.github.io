@@ -7,10 +7,15 @@
             let requestedPath = window.location.pathname;
             console.log(`Redirecting to default path 1: ${defaultPath}`);
             
+            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (START)
+            if (requestedPath === "/blog" || requestedPath === "/blog/") {
+                window.location.replace("/blog/Salam!");
+            }
+            // Added redirect to "/blog/Salam!" if path is "/blog" or "/blog/" (END)
+
             if (requestedPath != defaultPath) {
                 window.location.assign = "https://alaa.sh";
                 let requestedPath = defaultPath;
-                // <meta http-equiv="refresh" content="1; URL=https://blog.alaa.sh" />
                 console.log(`Redirecting to requested path 1: ${requestedPath}`);
         }
     })();
@@ -54,7 +59,7 @@
             <link rel="stylesheet" href="https://publish.obsidian.md/app.css?09cbb17d8c5de2dbdf08">
         </noscript>
 
-        <title>Welcome - Obsidian Publish</title>
+        <title>Encapsulated in 404 or index</title>
 
         <link rel="preload" href="https://publish-01.obsidian.md/access/2c5a68159068a224535763457f7212bf/publish.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript>
