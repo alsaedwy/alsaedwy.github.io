@@ -1,321 +1,571 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alaa Saeed — Personal Bio & Portfolio</title>
+  <!-- Include relevant CSS from index.html if needed, or adapt styles -->
+  <link rel="stylesheet" href="assets/css/main.css" /> <!-- Added from index.html for article styling -->
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript> <!-- Added from index.html -->
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #d4d4d4;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+      transition: opacity 0.5s ease-out; /* Transition for fade */
+      opacity: 1; /* Ensure body starts visible */
+    }
+    body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+        -moz-animation: none !important;
+        -webkit-animation: none !important;
+        -ms-animation: none !important;
+        animation: none !important;
+        -moz-transition: none !important;
+        -webkit-transition: none !important;
+        -ms-transition: none !important;
+        transition: none !important;
+    }
+    body.fade-out {
+        opacity: 0; /* Fade out effect */
+    }
+    #floating-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 700px;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border-top: 1px solid #666;
+      border-bottom: 1px solid #666;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      z-index: 1000;
+      opacity: 0;
+      transform: translate(-50%, -50%) translateX(20px);
+      transition: opacity 0.65s ease-out 0.5s, transform 0.65s ease-out 0.5s;
+      will-change: opacity, transform;
+    }
+    body:not(.is-preload) #floating-box {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    #floating-box h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 0.2em;
+    }
+    #floating-box h2 {
+      color: #00ff88;
+      font-size: 1.2rem;
+      text-align: left;
+      margin: 0 0 1rem;
+      letter-spacing: normal;
+    }
+    ul.tree, ul.subtree {
+      list-style: none;
+      padding-left: 1rem;
+      position: relative;
+      margin: 0;
+    }
+    ul.tree::before, ul.subtree::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-left: 1px dashed #666;
+    }
+    .node {
+      cursor: pointer;
+      margin: 0.3rem 0;
+      position: relative;
+      padding-left: 2.5rem;
+      transition: color 0.3s;
+      font-size: 1.2rem;
+      color: #b0b0b0;
+    }
+    .node:hover {
+        color: #00ff88;
+    }
+    .node.active-node {
+        color: #ffffff;
+    }
+    .node.active-node:hover {
+        color: #00ff88;
+    }
+    .node::before {
+      content: "├──  ";
+      color: #888;
+      position: absolute;
+      left: 0;
+    }
+    ul.tree > li:last-child > .node::before,
+    ul.subtree > li:last-child > .node::before {
+      content: "└──  ";
+    }
+    .content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: max-height 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                  opacity 1s ease-out, 
+                  transform 1s ease-out;
+      padding-left: 1.5rem;
+      will-change: max-height, opacity, transform;
+      font-size: 1.2rem;
+    }
+    .content.visible {
+      max-height: 1500px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .content p, .content li {
+        font-size: 1.2rem;
+        color: #b0b0b0;
+        transition: color 0.3s;
+    }
+    .content a {
+        font-size: 1.2rem;
+        color: #00aaff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .node.active-node + .content p,
+    .node.active-node + .content li,
+    .node.active-node + .content .node,
+    .node.active-node + .content .node a {
+        color: #ffffff;
+    }
+    .node.active-node + .content .node::before {
+        color: #aaa;
+    }
+    .node.active-node + .content a {
+        color: #33d6ff;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .main-content {
+      padding: 2rem;
+      text-align: center;
+    }
+    .main-content article {
+        background: #2a2f33;
+        padding: 2em;
+        margin: 2em auto;
+        max-width: 600px;
+        border-radius: 4px;
+        text-align: left;
+        color: #ffffff;
+    }
+    .main-content article h2.major {
+        color: #ffffff;
+        border-bottom: solid 2px #ffffff;
+        margin-bottom: 1em;
+        padding-bottom: 0.5em;
+    }
+    .main-content nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 1em;
+    }
+    .main-content nav ul li {
+        padding: 0 0.5em;
+    }
+    .main-content nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
+    .main-content nav ul li a:hover {
+        color: #00ff88;
+        border-bottom-color: transparent;
+    }
+    .main-content nav ul li a.icon:before {
+        margin-right: 0.5em;
+    }
+    .social-links {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px dashed #666;
+    }
+    .social-links ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .social-links ul li {
+        padding: 0 0.75em;
+    }
+    .social-links ul li a {
+        color: #777;
+        text-decoration: none;
+        font-size: 1.3rem;
+        transition: color 0.2s ease-in-out;
+    }
+    .social-links ul li a:hover {
+        color: #00ff88;
+        text-decoration: none;
+    }
+    .social-links ul li a .label {
+        display: none;
+    }
+  </style>
+</head>
+<body class="is-preload">
 
-<html>
-	<head>
-		<title>Alaa Saeed</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!-- Floating tree menu -->
+<div id="floating-box">
+  <h1>Alaa Saeed</h1>
+  <h2>~/alaa.sh</h2>
+  <ul class="tree">
+    <li>
+      <div class="node" onclick="toggle(this)">about</div>
+      <div class="content">
+        <p>A software engineer that's passionate about tech, art, nature and what's in between.</p>
+      </div>
+    </li>
+    <!-- <li>
+      <div class="node" onclick="toggle(this)"> skills</div>
+      <div class="content">
+        <ul class="subtree">
+          <li>
+            <div class="node" onclick="toggle(this)">Infrastructure</div>
+            <div class="content">
+              <ul>
+                <li>Terraform</li>
+                <li>Ansible</li>
+                <li>AWS CDK</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="node" onclick="toggle(this)">CI/CD</div>
+            <div class="content">
+              <ul>
+                <li>GitHub Actions</li>
+                <li>GitLab CI</li>
+                <li>Jenkins</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="node" onclick="toggle(this)">Cloud</div>
+            <div class="content">
+              <ul>
+                <li>AWS</li>
+                <li>GCP</li>
+                <li>Azure</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="node" onclick="toggle(this)">Monitoring</div>
+            <div class="content">
+              <ul>
+                <li>Prometheus</li>
+                <li>Grafana</li>
+                <li>Loki</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li> -->
+    <!-- <li>
+      <div class="node" onclick="toggle(this)">projects</div>
+      <div class="content">
+        <ul class="subtree">
+          <li>
+            <div class="node" onclick="toggle(this)">InfraSnap</div>
+            <div class="content">
+              <p>Snapshot automation across AWS with EBS &amp; RDS. Built to streamline backup consistency across multi-region infra.</p>
+            </div>
+          </li>
+          <li>
+            <div class="node" onclick="toggle(this)">KubeGhost</div>
+            <div class="content">
+              <p>Kubernetes threat simulation &amp; audit tool. Think of it like chaos engineering — but for your cluster’s security posture.</p>
+            </div>
+          </li>
+          <li>
+            <div class="node" onclick="toggle(this)">SafePorts</div>
+            <div class="content">
+              <p>Visualizer for open ports in cloud deployments — who’s exposed, how, and where. Makes security audits easier and prettier.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li> -->
+    <li>
+      <div class="node" onclick="toggle(this)">resume</div>
+    </li>
+    <li>
+      <div class="node" onclick="toggle(this)">contact</div>
+      <div class="content">
+        <ul>
+          <li>Email: <a href="mailto:alsaedwy@pm.me">alaa@alaa.sh</a></li>
+          <!-- <li>GitHub: <a href="https://github.com/alaa-sa" target="_blank">alaa-sa</a></li> -->
+          <!-- <li>Website: <a href="https://alaa.sh" target="_blank">alaa.sh</a></li> -->
+          <li>---</li>
+          <li>Legacy Contact: <a href="mailto:alsaedwy@pm.me">alsaedwy@pm.me</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+  <!-- Social Links Section -->
+  <div class="social-links">
+      <ul>
+          <li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+          <li><a href="https://github.com/alsaedwy" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+          <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+          <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+      </ul>
+  </div>
 
-				<!-- Header -->
-					<header id="header">
+</div>
 
-						<div class="content">
-							<div class="inner">
-								<h1>Alaa Saeed</h1>
-								<p>Software Engineer</p>
-								<p>I like tech, nature and what's in between.</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="https://github.com/alsaedwy" class="icon brands fa-github"><span class="label">Twitter</span></a></li>
-								<li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin"><span class="label">Twitter</span></a></li>
-								<li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+<!-- Main page content -->
+<div class="main-content">
+  <div class="inner">
+      <h1>Alaa Saeed</h1>
+      <p>Software Engineer</p>
+      <p>I like tech, nature and what's in between.</p>
+  </div>
+  <nav>
+      <ul>
+          <li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="https://github.com/alsaedwy" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+          <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+          <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#contact-article">Contact</a></li>
+      </ul>
+  </nav>
 
-				<!-- Main -->
-					<div id="main">
+  <article id="intro-article">
+      <h2 class="major">Intro</h2>
+      <span class="image main"><img src="images/pic01.jpg" alt="" /></span>
+      <p>Placeholder intro text. Add relevant introduction here.</p>
+  </article>
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-							</article>
+  <article id="work-article">
+      <h2 class="major">Work</h2>
+      <span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+      <p>Placeholder work details. Describe your work or projects.</p>
+  </article>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-							</article>
+  <article id="contact-article">
+      <h2 class="major">E-mail</h2>
+      <p>alsaedwy@pm.me</p>
+  </article>
 
-						<!-- About -->
-							<article id="contact">
-								<h2 class="major">E-mail</h2>
-								<p>alsaedwy@pm.me</p>
-							</article>
-
-
-
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
+  <article id="elements-article">
+      <h2 class="major">Elements</h2>
+      <section>
+          <h3 class="major">Text</h3>
+          <p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+          This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+          This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+          <hr />
+          <h2>Heading Level 2</h2>
+          <h3>Heading Level 3</h3>
+          <h4>Heading Level 4</h4>
+          <h5>Heading Level 5</h5>
+          <h6>Heading Level 6</h6>
+          <hr />
+          <h4>Blockquote</h4>
+          <blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+          <h4>Preformatted</h4>
+          <pre><code>i = 0;
 
 while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
+print 'Iteration ' + i;
+deck.shuffle();
+i++;
 }
 
 print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
+      </section>
+  </article>
 
-								<section>
-									<h3 class="major">Lists</h3>
+</div>
 
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
+<div id="bg"></div>
 
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
+<script>
+  function navigateToPage(url) {
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = url;
+    }, 500);
+  }
 
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
+  function toggle(node) {
+    // Handle navigation for 'resume' node
+    if (node.textContent.trim().toLowerCase() === 'resume') {
+        navigateToPage('cv.html');
+        return; // Stop further execution for resume node
+    }
 
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
+    const content = node.nextElementSibling;
+    if (!content || !content.classList.contains('content')) {
+        const parentLi = node.parentElement;
+        const parentUl = parentLi.parentElement;
+        const siblings = Array.from(parentUl.children);
+        const wasActive = node.classList.contains('active-node');
 
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
+        siblings.forEach(li => {
+            const siblingNode = li.querySelector(':scope > .node');
+            if (siblingNode && siblingNode !== node) {
+                siblingNode.classList.remove('active-node');
+                const siblingContent = siblingNode.nextElementSibling;
+                if (siblingContent && siblingContent.classList.contains('content')) {
+                    siblingContent.classList.remove('visible');
+                    const nestedNodes = siblingContent.querySelectorAll('.node.active-node');
+                    nestedNodes.forEach(nn => nn.classList.remove('active-node'));
+                    const nestedContents = siblingContent.querySelectorAll('.content.visible');
+                    nestedContents.forEach(nc => nc.classList.remove('visible'));
+                }
+            }
+        });
 
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
+        if (!wasActive) {
+            node.classList.add('active-node');
+        } else {
+            node.classList.remove('active-node');
+        }
+        return;
+    }
 
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
+    const parentLi = node.parentElement;
+    const parentUl = parentLi.parentElement;
+    const wasVisible = content.classList.contains('visible');
 
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
+    const siblings = Array.from(parentUl.children);
+    siblings.forEach(li => {
+        const siblingNode = li.querySelector(':scope > .node');
+        const siblingContent = li.querySelector(':scope > .content');
 
-							</article>
+        if (li !== parentLi) {
+            if (siblingNode) {
+                siblingNode.classList.remove('active-node');
+            }
+            if (siblingContent) {
+                siblingContent.classList.remove('visible');
+                const nestedNodes = siblingContent.querySelectorAll('.node.active-node');
+                nestedNodes.forEach(nn => nn.classList.remove('active-node'));
+                const nestedContents = siblingContent.querySelectorAll('.content.visible');
+                nestedContents.forEach(nc => nc.classList.remove('visible'));
+            }
+        }
+    });
 
-					</div>
+    if (!wasVisible) {
+        content.classList.add('visible');
+        node.classList.add('active-node');
+    } else {
+        content.classList.remove('visible');
+        node.classList.remove('active-node');
+        const nestedNodes = content.querySelectorAll('.node.active-node');
+        nestedNodes.forEach(nn => nn.classList.remove('active-node'));
+        const nestedContents = content.querySelectorAll('.content.visible');
+        nestedContents.forEach(nc => nc.classList.remove('visible'));
+    }
+  }
 
-				<!-- Footer -->
-					<footer id="footer">	</footer>
+  window.addEventListener('load', function() {
+    document.body.classList.remove('is-preload');
 
-			</div>
+    const hash = window.location.hash.substring(1);
 
-		<!-- BG -->
-			<div id="bg"></div>
+    if (hash) {
+        const pathSegments = hash.split('/');
+        let currentLevelElement = document.querySelector('#floating-box > ul.tree');
+        let nodeToActivate = null;
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        const findNodeInLevel = (segment, levelElement) => {
+            if (!levelElement) return null;
+            const childNodes = Array.from(levelElement.querySelectorAll(':scope > li > .node'));
+            return childNodes.find(node => {
+                let nodeText = node.textContent.trim();
+                if (nodeText.includes('Download CV')) nodeText = 'Download CV';
+                else nodeText = nodeText.split(' ')[0].toLowerCase();
+                return nodeText === segment;
+            });
+        };
 
-	</body>
+        pathSegments.forEach((segment, index) => {
+            nodeToActivate = findNodeInLevel(segment, currentLevelElement);
+
+            if (nodeToActivate) {
+                if (segment === 'resume' && pathSegments.length === 1) {
+                     setTimeout(() => {
+                        if (!nodeToActivate.classList.contains('active-node')) {
+                             toggle(nodeToActivate);
+                        }
+                     }, index * 50);
+                     currentLevelElement = null;
+                     return;
+                }
+
+                setTimeout(() => {
+                    const content = nodeToActivate.nextElementSibling;
+                    if (content && content.classList.contains('content')) {
+                        if (!content.classList.contains('visible')) {
+                            toggle(nodeToActivate);
+                        } else if (!nodeToActivate.classList.contains('active-node')) {
+                            nodeToActivate.classList.add('active-node');
+                        }
+                    } else {
+                        if (!nodeToActivate.classList.contains('active-node')) {
+                             toggle(nodeToActivate);
+                        }
+                    }
+                }, index * 50);
+
+                const nextContent = nodeToActivate.nextElementSibling;
+                if (nextContent && nextContent.classList.contains('content')) {
+                    currentLevelElement = nextContent.querySelector('ul.subtree');
+                } else {
+                    currentLevelElement = null;
+                }
+            } else {
+                console.warn(`Node segment "${segment}" not found.`);
+                currentLevelElement = null;
+            }
+        });
+
+    } else {
+        const aboutNode = Array.from(document.querySelectorAll('#floating-box .node')).find(el => el.textContent.trim() === 'about');
+        if (aboutNode) {
+            setTimeout(() => {
+                if (!aboutNode.classList.contains('active-node')) {
+                    toggle(aboutNode);
+                } else {
+                    const content = aboutNode.nextElementSibling;
+                    if (content && !content.classList.contains('visible')) {
+                        content.classList.add('visible');
+                    }
+                }
+            }, 650);
+        }
+    }
+  });
+
+</script>
+
+</body>
 </html>

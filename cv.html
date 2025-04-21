@@ -17,17 +17,15 @@
       top: 15px;
       right: 15px;
       background-color: #6fe600;
-      /* Adjust color to match theme if needed */
       color: rgb(0, 0, 0);
       padding: 10px 15px;
       border-radius: 5px;
       text-decoration: none;
       font-size: 11px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      /* Ensure it's above other content */
-      opacity: 0.6; /* Added: Make it dimmed by default */
-      transition: background-color 0.3s ease, opacity 0.3s ease; /* Added opacity to transition */
+      z-index: 1001;
+      opacity: 0.6;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
     }
 
     .float-download-button .fas {
@@ -36,13 +34,11 @@
 
     .float-download-button:hover {
       background-color: #0056b3;
-      /* Darker shade on hover */
       color: white;
       text-decoration: none;
-      opacity: 1; /* Added: Make it fully visible on hover */
+      opacity: 1;
     }
 
-    /* Hide button when printing */
     @media print {
       .float-download-button {
         display: none;
@@ -153,46 +149,77 @@
 
     body {
       line-height: 1.5;
-    }
-
-    ol,
-    ul {
-      list-style: none;
-    }
-
-    blockquote,
-    q {
-      quotes: none;
-    }
-
-    blockquote:before,
-    blockquote:after,
-    q:before,
-    q:after {
-      content: none;
-    }
-
-    table {
-      border-collapse: collapse;
-      border-spacing: 0;
-    }
-
-    /****************
-*	COMMONS
-****************/
-
-    body,
-    html {
       font-family: 'Consolas', monospace;
       font-size: 14.5px;
       color: #e0e0e0;
-      /* Light gray text color */
       background-color: #000000;
-      /* Dark background color changed from 121212 */
       font-weight: 400;
       letter-spacing: 0;
       line-height: 1.46153846;
       text-align: left;
+      overflow-x: hidden;
+      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    body.slide-init-right {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    body.slide-init-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    body.slide-out-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    body.slide-out-right {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    body.is-visible {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: #555;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      opacity: 0.6;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .back-button .fas {
+      margin-right: 5px;
+    }
+
+    .back-button:hover {
+      background-color: #777;
+      color: white;
+      text-decoration: none;
+      opacity: 1;
+    }
+
+    @media print {
+      .back-button {
+        display: none;
+      }
     }
 
     p {
@@ -201,13 +228,11 @@
 
     a {
       color: #64b5f6;
-      /* Light blue link color */
       text-decoration: none;
     }
 
     a:hover {
       color: #90caf9;
-      /* Lighter blue on hover */
       text-decoration: underline;
     }
 
@@ -216,13 +241,11 @@
       list-style-position: outside;
       margin-left: 1.3em;
       color: #e0e0e0;
-      /* Light gray list items */
     }
 
     h1 {
       font-size: 2rem;
       color: #ffffff;
-      /* White heading */
     }
 
     h2 {
@@ -237,7 +260,6 @@
 
     em {
       color: #b0b0b0;
-      /* Light gray emphasis */
     }
 
     blockquote {
@@ -252,14 +274,12 @@
       color: #000000;
     }
 
-    /* main container */
-
     #resume {
-      padding: 0rem;
-      margin: 1cm;
+      margin-left: 240px;
+      margin-top: 2rem;
+      margin-right: 2rem;
+      margin-bottom: 2rem;
     }
-
-    /* every section wrapper */
 
     .section {
       margin-bottom: 1rem;
@@ -278,6 +298,11 @@
 
     #profiles .item {
       padding: 0;
+      margin-right: 0.8em;
+    }
+
+    #profiles .item .url {
+      display: none;
     }
 
     #header>#profiles,
@@ -319,7 +344,6 @@
 
     .main-summary {
       background: #1e1e1e;
-      /* Darker background */
       padding: 1.2em 1em;
       margin-top: 1rem;
       color: #e0e0e0;
@@ -330,7 +354,6 @@
     }
 
     .section-title {
-      /* display: inline-block; */
       display: block;
       background: #000000;
       padding: 0 1em 0.3em 0;
@@ -357,7 +380,6 @@
       top: 0.7em;
       height: 1px;
       background: #424242;
-      /* Darker line */
       content: "";
       width: 100%;
       z-index: -100;
@@ -448,10 +470,8 @@
       font-size: 0.9rem;
       line-height: 1;
       color: #000000;
-      /* Light blue text */
       background-color: #09ff00;
-      /* Dark background */
-      border: 2 solid #ffffff;
+      border: 0;
       white-space: nowrap;
     }
 
@@ -459,8 +479,6 @@
     .courses li:hover {
       background: #d4d4d4;
     }
-
-
 
     .highlights {
       margin: 1em 0 0 0;
@@ -485,8 +503,6 @@
       font-size: 1.1em;
       color: #e0e0e0;
     }
-
-    /* Social Media Brand Colors */
 
     .google-plus {
       color: #d32f2f;
@@ -578,7 +594,6 @@
       border-bottom: none;
       color: #e0e0e0;
       page-break-inside: avoid;
-      /* page-break-after : avoid ! important; */
       page-break-before: avoid !important;
     }
 
@@ -589,8 +604,6 @@
     #skills .item .keywords {
       width: 15em;
     }
-
-    /* Skill chart */
 
     .level {
       margin-bottom: 0.5em;
@@ -643,24 +656,14 @@
     #references .item {
       padding-left: 0.5em;
       border-left: 5px solid #ffab40;
-      /* Darker orange */
       color: #e0e0e0;
     }
-
-
-    /* .section >  .section-title{
-  page-break-after : avoid ! important;
-} */
 
     .section>section>section {
       margin-bottom: 1rem;
       color: #e0e0e0;
       page-break-inside: avoid ! important;
     }
-
-    /******************
-*	HELPER CLASSES
-******************/
 
     .clear::after {
       content: "";
@@ -673,14 +676,10 @@
       opacity: 1 !important;
     }
 
-    /****************
-*		TABLET
-****************/
-
     @media screen and (min-width: 602px) {
       #resume {
-        width: 80%;
-        margin: 0 auto;
+        margin-left: 240px;
+        margin-right: 2rem;
       }
 
       .section header .date {
@@ -690,20 +689,15 @@
       }
     }
 
-    /****************
-*		LAPTOP
-****************/
-
     @media screen and (min-width: 1025px) {
       li {
         margin-left: 1.5em;
       }
 
       #resume {
-        /* width: 90%;
-    height: 70%; */
-        /* margin: 2cm auto; */
-        margin: 2rem auto;
+        margin-left: 260px;
+        margin-top: 2rem;
+        margin-right: 4rem;
       }
 
       .section>section>header .space-left {
@@ -740,11 +734,328 @@
         display: block;
       }
     }
+
+    #floating-box {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      width: 220px;
+      height: calc(100vh - 50px);
+      padding: 0.8rem;
+      border-right: 1px solid #666;
+      overflow-y: auto;
+      z-index: 1000;
+      background: #0d0d0d;
+    }
+
+    #floating-box h1 {
+      font-size: 1.2rem;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 0.2em;
+    }
+
+    #floating-box h2 {
+      color: #00ff88;
+      font-size: 0.9rem;
+      text-align: left;
+      margin: 0 0 0.8rem;
+      letter-spacing: normal;
+    }
+
+    ul.tree,
+    ul.subtree {
+      list-style: none;
+      padding-left: 0.8rem;
+      position: relative;
+      margin: 0;
+    }
+
+    ul.tree::before,
+    ul.subtree::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-left: 1px dashed #666;
+    }
+
+    .node {
+      cursor: pointer;
+      margin: 0.2rem 0;
+      position: relative;
+      padding-left: 2rem;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+      color: #b0b0b0;
+    }
+
+    .node:hover {
+      color: #00ff88;
+    }
+
+    .node.active-node {
+      color: #ffffff;
+    }
+
+    .node.active-node:hover {
+      color: #00ff88;
+    }
+
+    .node::before {
+      content: "├──  ";
+      color: #888;
+      position: absolute;
+      left: 0;
+      font-size: 0.9rem;
+    }
+
+    ul.tree>li:last-child>.node::before,
+    ul.subtree>li:last-child>.node::before {
+      content: "└──  ";
+    }
+
+    .content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      padding-left: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .content.visible {
+      max-height: 1000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content p,
+    .content li {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+    }
+
+    .content a {
+      font-size: 0.9rem;
+      color: #00aaff;
+      text-decoration: none;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed #666;
+    }
+
+    .social-links ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .social-links ul li {
+      padding: 0 0.5em;
+    }
+
+    .social-links ul li a {
+      color: #777;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s ease-in-out;
+    }
+
+    @media print {
+      #floating-box,
+      .back-button,
+      .float-download-button {
+        display: none;
+      }
+
+      #resume {
+        margin-left: 1cm;
+        margin-right: 1cm;
+        width: auto;
+      }
+
+      body,
+      html {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      #resume a {
+        color: #0000ff;
+        text-decoration: underline;
+      }
+
+      #resume h1,
+      #resume h2,
+      #resume h3,
+      #resume strong,
+      #resume .company,
+      #resume .institution,
+      #resume .organization,
+      #resume .awarder,
+      #resume .position,
+      #resume .studyType,
+      #resume .area,
+      #resume .title,
+      #resume .language,
+      #resume .name {
+        color: #000000;
+      }
+
+      #resume .section-title {
+        color: #000000;
+        background: none;
+      }
+
+      #resume .keywords li {
+        background-color: #eeeeee;
+        color: #000000;
+        border: 1px solid #cccccc;
+      }
+
+      #resume .level .bar {
+        border: 1px solid #000000;
+        background: #ffffff;
+      }
+
+      #resume .level .bar::after {
+        background: #888888;
+      }
+    }
+
   </style>
 
 </head>
 
 <body>
+
+  <a id="back-button" class="back-button">
+    <span class="fas fa-arrow-left"></span> Back
+  </a>
+
+  <div id="floating-box">
+    <h1>Alaa Saeed</h1>
+    <h2>~/alaa.sh</h2>
+    <ul class="tree">
+      <li>
+        <div class="node" onclick="navigateToIndexWithHash(this)">about</div>
+        <div class="content">
+          <p>Hi, I’m Alaa Saeed — a DevOps Engineer...</p>
+        </div>
+      </li>
+      <li>
+        <div class="node" onclick="navigateToIndexWithHash(this)"> skills</div>
+        <div class="content">
+          <ul class="subtree">
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">Infrastructure</div>
+              <div class="content">
+                <ul>
+                  <li>Terraform</li>
+                  <li>Ansible</li>
+                  <li>AWS CDK</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">CI/CD</div>
+              <div class="content">
+                <ul>
+                  <li>GitHub Actions</li>
+                  <li>GitLab CI</li>
+                  <li>Jenkins</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">Cloud</div>
+              <div class="content">
+                <ul>
+                  <li>AWS</li>
+                  <li>GCP</li>
+                  <li>Azure</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">Monitoring</div>
+              <div class="content">
+                <ul>
+                  <li>Prometheus</li>
+                  <li>Grafana</li>
+                  <li>Loki</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- <li>
+        <div class="node" onclick="navigateToIndexWithHash(this)">projects</div>
+        <div class="content">
+          <ul class="subtree">
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">InfraSnap</div>
+              <div class="content">
+                <p>Snapshot automation...</p>
+              </div>
+            </li>
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">KubeGhost</div>
+              <div class="content">
+                <p>Kubernetes threat simulation...</p>
+              </div>
+            </li>
+            <li>
+              <div class="node" onclick="navigateToIndexWithHash(this)">SafePorts</div>
+              <div class="content">
+                <p>Visualizer for open ports...</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li> -->
+      <li>
+        <div class="node" onclick="navigateToIndexWithHash(this)">resume</div>
+        <div class="content">
+          <ul class="subtree">
+            <li>
+              <div class="node" style="cursor: default; color: #ffffff;">CV</div>
+            </li>
+            <li>
+              <div class="node">Download CV <a href="assets/Alaa Saeed CV.pdf" download="Alaa Saeed CV.pdf">[PDF]</a></div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="node" onclick="navigateToIndexWithHash(this)">contact</div>
+        <div class="content">
+          <ul>
+            <li>Email: <a href="mailto:alaa@alaa.sh">alaa@alaa.sh</a></li>
+            <li>GitHub: <a href="https://github.com/alaa-sa" target="_blank">alaa-sa</a></li>
+            <li>Website: <a href="https://alaa.sh" target="_blank">alaa.sh</a></li>
+            <li>---</li>
+            <li>Legacy Contact: <a href="mailto:alsaedwy@pm.me">alsaedwy@pm.me</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div class="social-links">
+      <ul>
+        <li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+        <li><a href="https://github.com/alsaedwy" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+        <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+        <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+      </ul>
+    </div>
+  </div>
 
   <div id="resume">
     <header id="header" class="clear">
@@ -1983,10 +2294,103 @@
         </section>
       </section>
     </section>
-    <!-- Floating Download Button -->
     <a href="assets/Alaa Saeed CV.pdf" download="Alaa Saeed CV.pdf" class="float-download-button">
       <span class="fas fa-download"></span> Download CV
     </a>
+
+  <script>
+    // Helper function to get the path of a node
+    function getNodePath(nodeElement) {
+        let path = [];
+        let current = nodeElement;
+
+        while (current && current.classList.contains('node')) {
+            let nodeText = current.textContent.trim();
+            // Handle specific cases like "Download CV [PDF]"
+            if (nodeText.includes('Download CV')) {
+                nodeText = 'Download CV'; // Keep consistent for path matching if needed later
+            } else {
+                // Basic cleanup: take first word, lowercase
+                nodeText = nodeText.split(' ')[0].toLowerCase();
+            }
+            // Exclude the non-clickable 'CV' node from the path
+            // Also exclude 'Download CV' as it's handled separately
+            if ((nodeText !== 'cv' || current.style.cursor !== 'default') && !nodeText.includes('download cv')) {
+                 path.unshift(nodeText);
+            }
+
+
+            // Navigate up the DOM structure
+            const parentSubtreeLi = current.closest('li');
+            if (!parentSubtreeLi) break;
+
+            const parentContent = parentSubtreeLi.parentElement.closest('.content');
+            if (!parentContent) break; // Reached the top-level ul.tree
+
+            const parentNode = parentContent.previousElementSibling;
+            if (!parentNode || !parentNode.classList.contains('node')) break; // Structure error or reached top
+
+            current = parentNode;
+        }
+        // Filter out empty strings just in case
+        return path.filter(Boolean).join('/');
+    }
+
+    // Renamed function to reflect its purpose
+    function navigateToIndexWithHash(node) {
+        // 1. Handle Download CV link: Do nothing, let browser handle link/download
+        if (node.textContent.includes('Download CV')) {
+             return;
+        }
+
+        // 2. Handle the disabled CV node: Do nothing
+        if (node.textContent.trim() === 'CV' && node.style.cursor === 'default') {
+            return;
+        }
+
+        // 3. For all other nodes, calculate path and navigate back WITH hash
+        const path = getNodePath(node); // Calculate the path
+        navigateBack('index.html', path); // Navigate with hash
+    }
+
+    // Updated navigateBack function
+    function navigateBack(url, pathHash = '') {
+      // Use slide-out-right for navigating BACK to index.html
+      if (document.body) {
+          document.body.classList.add('slide-out-right');
+      }
+      const targetUrl = url + (pathHash ? '#' + pathHash : '');
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 500); // Match CSS transition duration
+    }
+
+    // Updated Load listener
+    window.addEventListener('load', () => {
+      // Set initial state for sliding in from the right
+      if(document.body) {
+          document.body.classList.add('slide-init-right');
+      }
+      // Trigger the slide-in animation shortly after load
+      setTimeout(() => {
+          if(document.body) {
+              document.body.classList.remove('slide-init-right');
+              document.body.classList.add('is-visible');
+          }
+      }, 50); // Small delay
+    });
+
+    // Back button listener remains the same (uses navigateBack)
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+        backButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          navigateBack('index.html'); // No specific path for generic back button
+        });
+    } else {
+        console.error("Back button not found");
+    }
+  </script>
 
 </body>
 
