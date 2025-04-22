@@ -6,6 +6,8 @@
   <title>Alaa Saeed</title>
   <!-- Include relevant CSS from index.html if needed, or adapt styles -->
   <link rel="stylesheet" href="assets/css/main.css" /> <!-- Added from index.html for article styling -->
+  <!-- Add Bootstrap Icons CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript> <!-- Added from index.html -->
   <style>
     html, body {
@@ -195,6 +197,26 @@
         display: none;
     }
 
+    /* Add color for lastfm icon if desired */
+    .fa-lastfm { color: #d51007; } /* Last.fm red */
+    .fa-lastfm:hover { color: #b30c05; } /* Darker red on hover */
+
+    /* Style for Bootstrap Substack icon */
+    .bi-substack {
+        color: inherit; /* Inherit default link color (#777) */
+        font-size: 1.1rem; /* Match other icons */
+        vertical-align: -0.1em; /* Fine-tune vertical alignment */
+        transition: color 0.2s ease-in-out; /* Add transition */
+    }
+    /* Hover effect for Bootstrap Substack icon */
+    .social-links ul li a:hover .bi-substack {
+        color: #FF6719; /* Substack orange on hover */
+    }
+
+    /* Style for Mastodon icon */
+    .fa-mastodon { color: #6364FF; } /* Mastodon purple */
+    .fa-mastodon:hover { color: #5354D4; } /* Darker purple on hover */
+
     /* --- Media Queries for Responsiveness --- */
 
     /* Medium screens (tablets) */
@@ -209,6 +231,7 @@
         .content p, .content li, .content a { font-size: 1.1rem; }
         .social-links ul li { padding: 0 0.6em; }
         .social-links ul li a { font-size: 1.2rem; }
+        .bi-substack { font-size: 1.2rem; } /* Adjust size for medium screens */
     }
 
     /* Large screens (desktops) */
@@ -227,6 +250,7 @@
         .content p, .content li, .content a { font-size: 1.2rem; }
         .social-links ul li { padding: 0 0.75em; }
         .social-links ul li a { font-size: 1.3rem; }
+        .bi-substack { font-size: 1.3rem; } /* Adjust size for large screens */
     }
 
   </style>
@@ -264,6 +288,14 @@
           <li><a href="https://github.com/alsaedwy" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
           <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
           <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+          <li><a href="https://www.last.fm/user/alsaedwy" class="icon brands fa-lastfm" target="_blank"><span class="label">Last.fm</span></a></li>
+          <li>
+            <a href="https://alsaedwy.substack.com/" class="icon brands" target="_blank">
+              <i class="bi bi-substack"></i>
+              <span class="label">Substack</span>
+            </a>
+          </li>
+          <li><a href="https://mastodon.social/@alsaedwy" class="icon brands fa-mastodon" target="_blank"><span class="label">Mastodon</span></a></li>
       </ul>
   </div>
 
