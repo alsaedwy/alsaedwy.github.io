@@ -8,6 +8,13 @@
   justify-content: center;
   align-items: center;
   overflow: visible;
+  transition: height 0.8s ease-out; /* Add transition for height change */
+}
+
+/* Add a class for collapsed state after animation */
+.username-animation.collapsed {
+  height: 40px; /* Reduced height after animation completes */
+  overflow: visible; /* Ensure content remains visible when height is reduced */
 }
 
 .words-container {
@@ -32,23 +39,25 @@
   position: relative;
   display: inline-block;
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10; /* Ensure characters remain visible */
 }
 
 /* Track for morphed username */
 .morph-track {
   position: absolute;
-  width: 100%;
-  bottom: 10px;
-  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
-  align-items: center;
+  z-index: 5;
+  height: auto; /* Allow natural height */
 }
 
 /* When in morphed state */
 .word span.morphed {
   position: absolute;
-  z-index: 10;
+  z-index: 20; /* Increased z-index to ensure visibility */
 }
 
 /* No separate final username - we'll use the morphed characters */

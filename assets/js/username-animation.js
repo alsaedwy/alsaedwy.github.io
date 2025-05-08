@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Animation elements
   const wordsContainer = document.querySelector('.words-container');
   const morphTrack = document.querySelector('.morph-track');
+  const usernameAnimation = document.querySelector('.username-animation');
   
   if (!wordsContainer || !morphTrack) {
     console.error('Animation elements not found');
@@ -151,6 +152,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }, delay * 1000 + 350);
           }
         });
+        
+        // Add a delay to collapse the height after animation completes
+        setTimeout(() => {
+          if (usernameAnimation) {
+            usernameAnimation.classList.add('collapsed');
+          }
+        }, 1200); // Adjust timing to match the animation duration
         
       }, 500); // Delay before morphing starts
     }, 1500); // Delay before highlighting
