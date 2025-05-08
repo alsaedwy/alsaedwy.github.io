@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="assets/css/main.css" /> <!-- Added from index.html for article styling -->
   <!-- Add Bootstrap Icons CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Username animation CSS -->
+  <link rel="stylesheet" href="assets/css/username-animation.css" />
+  <!-- Add GSAP directly for animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript> <!-- Added from index.html -->
   <style>
     html, body {
@@ -217,6 +221,51 @@
     .fa-mastodon { color: #6364FF; } /* Mastodon purple */
     .fa-mastodon:hover { color: #5354D4; } /* Darker purple on hover */
 
+    /* Username Animation Styles */
+    .username-animation {
+      position: relative;
+      height: 80px;
+      margin: 0 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .words-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      transition: opacity 0.8s ease, transform 1.5s ease;
+    }
+    
+    .word {
+      position: relative;
+      font-size: 1.2rem;
+      color: white;
+      display: inline-block;
+    }
+    
+    .word span {
+      display: inline-block;
+      position: relative;
+      transition: color 0.5s ease, transform 0.8s ease, opacity 0.8s ease, filter 0.8s ease;
+    }
+    
+    .final-username {
+      position: absolute;
+      bottom: 0;
+      font-size: 1.4rem;
+      color: white;
+      font-weight: bold;
+      transition: opacity 1s ease;
+    }
+
     /* --- Media Queries for Responsiveness --- */
 
     /* Medium screens (tablets) */
@@ -283,25 +332,38 @@
 
   <!-- Social Links Section -->
   <div class="social-links">
-      <ul>
-          <li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-          <li><a href="https://github.com/alsaedwy" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-          <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-          <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-          <li><a href="https://www.last.fm/user/alsaedwy" class="icon brands fa-lastfm" target="_blank"><span class="label">Last.fm</span></a></li>
-          <li>
-            <a href="https://alsaedwy.substack.com/" class="icon brands" target="_blank">
-              <i class="bi bi-substack"></i>
-              <span class="label">Substack</span>
-            </a>
-          </li>
-          <li><a href="https://mastodon.social/@alsaedwy" class="icon brands fa-mastodon" target="_blank"><span class="label">Mastodon</span></a></li>
-      </ul>
+    <!-- Username Animation Section -->
+    <div class="username-animation">
+      <div class="words-container">
+        <div class="word" id="word1">alaa</div>
+        <div class="word" id="word2">saeed</div>
+        <div class="word" id="word3">alseadawy</div>
+      </div>
+      <div class="morph-track">
+        <!-- This is where characters will morph into @alsaedwy -->
+      </div>
+    </div>
+    
+    <ul>
+        <li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
+        <li><a href="https://github.com/alsaedwy" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
+        <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+        <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+        <li><a href="https://www.last.fm/user/alsaedwy" class="icon brands fa-lastfm" target="_blank"><span class="label">Last.fm</span></a></li>
+        <li>
+          <a href="https://alsaedwy.substack.com/" class="icon brands" target="_blank">
+            <i class="bi bi-substack"></i>
+            <span class="label">Substack</span>
+          </a>
+        </li>
+        <li><a href="https://mastodon.social/@alsaedwy" class="icon brands fa-mastodon" target="_blank"><span class="label">Mastodon</span></a></li>
+    </ul>
   </div>
 
 </div>
 
 <script>
+  // Main site script
   function navigateToPage(url) {
     document.body.classList.add('fade-out');
     setTimeout(() => {
@@ -465,8 +527,10 @@
         }
     }
   });
-
 </script>
+
+<!-- Include the username animation script -->
+<script src="assets/js/username-animation.js"></script>
 
 </body>
 </html>

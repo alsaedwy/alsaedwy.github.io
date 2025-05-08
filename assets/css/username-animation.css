@@ -1,0 +1,66 @@
+/* Username Animation Styles - Single smooth morphing effect */
+.username-animation {
+  position: relative;
+  height: 100px;
+  margin: 0 0 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.words-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* Style for individual words */
+.word {
+  position: relative;
+  font-size: 1.4rem;
+  color: #fff;
+  display: inline-block;
+}
+
+/* Style for individual characters */
+.word span {
+  position: relative;
+  display: inline-block;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Track for morphed username */
+.morph-track {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* When in morphed state */
+.word span.morphed {
+  position: absolute;
+  z-index: 10;
+}
+
+/* No separate final username - we'll use the morphed characters */
+.final-username {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .word { font-size: 1.6rem; }
+}
+
+@media (min-width: 1024px) {
+  .word { font-size: 1.8rem; }
+}
