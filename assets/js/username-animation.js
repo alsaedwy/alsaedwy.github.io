@@ -93,6 +93,55 @@ document.addEventListener('DOMContentLoaded', function() {
   const keptChars = document.querySelectorAll('.word span.keep');
   const otherChars = document.querySelectorAll('.word span:not(.keep)');
   
+  // Function to copy text to clipboard
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        // Show success message
+        showCopyFeedback();
+      })
+      .catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+  }
+  
+  // Function to show feedback when text is copied
+  function showCopyFeedback() {
+    // Create feedback element if it doesn't exist
+    let feedback = document.querySelector('.copy-feedback');
+    if (!feedback) {
+      feedback = document.createElement('div');
+      feedback.className = 'copy-feedback';
+      feedback.textContent = 'Copied!';
+      feedback.style.position = 'absolute';
+      feedback.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      feedback.style.color = '#fff';
+      feedback.style.padding = '5px 10px';
+      feedback.style.borderRadius = '4px';
+      feedback.style.fontSize = '14px';
+      feedback.style.pointerEvents = 'none';
+      feedback.style.opacity = '0';
+      feedback.style.transition = 'opacity 0.3s ease';
+      feedback.style.zIndex = '1000';
+      
+      // Insert next to the morphTrack
+      if (morphTrack.parentNode) {
+        morphTrack.parentNode.appendChild(feedback);
+      }
+    }
+    
+    // Position the feedback relative to morphTrack
+    const trackRect = morphTrack.getBoundingClientRect();
+    feedback.style.top = `${trackRect.bottom + 5}px`;
+    feedback.style.left = `${trackRect.left + (trackRect.width / 2) - 30}px`;
+    
+    // Show and then hide the feedback
+    feedback.style.opacity = '1';
+    setTimeout(() => {
+      feedback.style.opacity = '0';
+    }, 1500);
+  }
+  
   // Animation sequence
   function animateUsername() {
     // Fade in the words
@@ -157,6 +206,15 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           if (usernameAnimation) {
             usernameAnimation.classList.add('collapsed');
+            
+            // Make the morphTrack clickable after animation completes
+            morphTrack.style.cursor = 'pointer';
+            morphTrack.title = 'Click to copy @alsaedwy';
+            
+            // Add click event listener to copy the username
+            morphTrack.addEventListener('click', () => {
+              copyToClipboard(targetUsername);
+            });
           }
         }, 1200); // Adjust timing to match the animation duration
         
