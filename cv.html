@@ -8,10 +8,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
   <style>
-    /********************************************
-* 	reset from
-* 	http://meyerweb.com/eric/tools/css/reset/
-*******************************************/
+    /* REQUIRED: Floating Download Button Styles */
     .float-download-button {
       position: fixed;
       top: 15px;
@@ -28,10 +25,12 @@
       transition: background-color 0.3s ease, opacity 0.3s ease;
     }
 
+    /* REQUIRED: Icon spacing for floating button */
     .float-download-button .fas {
       margin-right: 5px;
     }
 
+    /* REQUIRED: Hover effects for floating button */
     .float-download-button:hover {
       background-color: #0056b3;
       color: white;
@@ -39,10 +38,19 @@
       opacity: 1;
     }
 
+    /* REQUIRED: Hide floating button when printing */
     @media print {
       .float-download-button {
         display: none;
       }
+    }
+
+    /* DEMO/OPTIONAL: Basic page styling for demo purposes only */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
     }
 
     html,
@@ -147,90 +155,48 @@
       display: block;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       line-height: 1.5;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    blockquote,
+    q {
+      quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    /****************
+*	COMMONS
+****************/
+
+    body,
+    html {
       font-family: 'Consolas', monospace;
-      font-size: 14px;
+      font-size: 14.5px;
       color: #e0e0e0;
+      /* Light gray text color */
       background-color: #000000;
+      /* Dark background color changed from 121212 */
       font-weight: 400;
       letter-spacing: 0;
       line-height: 1.46153846;
       text-align: left;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-
-    #page-content {
-      position: relative;
-      min-height: 100vh;
-      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-      transform: translateX(0);
-      opacity: 1;
-      background-color: #000000;
-    }
-
-    #page-content.slide-init-right {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-
-    #page-content.slide-init-left {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-
-    #page-content.slide-out-left {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-
-    #page-content.slide-out-right {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-
-    #page-content.is-visible {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    .back-button {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background-color: #555;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      z-index: 1001;
-      opacity: 0.6;
-      transition: background-color 0.3s ease, opacity 0.3s ease;
-      cursor: pointer;
-    }
-
-    .back-button .fas {
-      margin-right: 5px;
-    }
-
-    .back-button:hover {
-      background-color: #777;
-      color: white;
-      text-decoration: none;
-      opacity: 1;
-    }
-
-    @media print {
-      .back-button {
-        display: none;
-      }
     }
 
     p {
@@ -239,11 +205,13 @@
 
     a {
       color: #64b5f6;
+      /* Light blue link color */
       text-decoration: none;
     }
 
     a:hover {
       color: #90caf9;
+      /* Lighter blue on hover */
       text-decoration: underline;
     }
 
@@ -252,15 +220,17 @@
       list-style-position: outside;
       margin-left: 1.3em;
       color: #e0e0e0;
+      /* Light gray list items */
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: #ffffff;
+      /* White heading */
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.67rem;
       color: #f5f5f5;
     }
 
@@ -271,6 +241,7 @@
 
     em {
       color: #b0b0b0;
+      /* Light gray emphasis */
     }
 
     blockquote {
@@ -285,10 +256,14 @@
       color: #000000;
     }
 
+    /* main container */
+
     #resume {
-      margin: 1rem;
-      padding-top: 40px;
+      padding: 0rem;
+      margin: 1cm;
     }
+
+    /* every section wrapper */
 
     .section {
       margin-bottom: 1rem;
@@ -307,11 +282,6 @@
 
     #profiles .item {
       padding: 0;
-      margin-right: 0.8em;
-    }
-
-    #profiles .item .url {
-      display: none;
     }
 
     #header>#profiles,
@@ -329,11 +299,11 @@
     }
 
     #header>div>div {
-      margin-right: 1em;
+      margin-right: 1.2em;
     }
 
     #header h1.name {
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       font-weight: 100;
       line-height: 100%;
       color: #ffffff;
@@ -341,16 +311,19 @@
 
     #header h2.label {
       color: #e0e0e0;
-      font-size: 1.3rem;
+      font-size: 1.47rem;
       font-weight: 300;
     }
 
     #header .image {
-      display: none;
+      width: 11em;
+      float: right;
+      border-radius: 4px;
     }
 
     .main-summary {
       background: #1e1e1e;
+      /* Darker background */
       padding: 1.2em 1em;
       margin-top: 1rem;
       color: #e0e0e0;
@@ -361,6 +334,7 @@
     }
 
     .section-title {
+      /* display: inline-block; */
       display: block;
       background: #000000;
       padding: 0 1em 0.3em 0;
@@ -368,7 +342,7 @@
       text-transform: uppercase;
       font-weight: 600;
       border: none;
-      font-size: 1.1rem;
+      font-size: 1.23rem;
       page-break-after: avoid !important;
     }
 
@@ -387,6 +361,7 @@
       top: 0.7em;
       height: 1px;
       background: #424242;
+      /* Darker line */
       content: "";
       width: 100%;
       z-index: -100;
@@ -398,7 +373,7 @@
     }
 
     .section>section>header {
-      font-size: 1.2rem;
+      font-size: 1.38rem;
       position: relative;
       margin-top: 0.7em;
       color: #ffffff;
@@ -409,7 +384,12 @@
     }
 
     .section>section>header .space-left {
-      display: none;
+      position: absolute;
+      left: -1.56rem;
+      top: 5px;
+      color: #757575;
+      line-height: 1;
+      opacity: 0;
     }
 
     .position,
@@ -452,11 +432,10 @@
 
     .section header .date {
       display: block;
-      font-size: 0.9rem;
+      font-size: 1rem;
       padding: 0.1em 0;
       color: #bdbdbd;
       font-weight: 400;
-      float: none;
     }
 
     .keywords,
@@ -470,11 +449,13 @@
       display: inline-block;
       margin: 2px 2px 2px 0;
       padding: 4px 5px 5px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       line-height: 1;
       color: #000000;
+      /* Light blue text */
       background-color: #09ff00;
-      border: 0;
+      /* Dark background */
+      border: 2 solid #ffffff;
       white-space: nowrap;
     }
 
@@ -482,6 +463,8 @@
     .courses li:hover {
       background: #d4d4d4;
     }
+
+
 
     .highlights {
       margin: 1em 0 0 0;
@@ -493,7 +476,7 @@
     }
 
     .item {
-      overflow: visible;
+      overflow: scroll;
     }
 
     .gpa {
@@ -506,6 +489,8 @@
       font-size: 1.1em;
       color: #e0e0e0;
     }
+
+    /* Social Media Brand Colors */
 
     .google-plus {
       color: #d32f2f;
@@ -592,19 +577,24 @@
     #languages .item,
     #skills .item,
     #interests .item {
-      width: 100%;
-      padding: 0 0 0.5em 0;
+      width: 15em;
+      padding: 0 0.5em 0.5em 0;
+      border-bottom: none;
+      color: #e0e0e0;
       page-break-inside: avoid;
+      /* page-break-after : avoid ! important; */
       page-break-before: avoid !important;
     }
 
     #skills .item {
-      width: 100%;
+      width: 16em;
     }
 
     #skills .item .keywords {
-      width: 100%;
+      width: 15em;
     }
+
+    /* Skill chart */
 
     .level {
       margin-bottom: 0.5em;
@@ -618,8 +608,7 @@
     .level .bar {
       border: 1px solid #424242;
       display: block;
-      width: 100%;
-      max-width: 10em;
+      width: 10em;
       height: 5px;
       position: relative;
       background: #1e1e1e;
@@ -658,14 +647,24 @@
     #references .item {
       padding-left: 0.5em;
       border-left: 5px solid #ffab40;
+      /* Darker orange */
       color: #e0e0e0;
     }
+
+
+    /* .section >  .section-title{
+  page-break-after : avoid ! important;
+} */
 
     .section>section>section {
       margin-bottom: 1rem;
       color: #e0e0e0;
       page-break-inside: avoid ! important;
     }
+
+    /******************
+*	HELPER CLASSES
+******************/
 
     .clear::after {
       content: "";
@@ -678,149 +677,14 @@
       opacity: 1 !important;
     }
 
-    #floating-box {
-      display: none;
-      position: fixed;
-      top: 50px;
-      left: 0;
-      width: 220px;
-      height: calc(100vh - 50px);
-      padding: 0.8rem;
-      border-right: 1px solid #666;
-      overflow-y: auto;
-      z-index: 1000;
-      background: #0d0d0d;
-    }
+    /****************
+*		TABLET
+****************/
 
-    #floating-box h1 {
-      font-size: 1.2rem;
-      text-align: center;
-      color: #ffffff;
-      margin-bottom: 0.2em;
-    }
-
-    #floating-box h2 {
-      color: #00ff88;
-      font-size: 0.9rem;
-      text-align: left;
-      margin: 0 0 0.8rem;
-      letter-spacing: normal;
-    }
-
-    ul.tree,
-    ul.subtree {
-      list-style: none;
-      padding-left: 0.8rem;
-      position: relative;
-      margin: 0;
-    }
-
-    ul.tree::before,
-    ul.subtree::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      border-left: 1px dashed #666;
-    }
-
-    .node {
-      cursor: pointer;
-      margin: 0.2rem 0;
-      position: relative;
-      padding-left: 2rem;
-      transition: color 0.3s;
-      font-size: 0.9rem;
-      color: #b0b0b0;
-    }
-
-    .node:hover {
-      color: #00ff88;
-    }
-
-    .node.active-node {
-      color: #ffffff;
-    }
-
-    .node.active-node:hover {
-      color: #00ff88;
-    }
-
-    .node::before {
-      content: "├──  ";
-      color: #888;
-      position: absolute;
-      left: 0;
-      font-size: 0.9rem;
-    }
-
-    ul.tree>li:last-child>.node::before,
-    ul.subtree>li:last-child>.node::before {
-      content: "└──  ";
-    }
-
-    .content {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      padding-left: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .content.visible {
-      max-height: 1000px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .content p,
-    .content li {
-      font-size: 0.9rem;
-      color: #b0b0b0;
-    }
-
-    .content a {
-      font-size: 0.9rem;
-      color: #00aaff;
-      text-decoration: none;
-    }
-
-    .social-links {
-      margin-top: 1rem;
-      padding-top: 0.8rem;
-      border-top: 1px dashed #666;
-    }
-
-    .social-links ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .social-links ul li {
-      padding: 0 0.5em;
-    }
-
-    .social-links ul li a {
-      color: #777;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.2s ease-in-out;
-    }
-
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 602px) {
       #resume {
-        margin-left: 1rem;
-        margin-right: 1rem;
-      }
-
-      #header .image {
-        display: block;
-        width: 8em;
-        float: right;
+        width: 80%;
+        margin: 0 auto;
       }
 
       .section header .date {
@@ -828,44 +692,25 @@
         font-weight: 600;
         color: #ffffff;
       }
-
-      #languages .item,
-      #skills .item,
-      #interests .item {
-        width: 48%;
-        margin-right: 2%;
-      }
-
-      #languages .item:nth-child(2n),
-      #skills .item:nth-child(2n),
-      #interests .item:nth-child(2n) {
-        margin-right: 0;
-      }
     }
 
+    /****************
+*		LAPTOP
+****************/
+
     @media screen and (min-width: 1025px) {
-      #floating-box {
-        display: block;
-      }
-
-      #page-content {
-        margin-left: 240px;
-        min-height: auto;
-      }
-
-      #resume {
-        margin-left: 2rem;
-        margin-top: 2rem;
-        margin-right: 4rem;
-        padding-top: 0;
-      }
-
       li {
         margin-left: 1.5em;
       }
 
+      #resume {
+        /* width: 90%;
+    height: 70%; */
+        /* margin: 2cm auto; */
+        margin: 2rem auto;
+      }
+
       .section>section>header .space-left {
-        display: block;
         opacity: 1;
         cursor: pointer;
       }
@@ -887,10 +732,6 @@
         word-break: normal;
       }
 
-      #header .image {
-        width: 11em;
-      }
-
       .section header .date {
         padding: 0.2em;
       }
@@ -902,1540 +743,1323 @@
       .display:not(.none) {
         display: block;
       }
-
-      #languages .item,
-      #skills .item,
-      #interests .item {
-        width: 15em;
-        padding: 0 0.5em 0.5em 0;
-        margin-right: auto;
-      }
-
-      #skills .item {
-        width: 16em;
-      }
-
-      #skills .item .keywords {
-        width: 15em;
-      }
     }
-
-    @media print {
-      #floating-box,
-      .back-button,
-      .float-download-button {
-        display: none;
-      }
-
-      #resume {
-        margin: 1cm !important;
-        padding-top: 0 !important;
-        width: auto;
-      }
-
-      body,
-      html {
-        background-color: #ffffff;
-        color: #000000;
-      }
-
-      #resume a {
-        color: #0000ff;
-        text-decoration: underline;
-      }
-
-      #resume h1,
-      #resume h2,
-      #resume h3,
-      #resume strong,
-      #resume .company,
-      #resume .institution,
-      #resume .organization,
-      #resume .awarder,
-      #resume .position,
-      #resume .studyType,
-      #resume .area,
-      #resume .title,
-      #resume .language,
-      #resume .name {
-        color: #000000;
-      }
-
-      #resume .section-title {
-        color: #000000;
-        background: none;
-      }
-
-      #resume .keywords li {
-        background-color: #eeeeee;
-        color: #000000;
-        border: 1px solid #cccccc;
-      }
-
-      #resume .level .bar {
-        border: 1px solid #000000;
-        background: #ffffff;
-      }
-
-      #resume .level .bar::after {
-        background: #888888;
-      }
-
-      #languages .item,
-      #skills .item,
-      #interests .item {
-        width: 48%;
-        margin-right: 2%;
-      }
-
-      #languages .item:nth-child(2n),
-      #skills .item:nth-child(2n),
-      #interests .item:nth-child(2n) {
-        margin-right: 0;
-      }
-    }
-
-    /* Header profiles Substack icon hover (handled by general .social:hover if needed, or add specific rule) */
-    #profiles .item .username a:hover .bi-substack {
-      color: #FF6719;
-      /* Substack orange on hover */
-    }
-
-    /* Header profiles Mastodon icon hover (handled by general .social:hover if needed, or add specific rule) */
-    #profiles .item .username a:hover .fa-mastodon {
-      color: #5354D4;
-      /* Darker purple on hover */
-    }
-
-    /* Ensure header profile links inherit color correctly and change on hover */
-    #profiles .item .username a .social {
-      color: inherit;
-      /* Inherit color from parent */
-      transition: color 0.2s ease-in-out;
-    }
-
-    #profiles .item .username a:hover .github {
-      color: #f0f6fc;
-    }
-
-    /* Lighter GitHub color on hover */
-    #profiles .item .username a:hover .linkedin {
-      color: #0a66c2;
-    }
-
-    /* LinkedIn blue on hover */
-    #profiles .item .username a:hover .stack-overflow {
-      color: #f48024;
-    }
-
-    /* Stack Overflow orange on hover */
-    #profiles .item .username a:hover .lastfm {
-      color: #b30c05;
-    }
-
-    /* Darker Last.fm red on hover */
   </style>
 
 </head>
 
 <body>
-
-  <a id="back-button" class="back-button">
-    <span class="fas fa-arrow-left"></span> Back
-  </a>
+  <!-- REQUIRED: Floating Download Button HTML -->
   <a href="assets/Alaa Saeed CV.pdf" download="Alaa Saeed CV.pdf" class="float-download-button">
     <span class="fas fa-download"></span> Download CV
   </a>
+  <script>
+    /* REQUIRED: JavaScript handling for floating download button */
+    // This prevents navigation interference when the download button is clicked
+    function handleDownloadClick(event) {
+      // Let the browser handle the download naturally
+      // No need to prevent default or add custom logic
+      console.log('Download initiated');
+    }
 
-  <div id="floating-box">
-    <h1>Alaa Saeed</h1>
-    <h2>~/alaa.sh</h2>
-    <ul class="tree">
-      <li>
-        <div class="node" onclick="navigateToIndexWithHash(this)">about</div>
-        <div class="content">
-          <p>Hi, I’m Alaa Saeed — a DevOps Engineer...</p>
-        </div>
-      </li>
-      <li>
-        <div class="node" onclick="navigateToIndexWithHash(this)">resume</div>
-        <div class="content">
-          <ul class="subtree">
-            <li>
-              <div class="node" style="cursor: default; color: #ffffff;">CV</div>
-            </li>
-            <li>
-              <div class="node">Download CV <a href="assets/Alaa Saeed CV.pdf" download="Alaa Saeed CV.pdf">[PDF]</a></div>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <div class="node" onclick="navigateToIndexWithHash(this)">contact</div>
-        <div class="content">
-          <ul>
-            <li>Email: <a href="mailto:alaa@alaa.sh">alaa@alaa.sh</a></li>
-            <li>GitHub: <a href="https://github.com/alaa-sa" target="_blank">alaa-sa</a></li>
-            <li>Website: <a href="https://alaa.sh" target="_blank">alaa.sh</a></li>
-            <li>---</li>
-            <li>Legacy Contact: <a href="mailto:alsaedwy@pm.me">alsaedwy@pm.me</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-    <div class="social-links">
-      <ul>
-        <li><a href="https://twitter.com/alsaedwy" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-        <li><a href="https://gitlab.com/alaa.saeed" class="icon brands fa-gitlab" target="_blank"><span class="label">GitHub</span></a></li>
-        <li><a href="https://github.com/alsaedwy" class="icon brands fa-github" target="_blank"><span class="label">GitHub</span></a></li>
-        <li><a href="https://linkedin.com/in/alsaedwy" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-        <li><a href="https://www.instagram.com/alsaedwy/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-      </ul>
-    </div>
-  </div>
 
-  <div id="page-content">
-    <div id="resume">
-      <header id="header" class="clear">
+    /* REQUIRED: Example navigation function that excludes download button */
+    // This is required if you have other navigation logic that should ignore the download button
+    function navigateToIndexWithHash(node) {
+      // 1. Handle Download CV link: Do nothing, let browser handle link/download
+      if (node.textContent.includes('Download CV')) {
+        return;
+      }
+
+      // Other navigation logic would go here...
+      console.log('Navigation logic for:', node.textContent);
+    }
+  </script>
+
+  <div id="resume">
+    <header id="header" class="clear">
+      <div>
+        <h1 class="name">Alaa Saeed</h1>
+        <h2 class="label">Senior MLOps Engineer</h2>
+      </div>
+
+      <span class="location">
+        <span class="city">Kerry,</span>
+        <span class="region">Ireland</span>
+        <span class="countryCode">(IE)</span>
+      </span>
+
+
+      <div id="contact">
+        <div class="website">
+          <span class="fas fa-external-link-alt"></span>
+          <a class="hide-href-print" target="_blank" target="_blank" href="https://alaa.sh">https://alaa.sh</a>
+        </div>
+        <div class="email">
+          <span class="far fa-envelope"></span>
+          <a class="hide-href-print" href="mailto:alsaedwy@gmail.com">alsaedwy@gmail.com</a>
+        </div>
+        <div class="phone">
+          <span class="fas fa-mobile-alt"></span>
+          <a class="hide-href-print" href="tel:(+353)834066681">(+353)834066681</a>
+        </div>
+      </div>
+
+      <div id="profiles">
+        <div class="item">
+          <div class="username">
+            <span class="fab fa-github github social"></span>
+            <span class="url">
+              <a target="_blank" href="https://github.com/alsaedwy">GitHub (@alsaedwy)</a>
+            </span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="username">
+            <span class="fab fa-gitlab gitlab social"></span>
+            <span class="url">
+              <a target="_blank" href="https://gitlab.com/alaa.saeed">GitLab (@alaa.saeed)</a>
+            </span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="username">
+            <span class="fab fa-linkedin linkedin social"></span>
+            <span class="url">
+              <a target="_blank" href="https://www.linkedin.com/in/alsaedwy/">LinkedIn (@alsaedwy)</a>
+            </span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="username">
+            <span class="fab fa-stack-overflow stack-overflow social"></span>
+            <span class="url">
+              <a target="_blank" href="https://stackoverflow.com/users/8805623/alsaedwy">Stack Overflow (@alsaedwy)</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <section class="main-summary">
         <div>
-          <h1 class="name">Alaa Saeed</h1>
-          <h2 class="label">Senior MLOps Engineer</h2>
+          <p>
+          <p>A software engineer with a strong foundation in Computer Science, passionate about technology and nature
+            alike, highly determined and resilient, as well as having:</p>
+          </p>
+          <p>
+          <ul>
+            </p>
+            <p>
+              <li>10+ years of total highly diverse technical experience and</li>
+            </p>
+            <p>
+              <li>purely 6+ years in DevOps, MLOps and cloud technologies.</li>
+            </p>
+            <p>
+          </ul>
+          </p>
         </div>
+      </section>
+    </section>
 
-        <span class="location">
-          <span class="city">Kerry,</span>
-          <span class="region">Ireland</span>
-          <span class="countryCode">(IE)</span>
-        </span>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Skills</h2>
+      </header>
+      <section id="skills">
+        <div class="item">
+          <h3 class="name">
+            Programming and Scripting
+          </h3>
 
-
-        <div id="contact">
-          <div class="website">
-            <span class="fas fa-external-link-alt"></span>
-            <a class="hide-href-print" target="_blank" target="_blank" href="https://alaa.sh">https://alaa.sh</a>
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
           </div>
-          <div class="email">
-            <span class="far fa-envelope"></span>
-            <a class="hide-href-print" href="mailto:alsaedwy@gmail.com">alsaedwy@gmail.com</a>
-          </div>
-          <div class="phone">
-            <span class="fas fa-mobile-alt"></span>
-            <a class="hide-href-print" href="tel:(+353)834066681">(+353)834066681</a>
-          </div>
+          <ul class="keywords">
+            <li>Python</li>
+            <li>pytest</li>
+            <li>Unit Testing</li>
+            <li>Test Driven Development (TDD)</li>
+            <li>Bash</li>
+            <li>AWS Lambda</li>
+            <li>AWS API Gateway</li>
+          </ul>
         </div>
+        <div class="item">
+          <h3 class="name">
+            Infrastructure as Code (IaC)
+            &amp; Config Management
+          </h3>
 
-        <div id="profiles">
-          <div class="item">
-            <div class="username">
-              <a target="_blank" href="https://github.com/alsaedwy">
-                <span class="fab fa-github github social"></span>
-              </a>
-              <span class="url">
-                <a target="_blank" href="https://github.com/alsaedwy">alsaedwy</a>
-              </span>
-            </div>
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
           </div>
-          <div class="item">
-            <div class="username">
-              <a target="_blank" href="https://www.linkedin.com/in/alsaedwy/">
-                <span class="fab fa-linkedin linkedin social"></span>
-              </a>
-              <span class="url">
-                <a target="_blank" href="https://www.linkedin.com/in/alsaedwy/">alsaedwy</a>
-              </span>
-            </div>
-          </div>
-          <div class="item">
-            <div class="username">
-              <a target="_blank" href="https://stackoverflow.com/users/8805623/alsaedwy">
-                <span class="fab fa-stack-overflow stack-overflow social"></span>
-              </a>
-              <span class="url">
-                <a target="_blank" href="https://stackoverflow.com/users/8805623/alsaedwy">alsaedwy</a>
-              </span>
-            </div>
-          </div>
+          <ul class="keywords">
+            <li>Terraform</li>
+            <li>CloudFormation</li>
+            <li>Ansible</li>
+            <li>AWS Systems Manager</li>
+          </ul>
         </div>
+        <div class="item">
+          <h3 class="name">
+            Continous Integration/Deployment/Delivery
+            (CI/CD)
+          </h3>
+
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>Jenkins</li>
+            <li>GitHub Actions</li>
+            <li>GitLab CI</li>
+            <li>AWS CodeBuild</li>
+            <li>AWS CodeDeploy</li>
+            <li>AWS CodePipeline</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3 class="name">
+            Containerization
+          </h3>
+
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>Docker</li>
+            <li>Kubernetes</li>
+            <li>AWS Batch</li>
+            <li>AWS Fargate</li>
+            <li>AWS EKS</li>
+            <li>AWS ECS</li>
+            <li>AWS ECR</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3 class="name">
+            Machine Learning and AI
+          </h3>
+
+          <div class="level intermediate">
+            <em>Intermediate</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>AWS SageMaker</li>
+            <li>AWS Bedrock</li>
+            <li>PyTorch</li>
+            <li>TensorFlow</li>
+            <li>Transformers</li>
+            <li>Model Training/Inferencing</li>
+            <li>Data Preprocessing</li>
+            <li>ETL Pipelines</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3 class="name">
+            Version Control Systems
+          </h3>
+
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>Git</li>
+            <li>GitHub Enterprise</li>
+            <li>BitBucket Server</li>
+            <li>GitLab</li>
+            <li>AWS CodeCommit</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3 class="name">
+            Monitoring, Logging and Alerting
+          </h3>
+
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>Datadog</li>
+            <li>Splunk</li>
+            <li>AWS CloudWatch</li>
+            <li>AWS X-Ray</li>
+            <li>AWS CloudTrail</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3 class="name">
+            Documentation
+          </h3>
+
+          <div class="level advanced">
+            <em>Advanced</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>Markdown</li>
+            <li>draw.io</li>
+            <li>Lucidchart</li>
+            <li>Confluence</li>
+            <li>Swagger</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3 class="name">
+            Database Administration (SQL &amp; NoSQL)
+          </h3>
+
+          <div class="level intermediate">
+            <em>Intermediate</em>
+            <div class="bar"></div>
+          </div>
+          <ul class="keywords">
+            <li>MySQL</li>
+            <li>PostgreSQL</li>
+            <li>DynamoDB</li>
+            <li>AWS RDS</li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Work Experience <span class="item-count">(8)</span></h2>
       </header>
 
-      <section class="section">
-        <section class="main-summary">
-          <div>
-            <p>
-            <p>A software engineer with a strong foundation in Computer Science, passionate about technology and nature
-              alike, highly determined and resilient, as well as:</p>
-            </p>
-            <p>
-            <ul>
-              </p>
-              <p>
-                <li>9+ years of total highly diverse technical experience and</li>
-              </p>
-              <p>
-                <li>purely 6+ years in DevOps and cloud technologies.</li>
-              </p>
-              <p>
-            </ul>
-            </p>
-          </div>
-        </section>
-      </section>
+      <section id="work">
+        <section class="work-item">
 
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Skills</h2>
-        </header>
-        <section id="skills">
-          <div class="item">
-            <h3 class="name">
-              Programming and Scripting
-            </h3>
 
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Nov 2024</span>
+              <span class="endDate">- Current</span>
             </div>
-            <ul class="keywords">
-              <li>Python</li>
-              <li>pytest</li>
-              <li>Unit Testing</li>
-              <li>Test Driven Development (TDD)</li>
-              <li>Bash</li>
-              <li>AWS Lambda</li>
-              <li>AWS API Gateway</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name">
-              Infrastructure as Code (IaC)
-            </h3>
+            <div class="position">Senior Machine Learning (MLOps) Engineer</div>
+            <div class="company">Workhuman</div>
+          </header>
 
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>Terraform</li>
-              <li>CloudFormation</li>
-              <li>Ansible</li>
-              <li>Systems Manager</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name">
-              Continous Integration/Deployment/Delivery (CI/CD)
-            </h3>
-
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>Jenkins</li>
-              <li>GitHub Actions</li>
-              <li>AWS CodeBuild</li>
-              <li>AWS CodeDeploy</li>
-              <li>AWS CodePipeline</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name">
-              Containerization
-            </h3>
-
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>Docker</li>
-              <li>Kubernetes</li>
-              <li>AWS Fargate</li>
-              <li>AWS EKS</li>
-              <li>AWS ECS</li>
-              <li>AWS ECR</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name">
-              Version Control Systems
-            </h3>
-
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>Git</li>
-              <li>GitHub Enterprise</li>
-              <li>BitBucket Server</li>
-              <li>GitLab</li>
-              <li>AWS CodeCommit</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name"></h3>
-              Monitoring, Logging and Alerting
-            </h3>
-
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>Datadog</li>
-              <li>Splunk</li>
-              <li>AWS CloudWatch</li>
-              <li>AWS X-Ray</li>
-              <li>AWS CloudTrail</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name"></h3>
-              Data Serialization
-            </h3>
-
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>YAML</li>
-              <li>JSON</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name">
-              Documentation
-            </h3>
-
-            <div class="level advanced">
-              <em>Advanced</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>Markdown</li>
-              <li>draw.io</li>
-              <li>Confluence</li>
-              <li>Swagger</li>
-            </ul>
-          </div>
-          <div class="item">
-            <h3 class="name">
-              Database Administration (SQL &amp; NoSQL)
-            </h3>
-
-            <div class="level intermediate">
-              <em>Intermediate</em>
-              <div class="bar"></div>
-            </div>
-            <ul class="keywords">
-              <li>MySQL</li>
-              <li>DynamoDB</li>
-              <li>AWS RDS</li>
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Dublin, Ireland (Remote)</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="https://workhuman.com/">https://workhuman.com/</a>
+          </span>
+          <ul class="keywords">
+            <li>Machine Learning</li>
+            <li>Technical Leadership</li>
+            <li>Design and Planning</li>
+            <li>AWS Batch</li>
+            <li>AWS Lambda</li>
+            <li>Amazon SageMaker</li>
+            <li>Amazon Bedrock</li>
+            <li>Amazon S3</li>
+            <li>Amazon Redshift</li>
+            <li>Redshift Serverless</li>
+            <li>Amazon RDS</li>
+            <li>Python</li>
+            <li>pytest</li>
+            <li>Jenkins</li>
+            <li>Terraform</li>
+            <li>GitLab CI</li>
+            <li>Model Running</li>
+            <li>ML Pipelines</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Owning, developing and maintaining automated Machine Learning pipelines for skills classification,
+                  soft skills labeling, and turnover calculations using Python, AWS Batch, Bedrock and SageMaker in
+                  collaboration with data scientists and product teams</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Leading design, planning, integrations and the release of Machine Learning models end-to-end
+                  production pipelines, starting from data ingestion, refinment/cleaning up to delivering the data to
+                  the consuming service layer team, all while ensuring seamless deployment and monitoring of model
+                  performance with robust observability practices</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Integrating diverse data sources consumption and outputs using Amazon Redshift (Serverless), RDS, and
+                  S3 to streamline data ingestion for model runs, affecting better efficiency for owned models pipelines
+                </p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Owning, maintaining and contributing to infrastructure resources using Terraform as well as
+                  automating/refining new and existing Machine Learning deployment cycles with GitLab CI, incorporating
+                  interanlly-offered package and container image scanning tools like Snyk and ECR, pytest for unit
+                  testing, Black for code formatting, and tflint for Terraform linting, enforcing policies and best
+                  practices; resulting in at least 40% faster development cycles as witnessed by the team's health
+                  metrics</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Establishing team-owning initiatives like postmortem analysis to track any production issues that
+                  have a customer impact, ensuring the team pinpoints rootcauses and that the team learns from past
+                  incidents and implements preventive measures, for example</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Working closely with the product manager to define and prioritize features and business requirement,
+                  translating them into technical specifications and actionable tasks for the team, ensuring alignment
+                  with business goals and customer needs</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Support the team by providing constant mentorship to 3 junior Machine Learning engineers through 1:1
+                  recurring weekly meetings, code review and personalized feedback loops, as well as providing guidance
+                  and support to 2 senior engineers in various areas</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Establishing technical workshops for the team; focusing on technical areas like code explanations,
+                  service integrations that are essential for the team's work and requires a deep understanding of the
+                  underlying technologies, and best practices for Machine Learning model deployment and monitoring</p>
+                </p>
+              </li>
             </ul>
           </div>
         </section>
-      </section>
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Education <span class="item-count">(2)</span></h2>
-        </header>
+        <section class="work-item">
 
-        <section id="education">
-          <section class="education-item">
-            <header class="clear"></header>
-              <div class="date">
-                <span class="startDate">
-                  2009
-                </span>
-                <span class="endDate">
-                  - 2013
-                </span>
-              </div>
-              <div class="header-left">
-                <div class="studyType">
-                  Bachelors Degree in
-                </div>
-                <div class="area">
-                  Computer Science
-                </div>
-                <div class="institution">
-                  Future Academy
-                </div>
-              </div>
-            </header>
+          <label for="work-item-1"></label>
 
-
-
-            <div class="item">
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Sep 2023</span>
+              <span class="endDate">- Oct 2024</span>
             </div>
-          </section>
-          <section class="education-item">
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">
-                  2015
-                </span>
-                <span class="endDate">
-                  - 2018
-                </span>
-              </div>
-              <div class="header-left">
-                <div class="studyType">
-                  Diploma in
-                </div>
-                <div class="area">
-                  Computer Science
-                </div>
-                <div class="institution">
-                  Suez Canal University
-                </div>
-              </div>
-            </header>
+            <div class="position">Senior DevOps Engineer</div>
+            <div class="company">Fidelity Investments</div>
+          </header>
 
-
-
-            <div class="item">
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Galway, Ireland (Remote)</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="http://fidelity.com">http://fidelity.com</a>
+          </span>
+          <ul class="keywords">
+            <li>GitHub Enterprise</li>
+            <li>Python</li>
+            <li>pytest</li>
+            <li>Jenkins</li>
+            <li>Kubernetes</li>
+            <li>EKS</li>
+            <li>Terraform</li>
+            <li>AWS Lambda</li>
+            <li>API Integrations</li>
+            <li>CI/CD Pipelines</li>
+            <li>AWS API Gateway</li>
+          </ul>
+          <div class="item" id="work-item">
+            <div class="summary">
+              <p>
+              <p>As a key member of the Source Code Management (SCM) platform team at Fidelity Investments, I manage and
+                optimize GitHub Enterprise operations and integrations, driving efficiency and compliance across the
+                organization. My contributions include:</p>
+              </p>
             </div>
-          </section>
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Developed Python-based automation solutions to streamline GitHub Enterprise maintenance and enforce
+                  company policies. I create reusable Python modules and conduct comprehensive code reviews to ensure
+                  adherence to best practices.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Spearheaded the automation of integrations between GitHub Enterprise and internal services,
+                  collaborating closely with cross-functional teams to design and implement efficient API solutions,
+                  ensuring the secure management &amp; compliance of source code repositories by implementing access
+                  controls and automating security scans within GitHub Enterprise.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Designed and maintained CI/CD pipelines (Jenkins) for containerized applications, like Mend for code
+                  scanning, deployed on Kubernetes clusters, all of which was leveraged by Infrastructure as Code (IaC)
+                  tools like Terraform and OpenTofu to manage infrastructure deployment and scaling.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Lead research and analysis efforts to enhance existing automation pipelines, identifying areas for
+                  refactoring or redesign. Collaborate with team members to deliver robust, scalable solutions to
+                  address evolving business needs.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Actively contributed to continuous improvement initiatives by introducing automation best practices,
+                  like linting, unit testing (pytest), and CI/CD optimizations, resulting in faster development cycles
+                  and improved code quality.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Implemented monitoring and alerting systems for GitHub Enterprise using tools like Datadog and
+                  Splunk; enabling early detection and swift resolution of issues, significantly reducing downtime.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Played a key role in mentoring junior developers within the team, sharing knowledge through 1:1
+                  recurring meetings, code reviews, workshops, and documentation, fostering a culture of learning and
+                  technical excellence.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="work-item">
+
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Nov 2021</span>
+              <span class="endDate">- Sep 2023</span>
+            </div>
+            <div class="position">DevOps Engineer</div>
+            <div class="company">3M</div>
+          </header>
+
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Dublin, Ireland (Remote)</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="http://3m.com">http://3m.com</a>
+          </span>
+          <ul class="keywords">
+            <li>Docker</li>
+            <li>Kubernetes</li>
+            <li>GitHub Actions</li>
+            <li>AWS Systems Manager</li>
+            <li>Python</li>
+            <li>AWS Lambda</li>
+            <li>Terraform</li>
+            <li>SonarQube</li>
+            <li>AWS Auto Scaling</li>
+            <li>AWS CloudFormation</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Designed and built services for 3M's DevOps and internal development teams, utilizing Docker,
+                  Kubernetes, GitHub Actions, and AWS Systems Manager for CI/CD and configuration management.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Automated essential jobs in development and deployment pipelines using Python, Bash, AWS Lambda, and
+                  participated in architectural designs to enhance infrastructure.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Led documentation efforts using Confluence, creating usage guides with draw.io Markdown &amp; README
+                  files, and contributed to GitHub Enterprise Server migration for internal development use.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Used Terraform for infrastructure provisioning, enforced coding standards with SonarQube, and
+                  promoted high code quality and collaboration through GitHub for code reviews.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="work-item">
+
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Sep 2019</span>
+              <span class="endDate">- Nov 2021</span>
+            </div>
+            <div class="position">Cloud DevOps Support Engineer</div>
+            <div class="company">Amazon Web Services (AWS)</div>
+          </header>
+
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Dublin, Ireland</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="http://aws.com">http://aws.com</a>
+          </span>
+          <ul class="keywords">
+            <li>AWS CloudFormation</li>
+            <li>EKS</li>
+            <li>ECS</li>
+            <li>CodeDeploy</li>
+            <li>CodePipeline</li>
+            <li>CodeBuild</li>
+            <li>CodeArtifact</li>
+            <li>CodeCommit</li>
+            <li>AWS SDKs</li>
+            <li>AWS CLI</li>
+            <li>Automation Services</li>
+            <li>CI/CD Pipelines</li>
+            <li>AWS Security</li>
+            <li>Compliance</li>
+            <li>Incident Management</li>
+            <li>Mentoring</li>
+            <li>Technical Support</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Provided expert assistance to customers using AWS DevOps services such as CloudFormation, EKS
+                  (Elastic Kubernetes Services), ECS (Elastic Container Service), CodeDeploy, CodePipeline, CodeBuild,
+                  and CodeArtifact.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Helped customers automate and design pipelines and tasks using AWS SDKs, CLI, CloudFormation, and
+                  other automation services.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Identified, analyzed, and resolved complex technical issues related to AWS DevOps services and their
+                  integrations.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Communicated effectively with customers to understand their challenges and provide clear, timely
+                  solutions &amp; to optimize the performance and scalability of their CI/CD pipelines and
+                  infrastructure while following best practices and compliance requirements within DevOps workflows.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Responded to and managed high-severity incidents, coordinating with multiple teams to ensure swift
+                  resolution.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Work closely with AWS engineering and product teams to escalate issues and provide customer feedback
+                  for service improvements.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Mentored new team members and provided technical guidance and support to help them succeed in their
+                  roles.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="work-item">
+
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Oct 2018</span>
+              <span class="endDate">- Aug 2019</span>
+            </div>
+            <div class="position">DevOps Engineer</div>
+            <div class="company">04Egypt</div>
+          </header>
+
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">The GrEEK Campus, Cairo, Egypt</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank"
+              href="https://www.linkedin.com/company/04egypt/">https://www.linkedin.com/company/04egypt/</a>
+          </span>
+          <ul class="keywords">
+            <li>GitHub</li>
+            <li>Ansible</li>
+            <li>Linux</li>
+            <li>Node.js</li>
+            <li>npm</li>
+            <li>PM2</li>
+            <li>Jenkins</li>
+            <li>CI/CD</li>
+            <li>Test-Driven Development (TDD)</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Utilized GitHub for source control management and Ansible for automating the configuration of Linux
+                  environments tailored for the company’s specific application needs.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>For the applications being based on Node, I've used npm for package management and PM2 for process
+                  management to streamline the build process, while Jenkins orchestrated automated testing and
+                  deployment workflows for different environments.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Administered Jenkins pipelines to facilitate continuous integration and delivery, ensuring seamless
+                  updates and robust software delivery cycles.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Diagnosed and resolved deployment and runtime issues with production software using Ansible for
+                  configuration fixes and PM2 for monitoring and process management.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Integrated test-driven development (TDD) practices into the development workflow, ensuring
+                  high-quality code and efficient testing processes.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="work-item">
+
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Sep 2016</span>
+              <span class="endDate">- Sep 2018</span>
+            </div>
+            <div class="position">Systems Administrator</div>
+            <div class="company">American Section, Al-Manar Language School</div>
+          </header>
+
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Al-Ismailia, Egypt</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="https://www.almanarschools.net/">https://www.almanarschools.net/</a>
+          </span>
+          <ul class="keywords">
+            <li>School Information Management System (SIMS)</li>
+            <li>Python</li>
+            <li>Infrastructure Design</li>
+            <li>Network Design</li>
+            <li>Technical Support</li>
+            <li>IT Course Instruction</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Administered School Information Management System (SIMS) that enabled teachers, students and the
+                  administration to manage school data and resources efficiently.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Wrote and maintained scripts using Python to automate system administration tasks.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Participated in the school's infrastructure and network design.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Taught IT course for IGCSE and American Section (International) students.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Provided technical support to staff and students, troubleshooting hardware and software issues.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="work-item">
+
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Sep 2015</span>
+              <span class="endDate">- May 2017</span>
+            </div>
+            <div class="position">Systems Administrator</div>
+            <div class="company">Tarqeem</div>
+          </header>
+
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Al-Ismailia, Egypt</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="https://tarqeem.net/">https://tarqeem.net/</a>
+          </span>
+          <ul class="keywords">
+            <li>Laboratory Information System (LIS)</li>
+            <li>Linux</li>
+            <li>PHP</li>
+            <li>MySQL</li>
+            <li>Network Connectivity</li>
+            <li>SSL Certificates</li>
+            <li>System Maintenance</li>
+            <li>Performance Monitoring</li>
+            <li>Training</li>
+            <li>Technical Support</li>
+            <li>VLANs</li>
+            <li>Subnetting</li>
+            <li>Documentation</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Collaborated with developers, technicians, and stakeholders to ensure the Laboratory Information
+                  System (LIS) met technical and operational requirements, customizing the software for specific
+                  workflows.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Installed and configured Linux servers, set up PHP environments with MySQL databases, and implemented
+                  security protocols including firewalls and SSL for secure LIS operation.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Connected laboratory machines to the LIS, ensured accurate data transfer, and provided training and
+                  support to staff, creating guides to enhance system adoption and usability.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Monitored system performance, performed updates, resolved issues, and documented configurations and
+                  procedures for compliance and future troubleshooting.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="work-item">
+
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">Jun 2015</span>
+              <span class="endDate">- Sep 2015</span>
+            </div>
+            <div class="position">Junior Network/Systems Administrator</div>
+            <div class="company">Sinai University</div>
+          </header>
+
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="location">Al-Ismailia, Egypt</span>
+          <span class="url">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="https://www.almanarschools.net/">https://www.almanarschools.net/</a>
+          </span>
+          <ul class="keywords">
+            <li>Wireless Network Infrastructure</li>
+            <li>Access Points</li>
+            <li>WPA2 Security</li>
+            <li>Routers</li>
+            <li>Switches</li>
+            <li>VLANs</li>
+            <li>Inter-VLAN Routing</li>
+            <li>Network Monitoring</li>
+            <li>SNMP</li>
+            <li>Network Upgrades</li>
+            <li>Firmware Updates</li>
+            <li>Troubleshooting</li>
+            <li>Layer 1 Infrastructure</li>
+          </ul>
+          <div class="item" id="work-item">
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Designed and deployed both wireless and wired network infrastructure for the university, configuring
+                  access points, routers, and switches while securing wireless communication with WPA2 protocols.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Implemented VLANs and inter-VLAN routing to enhance network segmentation and efficiency across both
+                  wired and wireless networks.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Monitored network performance using SNMP tools, resolved connectivity issues, and optimized traffic
+                  flow to ensure reliable and consistent network availability.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Documented the implementation of Layer 1 infrastructure, including cable installation, patch panels,
+                  and racks, ensuring compliance with physical network standards.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
         </section>
       </section>
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Publications</h2>
-        </header>
-        <section id="publications">
-          <section class="publication-item">
-            <label for="publication-item-0"></label>
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Education <span class="item-count">(2)</span></h2>
+      </header>
 
-            <header class="clear">
-              <span class="date">
-                22 Jul 2021
+      <section id="education">
+        <section class="education-item">
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">
+                2009
               </span>
-              <div class="header-left">
-                <span class="name"></span>
-                  Logging image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function
-                </span>
-                <span class="publisher">
-                  in AWS Containers Blog
-                </span>
+              <span class="endDate">
+                - 2013
+              </span>
+            </div>
+            <div class="header-left">
+              <div class="studyType">
+                Bachelors Degree in
               </div>
-
-            </header>
-
-            <div class="item">
-              <div class="summary">
-                <p>
-                <ul>
-                  </p>
-                  <p>
-                    <li><a
-                        href="https://aws.amazon.com/blogs/containers/logging-image-scan-findings-from-amazon-ecr-in-cloudwatch-using-an-aws-lambda-function/">Wrote
-                        an AWS blog post</a> where I have developed a solution about Logging image scan findings from ECR
-                      into CloudWatch using a Lambda Function on the official AWS Containers Blog.</li>
-                  </p>
-                  <p>
-                    <li>The blog post covers the importance of container security and how to automate the process of
-                      logging image scan findings from Amazon ECR into CloudWatch using an AWS Lambda function.</li>
-                  </p>
-                  <p>
-                    <li>Utilized AWS SDK for Python (Boto3) to interact with ECR and CloudWatch APIs, enabling seamless
-                      integration and data transfer.</li>
-                  </p>
-                  <p>
-                    <li>The solution provides a detailed guide on setting up the Lambda function, configuring the
-                      necessary permissions, and monitoring the logs in CloudWatch &amp; it on the AWS Containers Blog to
-                      share the solution with the broader AWS community and provide insights into best practices for
-                      container security.</li>
-                  </p>
-                  <p>
-                </ul>
-                </p>
+              <div class="area">
+                Computer Science
+              </div>
+              <div class="institution">
+                Future Academy
               </div>
             </div>
-          </section>
+          </header>
+
+
+
+          <div class="item">
+          </div>
+        </section>
+        <section class="education-item">
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">
+                2015
+              </span>
+              <span class="endDate">
+                - 2018
+              </span>
+            </div>
+            <div class="header-left">
+              <div class="studyType">
+                Diploma
+              </div>
+              <div class="area">
+                Computer Science
+              </div>
+              <div class="institution">
+                Suez Canal University
+              </div>
+            </div>
+          </header>
+
+
+
+          <div class="item">
+          </div>
         </section>
       </section>
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Work Experience <span class="item-count">(8)</span></h2>
-        </header>
-
-        <section id="work">
-          <section class="work-item">
-
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Nov 2024</span>
-                <span class="endDate">- Current</span>
-              </div>
-              <div class="position">Senior Machine Learning (MLOps) Engineer</div>
-              <div class="company">Workhuman</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Dublin, Ireland (Remote)</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="https://workhuman.com/">https://workhuman.com/</a>
-            </span>
-            <ul class="keywords">
-              <li>AWS Batch</li>
-              <li>AWS Lambda</li>
-              <li>Amazon SageMaker</li>
-              <li>Amazon S3</li>
-              <li>Amazon Redshift</li>
-              <li>Amazon RDS</li>
-              <li>Python</li>
-              <li>pytest</li>
-              <li>Jenkins</li>
-              <li>Terraform</li>
-              <li>GitLab CI</li>
-              <li>Model Running</li>
-              <li>ML Pipelines</li>
-            </ul>
-            <div class="item" id="work-item">
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Owning, developing and maintaining automated ML pipelines for skills classification, soft skills
-                    labeling, and turnover calculations using Python and AWS Batch in collaboration with data scientists
-                    and product teams.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Integrating diverse data sources consumption and outputs using Amazon Redshift, RDS, and S3 to
-                    streamline data ingestion for model runs, affecting better efficiency for owned models pipelines</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Managing infrastructure with Terraform and automated/refined new and existing deployment cycles with
-                    GitLab CI, incorporating interanlly-offered Snyk for vulnerability scanning, pytest for unit testing,
-                    Black for code formatting, and tflint for Terraform linting, enforcing policies and best practices;
-                    resulting in at least 40% faster development cycles as witnessed by the team's health metrics.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Established a postmortem initiative to track any production issues that have a customer impact,
-                    ensuring the team pinpoints rootcauses and that the team learns from past incidents and implements
-                    preventive measures.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Enhanced process efficiency through AWS Lambda integrations for ad hoc automation tasks.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Providing mentoring 3 junior engineers and provided guidance and support to 2 senior peers for both
-                    technical and support and scheduled team workshops.</p>
-                  </p>
-                </li>
-              </ul>
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Languages</h2>
+      </header>
+      <section id="languages">
+        <div class="display">
+          <h3 class="language">
+            English
+          </h3>
+          <div class="item">
+            <div class="level fluency fluent">
+              <em>Fluent</em>
+              <div class="bar"></div>
             </div>
-          </section>
-          <section class="work-item">
+          </div>
+        </div>
+        <div class="display">
+          <h3 class="language">
+            Arabic
+          </h3>
+          <div class="item">
+            <div class="level fluency native speaker">
+              <em>Native Speaker</em>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Publications</h2>
+      </header>
+      <section id="publications">
+        <section class="publication-item">
+          <label for="publication-item-0"></label>
 
-            <label for="work-item-1"></label>
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Sep 2023</span>
-                <span class="endDate">- Oct 2024</span>
-              </div>
-              <div class="position">Senior DevOps Engineer</div>
-              <div class="company">Fidelity Investments</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Galway, Ireland (Remote)</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="http://fidelity.com">http://fidelity.com</a>
+          <header class="clear">
+            <span class="date">
+              22 Jul 2021
             </span>
-            <ul class="keywords">
-              <li>GitHub Enterprise</li>
-              <li>Python</li>
-              <li>pytest</li>
-              <li>Jenkins</li>
-              <li>Kubernetes</li>
-              <li>EKS</li>
-              <li>Terraform</li>
-              <li>AWS Lambda</li>
-              <li>API Integrations</li>
-              <li>CI/CD Pipelines</li>
-              <li>AWS API Gateway</li>
-            </ul>
-            <div class="item" id="work-item">
-              <div class="summary">
-                <p>
-                <p>As a key member of the Source Code Management (SCM) platform team at Fidelity Investments, I manage and
-                  optimize GitHub Enterprise operations and integrations, driving efficiency and compliance across the
-                  organization. My contributions include:</p>
+            <div class="header-left">
+              <span class="name">
+                Logging image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function
+              </span>
+              <span class="publisher">
+                in AWS Containers Blog
+              </span>
+            </div>
+
+          </header>
+
+          <div class="item">
+            <div class="summary">
+              <p>
+              <ul>
                 </p>
-              </div>
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Developed Python-based automation solutions to streamline GitHub Enterprise maintenance and enforce
-                    company policies. I create reusable Python modules and conduct comprehensive code reviews to ensure
-                    adherence to best practices.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Spearheaded the automation of integrations between GitHub Enterprise and internal services,
-                    collaborating closely with cross-functional teams to design and implement efficient API solutions,
-                    ensuring the secure management &amp; compliance of source code repositories by implementing access
-                    controls and automating security scans within GitHub Enterprise.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Designed and maintained CI/CD pipelines (Jenkins) for containerized applications, like Mend for code
-                    scanning, deployed on Kubernetes clusters, all of which was leveraged by Infrastructure as Code (IaC)
-                    tools like Terraform and OpenTofu to manage infrastructure deployment and scaling.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Lead research and analysis efforts to enhance existing automation pipelines, identifying areas for
-                    refactoring or redesign. Collaborate with team members to deliver robust, scalable solutions to
-                    address evolving business needs.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Actively contributed to continuous improvement initiatives by introducing automation best practices,
-                    like linting, unit testing (pytest), and CI/CD optimizations, resulting in faster development cycles
-                    and improved code quality.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Implemented monitoring and alerting systems for GitHub Enterprise using tools like Datadog and
-                    Splunk; enabling early detection and swift resolution of issues, significantly reducing downtime.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Played a key role in mentoring junior developers within the team, sharing knowledge through code
-                    reviews, workshops, and documentation, fostering a culture of learning and technical excellence.</p>
-                  </p>
-                </li>
+                <p>
+                  <li><a
+                      href="https://aws.amazon.com/blogs/containers/logging-image-scan-findings-from-amazon-ecr-in-cloudwatch-using-an-aws-lambda-function/">Wrote
+                      an AWS blog post</a> where I have developed a solution about Logging image scan findings from ECR
+                    into CloudWatch using a Lambda Function on the official AWS Containers Blog.</li>
+                </p>
+                <p>
+                  <li>The blog post covers the importance of container security and how to automate the process of
+                    logging image scan findings from Amazon ECR into CloudWatch using an AWS Lambda function.</li>
+                </p>
+                <p>
+                  <li>Utilized AWS SDK for Python (Boto3) to interact with ECR and CloudWatch APIs, enabling seamless
+                    integration and data transfer.</li>
+                </p>
+                <p>
+                  <li>The solution provides a detailed guide on setting up the Lambda function, configuring the
+                    necessary permissions, and monitoring the logs in CloudWatch &amp; it on the AWS Containers Blog to
+                    share the solution with the broader AWS community and provide insights into best practices for
+                    container security.</li>
+                </p>
+                <p>
               </ul>
+              </p>
             </div>
-          </section>
-          <section class="work-item">
-
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Nov 2021</span>
-                <span class="endDate">- Sep 2023</span>
-              </div>
-              <div class="position">DevOps Engineer</div>
-              <div class="company">3M</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Dublin, Ireland (Remote)</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="http://3m.com">http://3m.com</a>
-            </span>
-            <ul class="keywords">
-              <li>Docker</li>
-              <li>Kubernetes</li>
-              <li>GitHub Actions</li>
-              <li>AWS Systems Manager</li>
-              <li>Python</li>
-              <li>AWS Lambda</li>
-              <li>Terraform</li>
-              <li>SonarQube</li>
-              <li>AWS Auto Scaling</li>
-              <li>AWS CloudFormation</li>
-            </ul>
-            <div class="item" id="work-item">
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Designed and built services for 3M's DevOps and internal development teams, utilizing Docker,
-                    Kubernetes, GitHub Actions, and AWS Systems Manager for CI/CD and configuration management.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Automated essential jobs in development and deployment pipelines using Python, Bash, AWS Lambda, and
-                    participated in architectural designs to enhance infrastructure.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Led documentation efforts using Confluence, creating usage guides with draw.io Markdown &amp; README
-                    files, and contributed to GitHub Enterprise Server migration for internal development use.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Used Terraform for infrastructure provisioning, enforced coding standards with SonarQube, and
-                    promoted high code quality and collaboration through GitHub for code reviews.</p>
-                  </p>
-                </li>
-              </ul>
+          </div>
+        </section>
+      </section>
+    </section>
+    <section class="section">
+      <header>
+        <h2 class="section-title">Certificates</h2>
+      </header>
+      <section id="certificates">
+        <section class="certificate-item">
+          <header class="clear">
+            <div class="date">
+              2021-07-01
             </div>
-          </section>
-          <section class="work-item">
-
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Sep 2019</span>
-                <span class="endDate">- Nov 2021</span>
+            <div class="header-left">
+              <div class="name">
+                AWS Certified Solutions Architect – Associate
               </div>
-              <div class="position">Cloud DevOps Support Engineer</div>
-              <div class="company">Amazon Web Services (AWS)</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Dublin, Ireland</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="http://aws.com">http://aws.com</a>
-            </span>
-            <ul class="keywords">
-              <li>AWS CloudFormation</li>
-              <li>EKS</li>
-              <li>ECS</li>
-              <li>CodeDeploy</li>
-              <li>CodePipeline</li>
-              <li>CodeBuild</li>
-              <li>CodeArtifact</li>
-              <li>CodeCommit</li>
-              <li>AWS SDKs</li>
-              <li>AWS CLI</li>
-              <li>Automation Services</li>
-              <li>CI/CD Pipelines</li>
-              <li>AWS Security</li>
-              <li>Compliance</li>
-              <li>Incident Management</li>
-              <li>Mentoring</li>
-              <li>Technical Support</li>
-            </ul>
-            <div class="item" id="work-item">
-              <ul class="highlights"></ul>
-                <li>
-                  <p>
-                  <p>Provided expert assistance to customers using AWS DevOps services such as CloudFormation, EKS
-                    (Elastic Kubernetes Services), ECS (Elastic Container Service), CodeDeploy, CodePipeline, CodeBuild,
-                    and CodeArtifact.</p>
-                  </p>
-                </li>
-                <li>
-                  <p></p>
-                  <p>Helped customers automate and design pipelines and tasks using AWS SDKs, CLI, CloudFormation, and
-                    other automation services.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Identified, analyzed, and resolved complex technical issues related to AWS DevOps services and their
-                    integrations.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Communicated effectively with customers to understand their challenges and provide clear, timely
-                    solutions &amp; to optimize the performance and scalability of their CI/CD pipelines and
-                    infrastructure while following best practices and compliance requirements within DevOps workflows.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Responded to and managed high-severity incidents, coordinating with multiple teams to ensure swift
-                    resolution.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Work closely with AWS engineering and product teams to escalate issues and provide customer feedback
-                    for service improvements.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Mentored new team members and provided technical guidance and support to help them succeed in their
-                    roles.</p>
-                  </p>
-                </li>
-              </ul>
+              <div class="issuer">
+                AWS Training and Certification
+              </div>
             </div>
-          </section>
-          <section class="work-item">
+          </header>
 
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Oct 2018</span>
-                <span class="endDate">- Aug 2019</span>
-              </div>
-              <div class="position">DevOps Engineer</div>
-              <div class="company">04Egypt</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">The GrEEK Campus, Cairo, Egypt</span>
+          <div class="item">
             <span class="url">
               <span class="fas fa-external-link-alt"></span>
               <a target="_blank"
-                href="https://www.linkedin.com/company/04egypt/">https://www.linkedin.com/company/04egypt/</a>
+                href="https://www.credly.com/badges/8f257fa1-3a5b-4896-bcc9-31df13efabe2">https://www.credly.com/badges/8f257fa1-3a5b-4896-bcc9-31df13efabe2</a>
             </span>
-            <ul class="keywords">
-              <li>GitHub</li>
-              <li>Ansible</li>
-              <li>Linux</li>
-              <li>Node.js</li>
-              <li>npm</li>
-              <li>PM2</li>
-              <li>Jenkins</li>
-              <li>CI/CD</li>
-              <li>Test-Driven Development (TDD)</li>
-            </ul>
-            <div class="item" id="work-item">
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Utilized GitHub for source control management and Ansible for automating the configuration of Linux
-                    environments tailored for the company’s specific application needs.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>For the applications being based on Node, I've used npm for package management and PM2 for process
-                    management to streamline the build process, while Jenkins orchestrated automated testing and
-                    deployment workflows for different environments.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Administered Jenkins pipelines to facilitate continuous integration and delivery, ensuring seamless
-                    updates and robust software delivery cycles.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Diagnosed and resolved deployment and runtime issues with production software using Ansible for
-                    configuration fixes and PM2 for monitoring and process management.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Integrated test-driven development (TDD) practices into the development workflow, ensuring
-                    high-quality code and efficient testing processes.</p>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <section class="work-item">
-
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Sep 2016</span>
-                <span class="endDate">- Sep 2018</span>
-              </div>
-              <div class="position">Systems Administrator</div>
-              <div class="company">American Section, Al-Manar Language School</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Al-Ismailia, Egypt</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="https://www.almanarschools.net/">https://www.almanarschools.net/</a>
-            </span>
-            <ul class="keywords"></ul>
-              <li>School Information Management System (SIMS)</li>
-              <li>Python</li>
-              <li>Infrastructure Design</li>
-              <li>Network Design</li>
-              <li>Technical Support</li>
-              <li>IT Course Instruction</li>
-            </ul>
-            <div class="item" id="work-item">
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Administered School Information Management System (SIMS) that enabled teachers, students and the
-                    administration to manage school data and resources efficiently.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Wrote and maintained scripts using Python to automate system administration tasks.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Participated in the school's infrastructure and network design.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Taught IT course for IGCSE and American Section (International) students.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Provided technical support to staff and students, troubleshooting hardware and software issues.</p>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <section class="work-item">
-
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Sep 2015</span>
-                <span class="endDate">- May 2017</span>
-              </div>
-              <div class="position">Systems Administrator</div>
-              <div class="company">Tarqeem</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Al-Ismailia, Egypt</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="https://tarqeem.net/">https://tarqeem.net/</a>
-            </span>
-            <ul class="keywords">
-              <li>Laboratory Information System (LIS)</li>
-              <li>Linux</li>
-              <li>PHP</li>
-              <li>MySQL</li>
-              <li>Network Connectivity</li>
-              <li>SSL Certificates</li>
-              <li>System Maintenance</li>
-              <li>Performance Monitoring</li>
-              <li>Training</li>
-              <li>Technical Support</li>
-              <li>VLANs</li>
-              <li>Subnetting</li>
-              <li>Documentation</li>
-            </ul>
-            <div class="item" id="work-item">
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Collaborated with developers, technicians, and stakeholders to ensure the Laboratory Information
-                    System (LIS) met technical and operational requirements, customizing the software for specific
-                    workflows.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Installed and configured Linux servers, set up PHP environments with MySQL databases, and implemented
-                    security protocols including firewalls and SSL for secure LIS operation.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Connected laboratory machines to the LIS, ensured accurate data transfer, and provided training and
-                    support to staff, creating guides to enhance system adoption and usability.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Monitored system performance, performed updates, resolved issues, and documented configurations and
-                    procedures for compliance and future troubleshooting.</p>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <section class="work-item">
-
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">Jun 2015</span>
-                <span class="endDate">- Sep 2015</span>
-              </div>
-              <div class="position">Junior Network/Systems Administrator</div>
-              <div class="company">Sinai University</div>
-            </header>
-
-            <span class="fas fa-map-marker-alt"></span>
-            <span class="location">Al-Ismailia, Egypt</span>
-            <span class="url">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="https://www.almanarschools.net/">https://www.almanarschools.net/</a>
-            </span>
-            <ul class="keywords">
-              <li>Wireless Network Infrastructure</li>
-              <li>Access Points</li>
-              <li>WPA2 Security</li>
-              <li>Routers</li>
-              <li>Switches</li>
-              <li>VLANs</li>
-              <li>Inter-VLAN Routing</li>
-              <li>Network Monitoring</li>
-              <li>SNMP</li>
-              <li>Network Upgrades</li>
-              <li>Firmware Updates</li>
-              <li>Troubleshooting</li>
-              <li>Layer 1 Infrastructure</li>
-            </ul>
-            <div class="item" id="work-item"></div>
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Designed and deployed both wireless and wired network infrastructure for the university, configuring
-                    access points, routers, and switches while securing wireless communication with WPA2 protocols.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Implemented VLANs and inter-VLAN routing to enhance network segmentation and efficiency across both
-                    wired and wireless networks.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Monitored network performance using SNMP tools, resolved connectivity issues, and optimized traffic
-                    flow to ensure reliable and consistent network availability.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Documented the implementation of Layer 1 infrastructure, including cable installation, patch panels,
-                    and racks, ensuring compliance with physical network standards.</p>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </section>
-      </section>
-      <section class="section">
-        <header>
-          <h2 class="section-title">Certificates</h2>
-        </header>
-        <section id="certificates">
-          <section class="certificate-item">
-            <header class="clear">
-              <div class="date">
-                2021-07-01
-              </div>
-              <div class="header-left">
-                <div class="name">
-                  AWS Certified Solutions Architect – Associate
-                </div>
-                <div class="issuer">
-                  AWS Training and Certification
-                </div>
-              </div>
-            </header>
-
-            <div class="item">
-              <span class="url">
-                <span class="fas fa-external-link-alt"></span>
-                <a target="_blank"
-                  href="https://www.credly.com/badges/8f257fa1-3a5b-4896-bcc9-31df13efabe2">https://www.credly.com/badges/8f257fa1-3a5b-4896-bcc9-31df13efabe2</a>
-              </span>
-            </div>
-          </section>
-          <section class="certificate-item">
-            <header class="clear">
-              <div class="date">
-                2023-03-31
-              </div>
-              <div class="header-left">
-                <div class="name">
-                  Terraform Associate
-                </div>
-                <div class="issuer">
-                  HashiCorp
-                </div>
-              </div>
-            </header>
-
-            <div class="item">
-              <span class="url">
-                <span class="fas fa-external-link-alt"></span>
-                <a target="_blank"
-                  href="https://www.credly.com/badges/e6fc175d-4646-4d25-ab5f-64d18dc4dfe6">https://www.credly.com/badges/e6fc175d-4646-4d25-ab5f-64d18dc4dfe6</a>
-              </span>
-            </div>
-          </section>
-          <section class="certificate-item">
-            <header class="clear">
-              <div class="date">
-                2016-09-26
-              </div>
-              <div class="header-left">
-                <div class="name">
-                  MCSE: Cloud Platform and Infrastructure — Certified 2016
-                </div>
-                <div class="issuer">
-                  Microsoft
-                </div>
-              </div>
-            </header>
-
-            <div class="item">
-              <span class="url">
-                <span class="fas fa-external-link-alt"></span>
-                <a target="_blank"
-                  href="https://www.credly.com/badges/d5299c12-2e0b-4d99-bb1e-bccc0740e749">https://www.credly.com/badges/d5299c12-2e0b-4d99-bb1e-bccc0740e749</a>
-              </span>
-            </div>
-          </section>
-          <section class="certificate-item">
-            <header class="clear">
-              <div class="date">
-                2021-09-05
-              </div>
-              <div class="header-left">
-                <div class="name">
-                  Python Core
-                </div>
-                <div class="issuer">
-                  Sololearn
-                </div>
-              </div>
-            </header>
-
-            <div class="item">
-              <span class="url">
-                <span class="fas fa-external-link-alt"></span>
-                <a target="_blank"
-                  href="https://www.sololearn.com/Certificate/CT-8MNENPLF/png">https://www.sololearn.com/Certificate/CT-8MNENPLF/png</a>
-              </span>
-            </div>
-          </section>
-          <section class="certificate-item">
-            <header class="clear">
-              <div class="date">
-                2014-05-13
-              </div>
-              <div class="header-left">
-                <div class="name">
-                  Cisco Certified Network Associate Routing and Switching (CCNA Routing and Switching)
-                </div>
-                <div class="issuer">
-                  Cisco
-                </div>
-              </div>
-            </header>
-
-            <div class="item">
-              <span class="url">
-                <span class="fas fa-external-link-alt"></span>
-                <a target="_blank"
-                  href="https://www.credly.com/badges/0e741573-c208-4bc0-976d-f60e8cb0f35a">https://www.credly.com/badges/0e741573-c208-4bc0-976d-f60e8cb0f35a</a>
-              </span>
-            </div>
-          </section>
-        </section>
-      </section>
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Languages</h2>
-        </header>
-        <section id="languages">
-          <div class="display">
-            <h3 class="language">
-              English
-            </h3>
-            <div class="item">
-              <div class="level fluency fluent">
-                <em>Fluent</em>
-                <div class="bar"></div>
-              </div>
-            </div>
           </div>
-          <div class="display">
-            <h3 class="language">
-              Arabic
-            </h3>
-            <div class="item">
-              <div class="level fluency native speaker">
-                <em>Native Speaker</em>
-                <div class="bar"></div>
+        </section>
+        <section class="certificate-item">
+          <header class="clear">
+            <div class="date">
+              2023-03-31
+            </div>
+            <div class="header-left">
+              <div class="name">
+                Terraform Associate
+              </div>
+              <div class="issuer">
+                HashiCorp
               </div>
             </div>
+          </header>
+
+          <div class="item">
+            <span class="url">
+              <span class="fas fa-external-link-alt"></span>
+              <a target="_blank"
+                href="https://www.credly.com/badges/e6fc175d-4646-4d25-ab5f-64d18dc4dfe6">https://www.credly.com/badges/e6fc175d-4646-4d25-ab5f-64d18dc4dfe6</a>
+            </span>
+          </div>
+        </section>
+        <section class="certificate-item">
+          <header class="clear">
+            <div class="date">
+              2016-09-26
+            </div>
+            <div class="header-left">
+              <div class="name">
+                MCSE: Cloud Platform and Infrastructure — Certified 2016
+              </div>
+              <div class="issuer">
+                Microsoft
+              </div>
+            </div>
+          </header>
+
+          <div class="item">
+            <span class="url">
+              <span class="fas fa-external-link-alt"></span>
+              <a target="_blank"
+                href="https://www.credly.com/badges/d5299c12-2e0b-4d99-bb1e-bccc0740e749">https://www.credly.com/badges/d5299c12-2e0b-4d99-bb1e-bccc0740e749</a>
+            </span>
+          </div>
+        </section>
+        <section class="certificate-item">
+          <header class="clear">
+            <div class="date">
+              2021-09-05
+            </div>
+            <div class="header-left">
+              <div class="name">
+                Python Core
+              </div>
+              <div class="issuer">
+                Sololearn
+              </div>
+            </div>
+          </header>
+
+          <div class="item">
+            <span class="url">
+              <span class="fas fa-external-link-alt"></span>
+              <a target="_blank"
+                href="https://www.sololearn.com/Certificate/CT-8MNENPLF/png">https://www.sololearn.com/Certificate/CT-8MNENPLF/png</a>
+            </span>
+          </div>
+        </section>
+        <section class="certificate-item">
+          <header class="clear">
+            <div class="date">
+              2014-05-13
+            </div>
+            <div class="header-left">
+              <div class="name">
+                Cisco Certified Network Associate Routing and Switching (CCNA Routing and Switching)
+              </div>
+              <div class="issuer">
+                Cisco
+              </div>
+            </div>
+          </header>
+
+          <div class="item">
+            <span class="url">
+              <span class="fas fa-external-link-alt"></span>
+              <a target="_blank"
+                href="https://www.credly.com/badges/0e741573-c208-4bc0-976d-f60e8cb0f35a">https://www.credly.com/badges/0e741573-c208-4bc0-976d-f60e8cb0f35a</a>
+            </span>
           </div>
         </section>
       </section>
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Projects <span class="item-count">(1)</span></h2>
-        </header>
-        <section id="projects">
-          <section class="project-item">
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Volunteer</h2>
+      </header>
+      <section id="volunteer">
+        <section class="volunteer-item">
 
-            <header class="clear">
-              <div class="position">GitHub API Python Wrapper</div>
-              <div class="date">
-                <span class="startDate">Sep 2024</span>
-                <span class="endDate">- Current</span>
+          <label for="volunteer-item-0"></label>
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">
+                Feb 2023
+              </span>
+              <span class="endDate">
+                - Feb 2023
+              </span>
+            </div>
+            <div class="header-left">
+              <div class="position">
+                Speaker
               </div>
-            </header>
-            <span class="website">
-              <span class="fas fa-external-link-alt"></span>
-              <a target="_blank" href="https://github.com/alsaedwy">https://github.com/alsaedwy</a>
-            </span>
-            <ul class="keywords">
-              <li>Python</li>
-              <li>GitHub</li>
-              <li>OpenAPI</li>
-              <li>API</li>
-              <li>Client Code</li>
-              <li>Reusable</li>
+              <div class="organization">
+                Cork|Sec
+              </div>
+            </div>
+
+          </header>
+          <div class="item">
+            <div class="summary">
+              <p>
+              <p>CorkSec is a monthly meetup (running since 2013) for anyone interested in Information Security in the
+                Munster region (primarily Cork). It is modeled on the idea of a DefCon Group - In fact its got an
+                official Defcon Group code of DC35321.</p>
+              </p>
+            </div>
+            <ul class="highlights">
+              <li>
+                <p>
+                <p><a href="https://www.meetup.com/corksec/events/290483052/">In this event</a>, I spoke about the
+                  importance of container security and some of the best practices to keep containers safe.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Alongside with a demo of some vulnerability scanning tools provided by AWS like ECR basic scanning
+                  and AWS Inspector.</p>
+                </p>
+              </li>
             </ul>
-            <div class="item">
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Developed a Python wrapper for the GitHub API, leveraging OpenAPI descriptions to generate client
-                    code for interacting with GitHub services.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Designed and implemented reusable Python modules for interacting with GitHub services, ensuring
-                    consistent and efficient API calls.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Conducted comprehensive code reviews to ensure adherence to best practices and maintain high code
-                    quality standards.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Collaborated with cross-functional teams to design and implement efficient API solutions, ensuring
-                    secure management and compliance of source code repositories.</p>
-                  </p>
-                </li>
-              </ul>
+          </div>
+        </section>
+        <section class="volunteer-item">
+
+          <label for="volunteer-item-1"></label>
+
+          <header class="clear">
+            <div class="date">
+              <span class="startDate">
+                Jan 2012
+              </span>
+              <span class="endDate">
+                - Jan 2014
+              </span>
             </div>
-          </section>
+            <div class="header-left">
+              <div class="position">
+                Media Coordinator - Head of Photography
+              </div>
+              <div class="organization">
+                Resala
+              </div>
+            </div>
+
+          </header>
+          <div class="item">
+            <div class="summary">
+              <p>
+              <p>Non-profit organization focused on caring for orphans; helping the blind, the deaf, and children with
+                special needs; blood donations poverty alleviation; and literacy training.</p>
+              </p>
+            </div>
+            <ul class="highlights">
+              <li>
+                <p>
+                <p>Document volunteering events; mainly convoys and multipleday volunteering trips.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Lead a team of photographers and plan events coverage.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Maintain documentation &amp; lead video creation for every event.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
         </section>
       </section>
-      <section class="section">
-        <header>
-          <h2 class='section-title'>Volunteer</h2>
-        </header>
-        <section id="volunteer">
-          <section class="volunteer-item">
+    </section>
+    <section class="section">
+      <header>
+        <h2 class='section-title'>Projects <span class="item-count">(1)</span></h2>
+      </header>
+      <section id="projects">
+        <section class="project-item">
 
-            <label for="volunteer-item-0"></label>
-
-            <header class="clear">
-              <div class="date">
-                <span class="startDate">
-                  Feb 2023
-                </span>
-                <span class="endDate">
-                  - Feb 2023
-                </span>
-              </div>
-              <div class="header-left">
-                <div class="position">
-                  Speaker
-                </div>
-                <div class="organization">
-                  Cork|Sec
-                </div>
-              </div>
-
-            </header>
-            <div class="item">
-              <div class="summary">
-                <p>
-                <p>CorkSec is a monthly meetup (running since 2013) for anyone interested in Information Security in the
-                  Munster region (primarily Cork). It is modeled on the idea of a DefCon Group - In fact its got an
-                  official Defcon Group code of DC35321.</p>
-                </p>
-              </div>
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p><a href="https://www.meetup.com/corksec/events/290483052/">In this event</a>, I spoke about the
-                    importance of container security and some of the best practices to keep containers safe.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Alongside with a demo of some vulnerability scanning tools provided by AWS like ECR basic scanning
-                    and AWS Inspector.</p>
-                  </p>
-                </li>
-              </ul>
+          <header class="clear">
+            <div class="position">GitHub API Python Wrapper</div>
+            <div class="date">
+              <span class="startDate">Sep 2024</span>
+              <span class="endDate">- Current</span>
             </div>
-          </section>
-          <section class="volunteer-item">
-
-            <label for="volunteer-item-1"></label>
-
-            <header class="clear"></header>
-              <div class="date">
-                <span class="startDate">
-                  Jan 2012
-                </span>
-                <span class="endDate">
-                  - Jan 2014
-                </span>
-              </div>
-              <div class="header-left">
-                <div class="position">
-                  Media Coordinator - Head of Photography
-                </div>
-                <div class="organization">
-                  Resala
-                </div>
-              </div>
-
-            </header>
-            <div class="item">
-              <div class="summary">
+          </header>
+          <span class="website">
+            <span class="fas fa-external-link-alt"></span>
+            <a target="_blank" href="https://github.com/alsaedwy">https://github.com/alsaedwy</a>
+          </span>
+          <ul class="keywords">
+            <li>Python</li>
+            <li>GitHub</li>
+            <li>OpenAPI</li>
+            <li>API</li>
+            <li>Client Code</li>
+            <li>Reusable</li>
+          </ul>
+          <div class="item">
+            <ul class="highlights">
+              <li>
                 <p>
-                <p>Non-profit organization focused on caring for orphans; helping the blind, the deaf, and children with
-                  special needs; blood donations poverty alleviation; and literacy training.</p>
+                <p>Developed a Python wrapper for the GitHub API, leveraging OpenAPI descriptions to generate client
+                  code for interacting with GitHub services.</p>
                 </p>
-              </div>
-              <ul class="highlights">
-                <li>
-                  <p>
-                  <p>Document volunteering events; mainly convoys and multipleday volunteering trips.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Lead a team of photographers and plan events coverage.</p>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                  <p>Maintain documentation &amp; lead video creation for every event.</p>
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </section>
+              </li>
+              <li>
+                <p>
+                <p>Designed and implemented reusable Python modules for interacting with GitHub services, ensuring
+                  consistent and efficient API calls.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Conducted comprehensive code reviews to ensure adherence to best practices and maintain high code
+                  quality standards.</p>
+                </p>
+              </li>
+              <li>
+                <p>
+                <p>Collaborated with cross-functional teams to design and implement efficient API solutions, ensuring
+                  secure management and compliance of source code repositories.</p>
+                </p>
+              </li>
+            </ul>
+          </div>
         </section>
       </section>
-    </div>
-  </div>
-
-  <script>
-    // Helper function to get the path of a node
-    function getNodePath(nodeElement) {
-        let path = [];
-        let current = nodeElement;
-
-        while (current && current.classList.contains('node')) {
-            let nodeText = current.textContent.trim();
-            // Handle specific cases like "Download CV [PDF]"
-            if (nodeText.includes('Download CV')) {
-                nodeText = 'Download CV'; // Keep consistent for path matching if needed later
-            } else {
-                // Basic cleanup: take first word, lowercase
-                nodeText = nodeText.split(' ')[0].toLowerCase();
-            }
-            // Exclude the non-clickable 'CV' node from the path
-            // Also exclude 'Download CV' as it's handled separately
-            if ((nodeText !== 'cv' || current.style.cursor !== 'default') && !nodeText.includes('download cv')) {
-                 path.unshift(nodeText);
-            }
-
-
-            // Navigate up the DOM structure
-            const parentSubtreeLi = current.closest('li');
-            if (!parentSubtreeLi) break;
-
-            const parentContent = parentSubtreeLi.parentElement.closest('.content');
-            if (!parentContent) break; // Reached the top-level ul.tree
-
-            const parentNode = parentContent.previousElementSibling;
-            if (!parentNode || !parentNode.classList.contains('node')) break; // Structure error or reached top
-
-            current = parentNode;
-        }
-        // Filter out empty strings just in case
-        return path.filter(Boolean).join('/');
-    }
-
-    // Renamed function to reflect its purpose
-    function navigateToIndexWithHash(node) {
-        // 1. Handle Download CV link: Do nothing, let browser handle link/download
-        if (node.textContent.includes('Download CV')) {
-             return;
-        }
-
-        // 2. Handle the disabled CV node: Do nothing
-        if (node.textContent.trim() === 'CV' && node.style.cursor === 'default') {
-            return;
-        }
-
-        // 3. For all other nodes, calculate path and navigate back WITH hash
-        const path = getNodePath(node); // Calculate the path
-        navigateBack('index.html', path); // Navigate with hash
-    }
-
-    // Updated navigateBack function
-    function navigateBack(url, pathHash = '') {
-      const pageContent = document.getElementById('page-content'); // Target #page-content
-      // Use slide-out-right for navigating BACK to index.html
-      if (pageContent) {
-          pageContent.classList.add('slide-out-right'); // Apply class to #page-content
-      }
-      const targetUrl = url + (pathHash ? '#' + pathHash : '');
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 500); // Match CSS transition duration
-    }
-
-    // Updated Load listener
-    window.addEventListener('load', () => {
-      const pageContent = document.getElementById('page-content'); // Target #page-content
-      // Set initial state for sliding in from the right
-      if(pageContent) {
-          pageContent.classList.add('slide-init-right'); // Apply class to #page-content
-      }
-      // Trigger the slide-in animation shortly after load
-      setTimeout(() => {
-          if(pageContent) {
-              pageContent.classList.remove('slide-init-right'); // Remove class from #page-content
-              pageContent.classList.add('is-visible'); // Add class to #page-content
-          }
-      }, 50); // Small delay
-    });
-
-    // Back button listener remains the same (uses navigateBack)
-    const backButton = document.getElementById('back-button');
-    if (backButton) {
-        backButton.addEventListener('click', (event) => {
-          event.preventDefault();
-          navigateBack('index.html'); // No specific path for generic back button
-        });
-    } else {
-        console.error("Back button not found");
-    }
-  </script>
+    </section>
 
 </body>
 
