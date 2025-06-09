@@ -2,3 +2,5 @@
 .DS_Store
 
 *.bak
+
+*/.DS_Store
