@@ -814,18 +814,20 @@
                    max-height 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s,
                    border-top 0.8s ease-out 0.2s,
                    border-bottom 0.8s ease-out 0.2s,
-                   padding 0.8s ease-out 0.4s;
-        will-change: opacity, max-height, border-top, border-bottom, padding;
+                   padding 0.8s ease-out 0.4s,
+                   overflow 0.8s ease-out 0.2s;
+        will-change: opacity, max-height, border-top, border-bottom, padding, overflow;
     }
     
     /* Shell opening - smooth reveal */
     body:not(.is-preload) #animation-wrapper {
         opacity: 1;
-        max-height: 500vh; /* Large specific value instead of 'none' for smooth transitions */
+        max-height: 9999px; /* Very large value to ensure all content is visible */
         border-top: 1px solid #666;
         border-bottom: 1px solid #666;
         padding-top: 20px;
         padding-bottom: 20px;
+        overflow: visible; /* Ensure content isn't clipped */
     }
     
     /* Content inside wrapper starts hidden and fades in */
