@@ -37,11 +37,26 @@
         -webkit-transition: none !important;
         -ms-transition: none !important;
         transition: none !important;
-    }
-    body.fade-out {
+    }    body.fade-out {
         opacity: 0; /* Fade out effect */
-    }
-    #floating-box {
+    }    /* Shell closing animation - smooth reverse of the opening effect */
+    body.fold-out #floating-box {
+        opacity: 0 !important;
+        max-height: 0 !important;
+        border-top: 5px solid #666 !important;
+        border-bottom: 5px solid #666 !important;
+        overflow: hidden !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        transform: translateX(0) !important; /* Reset any slide transforms */
+        transition: opacity 0.6s ease-in, 
+                   max-height 0.8s ease-in 0.1s,
+                   border-top 0.6s ease-in,
+                   border-bottom 0.6s ease-in,
+                   padding 0.6s ease-in,
+                   transform 0.6s ease-in !important;
+        will-change: opacity, max-height, border-top, border-bottom, padding, transform;
+    }    #floating-box {
       /* Responsive width and centering */
       width: 90%; /* Use percentage width */
       max-width: 700px; /* Keep max-width for larger screens */
@@ -62,7 +77,7 @@
       transition: opacity 0.65s ease-out 0.5s, transform 0.65s ease-out 0.5s;
       will-change: opacity, transform;
     }
-    body:not(.is-preload) #floating-box {
+    body:not(.is-preload):not(.fold-out) #floating-box {
         opacity: 1;
         transform: translateX(0); /* Animate to final position */
     }
@@ -302,12 +317,12 @@
 
 </div>
 
-<script>
-  function navigateToPage(url) {
-    document.body.classList.add('fade-out');
+<script>  function navigateToPage(url) {
+    // Use fold-out animation (reverse of the initial slide-in)
+    document.body.classList.add('fold-out');
     setTimeout(() => {
       window.location.href = url;
-    }, 500);
+    }, 800); // Match the shell close animation duration
   }
 
   function toggle(node) {

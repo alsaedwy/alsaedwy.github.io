@@ -38,9 +38,41 @@
       opacity: 1;
     }
 
-    /* REQUIRED: Hide floating button when printing */
+    /* Back button styling - grey version of download button */
+    .float-back-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: #666;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      opacity: 0.6;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    /* Icon spacing for back button */
+    .float-back-button .fas {
+      margin-right: 5px;
+    }
+
+    /* Hover effects for back button */
+    .float-back-button:hover {
+      background-color: #444;
+      color: white;
+      text-decoration: none;
+      opacity: 1;
+    }
+
+    /* REQUIRED: Hide floating buttons when printing */
     @media print {
-      .float-download-button {
+      .float-download-button,
+      .float-back-button {
         display: none;
       }
     }
@@ -51,6 +83,7 @@
       margin: 0;
       padding: 20px;
       background-color: #f5f5f5;
+      overflow-x: hidden;
     }
 
     html,
@@ -744,16 +777,117 @@
         display: block;
       }
     }
+    
+    /* === FOLD ANIMATIONS === */
+    /* Shell opening animation (mirrors index.html gentle reveal) */
+    body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+        -moz-animation: none !important;
+        -webkit-animation: none !important;
+        -ms-animation: none !important;
+        animation: none !important;
+        -moz-transition: none !important;
+        -webkit-transition: none !important;
+        -ms-transition: none !important;
+        transition: none !important;
+    }
+    
+    body {
+        overflow-x: hidden !important;
+    }
+    
+    /* Initial state - shell closed with smooth transitions */
+    #animation-wrapper {
+        opacity: 0;
+        max-height: 0;
+        border-top: 5px solid #666;
+        border-bottom: 5px solid #666;
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 2rem auto;
+        width: 90%;
+        max-width: 1200px; /* Wider for CV content */
+        background: #000000;
+        border-radius: 0.5rem;
+        /* Smooth transitions matching index.html style */
+        transition: opacity 0.8s ease-out 0.3s, 
+                   max-height 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s,
+                   border-top 0.8s ease-out 0.2s,
+                   border-bottom 0.8s ease-out 0.2s,
+                   padding 0.8s ease-out 0.4s;
+        will-change: opacity, max-height, border-top, border-bottom, padding;
+    }
+    
+    /* Shell opening - smooth reveal */
+    body:not(.is-preload) #animation-wrapper {
+        opacity: 1;
+        max-height: 500vh; /* Large specific value instead of 'none' for smooth transitions */
+        border-top: 1px solid #666;
+        border-bottom: 1px solid #666;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    /* Content inside wrapper starts hidden and fades in */
+    #animation-wrapper #resume {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.6s ease-out 0.8s, transform 0.6s ease-out 0.8s;
+        will-change: opacity, transform;
+    }
+    
+    body:not(.is-preload) #animation-wrapper #resume {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Shell closing animation for navigation back */
+    body.fade-out #animation-wrapper {
+        opacity: 0;
+        max-height: 0;
+        border-top: 5px solid #666;
+        border-bottom: 5px solid #666;
+        padding-top: 0;
+        padding-bottom: 0;
+        transition: opacity 0.6s ease-in, 
+                   max-height 0.8s ease-in 0.1s,
+                   border-top 0.6s ease-in,
+                   border-bottom 0.6s ease-in,
+                   padding 0.6s ease-in;
+    }
+    
+    body.fade-out #animation-wrapper #resume {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+    }
   </style>
 
 </head>
 
-<body>
+<body class="is-preload">
   <!-- REQUIRED: Floating Download Button HTML -->
   <a href="assets/Alaa Saeed CV.pdf" download="Alaa Saeed CV.pdf" class="float-download-button">
     <span class="fas fa-download"></span> Download CV
   </a>
+  
+  <!-- Back Button HTML -->
+  <a href="#" class="float-back-button" onclick="navigateToIndex(event)">
+    <span class="fas fa-arrow-left"></span> Back
+  </a>
   <script>
+    /* Navigation function for back button and website link */
+    function navigateToIndex(event) {
+      if (event) {
+        event.preventDefault();
+      }
+      // Use fold-out animation (reverse of the fold-in animation)
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 800); // Match the shell close animation duration
+    }
+
     /* REQUIRED: JavaScript handling for floating download button */
     // This prevents navigation interference when the download button is clicked
     function handleDownloadClick(event) {
@@ -761,7 +895,6 @@
       // No need to prevent default or add custom logic
       console.log('Download initiated');
     }
-
 
     /* REQUIRED: Example navigation function that excludes download button */
     // This is required if you have other navigation logic that should ignore the download button
@@ -774,9 +907,32 @@
       // Other navigation logic would go here...
       console.log('Navigation logic for:', node.textContent);
     }
+    
+    // Handle fold-in animation on page load
+    window.addEventListener('load', function() {
+      // Remove preload class to trigger fold-in animation
+      document.body.classList.remove('is-preload');
+    });
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function() {
+      navigateToIndex();
+    });
+    
+    // Optional: Add click handler to website link for navigation back to index
+    document.addEventListener('DOMContentLoaded', function() {
+      const websiteLink = document.querySelector('#contact .website a');
+      if (websiteLink && websiteLink.href.includes('alaa.sh')) {
+        websiteLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          navigateToIndex();
+        });
+      }
+    });
   </script>
 
-  <div id="resume">
+  <div id="animation-wrapper">
+    <div id="resume">
     <header id="header" class="clear">
       <div>
         <h1 class="name">Alaa Saeed</h1>
@@ -2058,8 +2214,9 @@
             </ul>
           </div>
         </section>
-      </section>
+        </section>
     </section>
+  </div> <!-- Close animation-wrapper -->
 
 </body>
 
