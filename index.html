@@ -9,14 +9,69 @@
   <!-- Add Bootstrap Icons CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript> <!-- Added from index.html -->
+  
+  <!-- Load theme immediately to prevent flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light-mode-loading');
+      }
+    })();
+  </script>
+  
   <style>
+    /* CSS Variables for Dark/Light Mode */
+    :root {
+      /* Dark mode colors (default) */
+      --bg-color: #000000;
+      --text-color: #d4d4d4;
+      --text-bright: #ffffff;
+      --accent-green: #00ff88;
+      --accent-blue: #00aaff;
+      --accent-cyan: #00ccff;
+      --accent-light-cyan: #33d6ff;
+      --border-color: #666;
+      --border-dashed: #666;
+      --text-muted: #b0b0b0;
+      --text-subtle: #888;
+      --text-faded: #777;
+      --text-light: #aaa;
+      --box-bg: #000000;
+      
+      /* Social media brand colors (keep consistent) */
+      --lastfm-color: #d51007;
+      --lastfm-hover: #b30c05;
+      --substack-color: #FF6719;
+      --mastodon-color: #6364FF;
+      --mastodon-hover: #5354D4;
+    }
+      /* Light mode colors */
+    body.light-mode,
+    html.light-mode-loading body {
+      --bg-color: #ffffff;
+      --text-color: #2b2b2b;
+      --text-bright: #000000;
+      --accent-green: #006644;
+      --accent-blue: #0066cc;
+      --accent-cyan: #0088cc;
+      --accent-light-cyan: #0099dd;
+      --border-color: #999;
+      --border-dashed: #999;
+      --text-muted: #4f4f4f;
+      --text-subtle: #777;
+      --text-faded: #888;
+      --text-light: #555;
+      --box-bg: #ffffff;
+    }
+
     html, body {
         height: 100%; /* Ensure body takes full height */
         margin: 0;
     }
     body {
-      background: #000000;
-      color: #d4d4d4;
+      background: var(--bg-color);
+      color: var(--text-color);
       font-family: 'Courier New', Courier, monospace;
       margin: 0;
       padding: 1rem; /* Add padding for smaller screens */
@@ -39,12 +94,11 @@
         transition: none !important;
     }    body.fade-out {
         opacity: 0; /* Fade out effect */
-    }    /* Shell closing animation - smooth reverse of the opening effect */
-    body.fold-out #floating-box {
+    }    /* Shell closing animation - smooth reverse of the opening effect */    body.fold-out #floating-box {
         opacity: 0 !important;
         max-height: 0 !important;
-        border-top: 5px solid #666 !important;
-        border-bottom: 5px solid #666 !important;
+        border-top: 5px solid var(--border-color) !important;
+        border-bottom: 5px solid var(--border-color) !important;
         overflow: hidden !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
@@ -60,16 +114,14 @@
       /* Responsive width and centering */
       width: 90%; /* Use percentage width */
       max-width: 700px; /* Keep max-width for larger screens */
-      margin: 2rem auto; /* Center horizontally and add vertical margin */
-
-      /* Keep appearance styles */
+      margin: 2rem auto; /* Center horizontally and add vertical margin */      /* Keep appearance styles */
       padding: 1rem;
       border-radius: 0.5rem;
-      border-top: 1px solid #666;
-      border-bottom: 1px solid #666;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
       max-height: 85vh; /* Adjust max-height */
       overflow-y: auto;
-      background: #000000; /* Match body or use desired background */
+      background: var(--box-bg); /* Match body or use desired background */
 
       /* Keep initial animation styles */
       opacity: 0;
@@ -80,16 +132,15 @@
     body:not(.is-preload):not(.fold-out) #floating-box {
         opacity: 1;
         transform: translateX(0); /* Animate to final position */
-    }
-    #floating-box h1 {
+    }    #floating-box h1 {
       font-size: 1.5rem; /* Adjust base size */
       text-align: center;
-      color: #ffffff;
+      color: var(--text-bright);
       margin-bottom: 0.2em;
     }
     #floating-box h2 {
       font-size: 1rem; /* Adjust base size */
-      color: #00ff88;
+      color: var(--accent-green);
       text-align: left;
       margin: 0 0 1rem;
       letter-spacing: normal;
@@ -99,36 +150,34 @@
       padding-left: 0.8rem; /* Adjust padding */
       position: relative;
       margin: 0;
-    }
-    ul.tree::before, ul.subtree::before {
+    }    ul.tree::before, ul.subtree::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
-      border-left: 1px dashed #666;
-    }
-    .node {
+      border-left: 1px dashed var(--border-dashed);
+    }    .node {
       cursor: pointer;
       margin: 0.3rem 0;
       position: relative;
       padding-left: 2rem; /* Adjust padding */
       transition: color 0.3s;
       font-size: 1rem; /* Adjust base size */
-      color: #b0b0b0;
+      color: var(--text-muted);
     }
     .node:hover {
-        color: #00ff88;
+        color: var(--accent-green);
     }
     .node.active-node {
-        color: #ffffff;
+        color: var(--text-bright);
     }
     .node.active-node:hover {
-        color: #00ff88;
+        color: var(--accent-green);
     }
     .node::before {
       content: "├──  ";
-      color: #888;
+      color: var(--text-subtle);
       position: absolute;
       left: 0;
     }
@@ -152,15 +201,14 @@
       max-height: 1500px;
       opacity: 1;
       transform: translateY(0);
-    }
-    .content p, .content li {
+    }    .content p, .content li {
         font-size: 1rem; /* Adjust base size */
-        color: #b0b0b0;
+        color: var(--text-muted);
         transition: color 0.3s;
     }
     .content a {
         font-size: 1rem; /* Adjust base size */
-        color: #00aaff;
+        color: var(--accent-blue);
         text-decoration: none;
         transition: color 0.3s;
     }
@@ -168,25 +216,24 @@
     .node.active-node + .content li,
     .node.active-node + .content .node,
     .node.active-node + .content .node a {
-        color: #ffffff;
+        color: var(--text-bright);
     }
     .node.active-node + .content .node::before {
-        color: #aaa;
+        color: var(--text-light);
     }
     .node.active-node + .content a {
-        color: #33d6ff;
+        color: var(--accent-light-cyan);
     }
     a {
-      color: #00ccff;
+      color: var(--accent-cyan);
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
-    }
-    .social-links {
+    }    .social-links {
         margin-top: 1rem;
         padding-top: 0.8rem;
-        border-top: 1px dashed #666;
+        border-top: 1px dashed var(--border-dashed);
     }
     .social-links ul {
         display: flex;
@@ -197,42 +244,128 @@
     }
     .social-links ul li {
         padding: 0 0.5em; /* Adjust padding */
-    }
-    .social-links ul li a {
-        color: #777;
+    }    .social-links ul li a {
+        color: var(--text-faded);
         text-decoration: none;
         font-size: 1.1rem; /* Adjust size */
         transition: color 0.2s ease-in-out;
     }
     .social-links ul li a:hover {
-        color: #00ff88;
+        color: var(--accent-green);
         text-decoration: none;
     }
     .social-links ul li a .label {
         display: none;
-    }
-
-    /* Add color for lastfm icon if desired */
-    .fa-lastfm { color: #d51007; } /* Last.fm red */
-    .fa-lastfm:hover { color: #b30c05; } /* Darker red on hover */
+    }    /* Add color for lastfm icon if desired */
+    .fa-lastfm { color: var(--lastfm-color); } /* Last.fm red */
+    .fa-lastfm:hover { color: var(--lastfm-hover); } /* Darker red on hover */
 
     /* Style for Bootstrap Substack icon */
     .bi-substack {
-        color: inherit; /* Inherit default link color (#777) */
+        color: inherit; /* Inherit default link color (--text-faded) */
         font-size: 1.1rem; /* Match other icons */
         vertical-align: -0.1em; /* Fine-tune vertical alignment */
         transition: color 0.2s ease-in-out; /* Add transition */
     }
     /* Hover effect for Bootstrap Substack icon */
     .social-links ul li a:hover .bi-substack {
-        color: #FF6719; /* Substack orange on hover */
+        color: var(--substack-color); /* Substack orange on hover */
     }
 
     /* Style for Mastodon icon */
-    .fa-mastodon { color: #6364FF; } /* Mastodon purple */
-    .fa-mastodon:hover { color: #5354D4; } /* Darker purple on hover */
+    .fa-mastodon { color: var(--mastodon-color); } /* Mastodon purple */
+    .fa-mastodon:hover { color: var(--mastodon-hover); } /* Darker purple on hover */    /* Light Mode Toggle Styles - positioned in top-right corner */
+    .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        z-index: 1000;
+    }
 
-    /* --- Media Queries for Responsiveness --- */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--border-color);
+        transition: .4s;
+        border-radius: 20px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: var(--text-bright);
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: var(--accent-green);
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }    /* Theme transition for smooth color changes - exclude layout properties */
+    body {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    #floating-box {
+        transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.65s ease-out 0.5s, transform 0.65s ease-out 0.5s;
+    }
+    
+    /* Only apply color transitions to specific elements, preserving original animations */
+    .node {
+        transition: color 0.3s ease;
+    }
+    
+    .content p, .content li, .content a {
+        transition: color 0.3s ease;
+    }
+    
+    .social-links ul li a {
+        transition: color 0.2s ease-in-out;
+    }
+    
+    a:not(.content a) {
+        transition: color 0.3s ease;
+    }
+    
+    .slider {
+        transition: background-color 0.4s ease;
+    }
+    
+    .slider:before {
+        transition: background-color 0.4s ease, transform 0.4s ease;
+    }    /* --- Media Queries for Responsiveness --- */    /* Theme toggle responsive adjustments */
+    @media (max-height: 600px) {
+        .theme-toggle {
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+    }
 
     /* Medium screens (tablets) */
     @media (min-width: 768px) {
@@ -247,9 +380,7 @@
         .social-links ul li { padding: 0 0.6em; }
         .social-links ul li a { font-size: 1.2rem; }
         .bi-substack { font-size: 1.2rem; } /* Adjust size for medium screens */
-    }
-
-    /* Large screens (desktops) */
+    }    /* Large screens (desktops) */
     @media (min-width: 1024px) {
         body {
             padding: 2rem; /* More padding on large screens */
@@ -266,11 +397,25 @@
         .social-links ul li { padding: 0 0.75em; }
         .social-links ul li a { font-size: 1.3rem; }
         .bi-substack { font-size: 1.3rem; } /* Adjust size for large screens */
+    }    /* Mobile specific adjustments */
+    @media (max-width: 480px) {
+        .theme-toggle {
+            top: 0.5rem;
+            right: 0.5rem;
+        }
     }
 
   </style>
 </head>
 <body class="is-preload slide-init-left">
+
+<!-- Light Mode Toggle - Fixed position in top-right -->
+<div class="theme-toggle">
+  <label class="switch">
+    <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+    <span class="slider"></span>
+  </label>
+</div>
 
 <!-- Floating tree menu -->
 <div id="floating-box">
@@ -317,7 +462,35 @@
 
 </div>
 
-<script>  function navigateToPage(url) {
+<script>  
+  // Theme toggle functionality
+  function toggleTheme() {
+    const body = document.body;
+    const toggle = document.getElementById('theme-toggle');
+    
+    if (toggle.checked) {
+      body.classList.add('light-mode');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+  // Load saved theme on page load
+  function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const toggle = document.getElementById('theme-toggle');
+    
+    // Clean up early loading class
+    document.documentElement.classList.remove('light-mode-loading');
+    
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+      toggle.checked = true;
+    }
+  }
+
+  function navigateToPage(url) {
     // Use fold-out animation (reverse of the initial slide-in)
     document.body.classList.add('fold-out');
     setTimeout(() => {
@@ -397,8 +570,10 @@
         nestedContents.forEach(nc => nc.classList.remove('visible'));
     }
   }
-
   window.addEventListener('load', function() {
+    // Load theme first
+    loadTheme();
+    
     document.body.classList.remove('is-preload');
 
     setTimeout(() => {
