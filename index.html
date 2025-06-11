@@ -102,19 +102,25 @@
         overflow: hidden !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
-        transform: translateX(0) !important; /* Reset any slide transforms */
+        transform: translate(-50%, -50%) !important; /* Keep centered during exit */
         transition: opacity 0.6s ease-in, 
                    max-height 0.8s ease-in 0.1s,
                    border-top 0.6s ease-in,
                    border-bottom 0.6s ease-in,
                    padding 0.6s ease-in,
                    transform 0.6s ease-in !important;
-        will-change: opacity, max-height, border-top, border-bottom, padding, transform;
-    }    #floating-box {
+        will-change: opacity, max-height, border-top, border-bottom, padding, transform;    }    #floating-box {
       /* Responsive width and centering */
       width: 90%; /* Use percentage width */
       max-width: 700px; /* Keep max-width for larger screens */
-      margin: 2rem auto; /* Center horizontally and add vertical margin */      /* Keep appearance styles */
+      
+      /* Center both horizontally and vertically */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateX(20px); /* Center position + initial animation offset */
+      
+      /* Keep appearance styles */
       padding: 1rem;
       border-radius: 0.5rem;
       border-top: 1px solid var(--border-color);
@@ -125,14 +131,12 @@
 
       /* Keep initial animation styles */
       opacity: 0;
-      transform: translateX(20px); /* Keep initial transform for entry animation */
       transition: opacity 0.65s ease-out 0.5s, transform 0.65s ease-out 0.5s;
       will-change: opacity, transform;
-    }
-    body:not(.is-preload):not(.fold-out) #floating-box {
+    }    body:not(.is-preload):not(.fold-out) #floating-box {
         opacity: 1;
-        transform: translateX(0); /* Animate to final position */
-    }    #floating-box h1 {
+        transform: translate(-50%, -50%); /* Animate to centered position */
+    }#floating-box h1 {
       font-size: 1.5rem; /* Adjust base size */
       text-align: center;
       color: var(--text-bright);
