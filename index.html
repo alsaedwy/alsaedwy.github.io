@@ -323,11 +323,72 @@
 
     input:checked + .slider {
         background-color: var(--accent-green);
+    }    input:checked + .slider:before {
+        transform: translateX(20px);
+    }    /* Bear intervention styles - adapted from original impossible checkbox */
+    .bear-paw {
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        background: #2a2a2a; /* Black bear */
+        border-radius: 50%;
+        z-index: 999;
+        transform-origin: right center;
+        transform: translate(0, -50%) scaleX(0);
+        transition: transform 0.4s ease; /* Slowed down from 0.3s */
+        pointer-events: none;
+        /* Position at the end of the arm */
+        top: calc(1rem + 10px); /* Align with toggle center */
+        right: calc(1rem + 10px); /* Position at arm's end when extended */
+    }    /* Bear arm wrap - container for arm animation */
+    .bear__arm-wrap {
+        position: fixed;
+        width: 40px; /* Shorter arm length */
+        height: 30px;
+        z-index: 998;
+        transform: translate(60px, -50%); /* Start hidden off-screen to the right */
+        transition: transform 0.4s ease; /* Slowed down from 0.2s */
+        pointer-events: none;
+        background: transparent;
+        /* Position for arm extension */
+        top: calc(1rem + 10px); /* Align with toggle center */
+        right: 1rem; /* Align with toggle position */
+    }    /* Bear arm - scales from left origin like original */
+    .bear__arm {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 4px; /* Even thinner */
+        background: #2a2a2a; /* Black bear */
+        border-radius: 2px;
+        transform-origin: left center;
+        transform: translate(0, -50%) scaleX(0); /* Start with scaleX(0) to be hidden */
+        transition: transform 0.4s ease; /* Slowed down from 0.2s */
+        pointer-events: none;
+    }/* Create paw pads using pseudo-element */
+    .bear-paw::after {
+        content: '';
+        position: absolute;
+        top: 1.5px;
+        left: 2px;
+        width: 2px;
+        height: 2px;
+        background: #1a1a1a; /* Darker black for pads */
+        border-radius: 50%;
+        box-shadow: 
+            2px 0 0 #1a1a1a,     /* toe pad 1 */
+            4px 0 0 #1a1a1a,     /* toe pad 2 */
+            6px 0 0 #1a1a1a,     /* toe pad 3 */
+            1px 6px 0 #1a1a1a;   /* main pad */
     }
 
-    input:checked + .slider:before {
-        transform: translateX(20px);
-    }    /* Theme transition for smooth color changes - exclude layout properties */
+    /* Shake animation for persistent attempts */
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-2px); }
+        75% { transform: translateX(2px); }
+    }/* Theme transition for smooth color changes - exclude layout properties */
     body {
         transition: background-color 0.3s ease, color 0.3s ease;
     }
@@ -364,6 +425,17 @@
         .theme-toggle {
             top: 0.5rem;
             right: 0.5rem;
+        }
+        
+        /* Adjust bear elements for short screens */
+        .bear-paw {
+            top: calc(0.5rem + 10px); /* Match reduced toggle center */
+            right: calc(0.5rem + 10px); /* Match reduced toggle position */
+        }
+        
+        .bear__arm-wrap {
+            top: calc(0.5rem + 10px); /* Match reduced toggle center */
+            right: 0.5rem; /* Match reduced toggle position */
         }
     }
 
@@ -403,6 +475,17 @@
             top: 0.5rem;
             right: 0.5rem;
         }
+        
+        /* Adjust bear elements for mobile toggle position */
+        .bear-paw {
+            top: calc(0.5rem + 10px); /* Match mobile toggle center */
+            right: calc(0.5rem + 10px); /* Match mobile toggle position */
+        }
+        
+        .bear__arm-wrap {
+            top: calc(0.5rem + 10px); /* Match mobile toggle center */
+            right: 0.5rem; /* Match mobile toggle position */
+        }
     }
 
   </style>
@@ -412,9 +495,15 @@
 <!-- Light Mode Toggle - Fixed position in top-right -->
 <div class="theme-toggle">
   <label class="switch">
-    <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+    <input type="checkbox" id="theme-toggle">
     <span class="slider"></span>
   </label>
+</div>
+
+<!-- Bear intervention elements -->
+<div class="bear-paw" id="bear-paw"></div>
+<div class="bear__arm-wrap" id="bear-arm-wrap">
+    <div class="bear__arm" id="bear-arm"></div>
 </div>
 
 <!-- Floating tree menu -->
@@ -462,9 +551,11 @@
 
 </div>
 
-<script>  
-  // Theme toggle functionality
+<script>  // Theme toggle functionality - now handled by bear-intervention.js
+  // Keep basic theme management functions for compatibility
+  
   function toggleTheme() {
+    // This function is now only called when loading saved theme
     const body = document.body;
     const toggle = document.getElementById('theme-toggle');
     
@@ -475,8 +566,7 @@
       body.classList.remove('light-mode');
       localStorage.setItem('theme', 'dark');
     }
-  }
-  // Load saved theme on page load
+  }// Load saved theme on page load
   function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
     const toggle = document.getElementById('theme-toggle');
@@ -484,9 +574,11 @@
     // Clean up early loading class
     document.documentElement.classList.remove('light-mode-loading');
     
+    // Note: We don't actually allow light mode to persist due to bear intervention
+    // But we keep the localStorage logic for consistency
     if (savedTheme === 'light') {
-      document.body.classList.add('light-mode');
-      toggle.checked = true;
+      // Don't actually apply light mode - the bear prevents it!
+      // toggle.checked = true;
     }
   }
 
@@ -654,10 +746,12 @@
                 }
             }, 700); // Adjusted delay
         }
-    }
-  });
+    }  });
 
 </script>
+
+<!-- Bear intervention animation system -->
+<script src="assets/js/bear-intervention.js"></script>
 
 </body>
 </html>
