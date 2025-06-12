@@ -103,14 +103,14 @@
         overflow: hidden !important;
         padding-top: 0 !important;
         padding-bottom: 0 !important;
-        transform: translate(-50%, -50%) !important; /* Keep centered during exit */
+        left: calc(50% + 20px) !important; /* Move back to initial position during exit */
         transition: opacity 0.6s ease-in, 
                    max-height 0.8s ease-in 0.1s,
                    border-top 0.6s ease-in,
                    border-bottom 0.6s ease-in,
                    padding 0.6s ease-in,
-                   transform 0.6s ease-in !important;
-        will-change: opacity, max-height, border-top, border-bottom, padding, transform;    }    #floating-box {
+                   left 0.6s ease-in !important;
+        will-change: opacity, max-height, border-top, border-bottom, padding, left;    }#floating-box {
       /* Responsive width and centering */
       width: 90%; /* Use percentage width */
       max-width: 700px; /* Keep max-width for larger screens */
@@ -118,8 +118,8 @@
       /* Center both horizontally and vertically */
       position: fixed;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) translateX(20px); /* Center position + initial animation offset */
+      left: calc(50% + 20px); /* Start offset to the right */
+      transform: translate(-50%, -50%); /* Keep consistent centering transform */
       
       /* Keep appearance styles */
       padding: 1rem;
@@ -132,11 +132,11 @@
 
       /* Keep initial animation styles */
       opacity: 0;
-      transition: opacity 0.65s ease-out 0.5s, transform 0.65s ease-out 0.5s;
-      will-change: opacity, transform;
+      transition: opacity 0.65s ease-out 0.5s, left 0.65s ease-out 0.5s;
+      will-change: opacity, left;
     }    body:not(.is-preload):not(.fold-out) #floating-box {
         opacity: 1;
-        transform: translate(-50%, -50%); /* Animate to centered position */
+        left: 50%; /* Animate to centered position */
     }#floating-box h1 {
       font-size: 1.5rem; /* Adjust base size */
       text-align: center;
@@ -395,9 +395,8 @@
     body {
         transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
-    #floating-box {
-        transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.65s ease-out 0.5s, transform 0.65s ease-out 0.5s;
+      #floating-box {
+        transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.65s ease-out 0.5s, left 0.65s ease-out 0.5s;
     }
     
     /* Only apply color transitions to specific elements, preserving original animations */
