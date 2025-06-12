@@ -286,13 +286,11 @@
         display: flex;
         align-items: center;
         z-index: 1000;
-    }
-
-    .switch {
+    }    .switch {
         position: relative;
         display: inline-block;
-        width: 40px;
-        height: 20px;
+        width: 32px;
+        height: 16px;
     }
 
     .switch input {
@@ -310,16 +308,16 @@
         bottom: 0;
         background-color: var(--border-color);
         transition: .4s;
-        border-radius: 20px;
+        border-radius: 16px;
     }
 
     .slider:before {
         position: absolute;
         content: "";
-        height: 14px;
-        width: 14px;
-        left: 3px;
-        bottom: 3px;
+        height: 12px;
+        width: 12px;
+        left: 2px;
+        bottom: 2px;
         background-color: var(--text-bright);
         transition: .4s;
         border-radius: 50%;
@@ -328,34 +326,34 @@
     input:checked + .slider {
         background-color: var(--accent-green);
     }    input:checked + .slider:before {
-        transform: translateX(20px);
-    }    /* Bear intervention styles - adapted from original impossible checkbox */
+        transform: translateX(16px);
+    }    /* Bear intervention styles - adapted for smaller toggle */
     .bear-paw {
         position: fixed;
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         background: #2a2a2a; /* Black bear */
         border-radius: 50%;
         z-index: 999;
         transform-origin: right center;
         transform: translate(0, -50%) scaleX(0);
-        transition: transform 0.4s ease; /* Slowed down from 0.3s */
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother easing */
         pointer-events: none;
-        /* Position at the end of the arm */
-        top: calc(1rem + 10px); /* Align with toggle center */
-        right: calc(1rem + 10px); /* Position at arm's end when extended */
+        /* Position at the end of the arm - adjusted for smaller toggle */
+        top: calc(1rem + 8px); /* Align with smaller toggle center */
+        right: calc(1rem + 8px); /* Position at arm's end when extended */
     }    /* Bear arm wrap - container for arm animation */
     .bear__arm-wrap {
         position: fixed;
-        width: 40px; /* Shorter arm length */
-        height: 30px;
+        width: 32px; /* Shorter arm length to match smaller toggle */
+        height: 24px;
         z-index: 998;
-        transform: translate(60px, -50%); /* Start hidden off-screen to the right */
-        transition: transform 0.4s ease; /* Slowed down from 0.2s */
+        transform: translate(50px, -50%); /* Start hidden off-screen to the right */
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother, consistent easing */
         pointer-events: none;
         background: transparent;
-        /* Position for arm extension */
-        top: calc(1rem + 10px); /* Align with toggle center */
+        /* Position for arm extension - adjusted for smaller toggle */
+        top: calc(1rem + 8px); /* Align with smaller toggle center */
         right: 1rem; /* Align with toggle position */
     }    /* Bear arm - scales from left origin like original */
     .bear__arm {
@@ -363,35 +361,35 @@
         top: 50%;
         left: 0;
         width: 100%;
-        height: 4px; /* Even thinner */
+        height: 3px; /* Slightly thinner for smaller toggle */
         background: #2a2a2a; /* Black bear */
-        border-radius: 2px;
+        border-radius: 1.5px;
         transform-origin: left center;
         transform: translate(0, -50%) scaleX(0); /* Start with scaleX(0) to be hidden */
-        transition: transform 0.4s ease; /* Slowed down from 0.2s */
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother, consistent easing */
         pointer-events: none;
-    }/* Create paw pads using pseudo-element */
+    }/* Create paw pads using pseudo-element - adjusted for smaller paw */
     .bear-paw::after {
         content: '';
         position: absolute;
-        top: 1.5px;
-        left: 2px;
-        width: 2px;
-        height: 2px;
+        top: 1px;
+        left: 1.5px;
+        width: 1.5px;
+        height: 1.5px;
         background: #1a1a1a; /* Darker black for pads */
         border-radius: 50%;
         box-shadow: 
-            2px 0 0 #1a1a1a,     /* toe pad 1 */
-            4px 0 0 #1a1a1a,     /* toe pad 2 */
-            6px 0 0 #1a1a1a,     /* toe pad 3 */
-            1px 6px 0 #1a1a1a;   /* main pad */
-    }
-
-    /* Shake animation for persistent attempts */
+            1.5px 0 0 #1a1a1a,     /* toe pad 1 */
+            3px 0 0 #1a1a1a,       /* toe pad 2 */
+            4.5px 0 0 #1a1a1a,     /* toe pad 3 */
+            1px 5px 0 #1a1a1a;     /* main pad */
+    }    /* Shake animation for persistent attempts - more controlled */
     @keyframes shake {
         0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-2px); }
-        75% { transform: translateX(2px); }
+        20% { transform: translateX(-1px); }
+        40% { transform: translateX(1px); }
+        60% { transform: translateX(-1px); }
+        80% { transform: translateX(1px); }
     }/* Theme transition for smooth color changes - exclude layout properties */
     body {
         transition: background-color 0.3s ease, color 0.3s ease;
@@ -433,12 +431,12 @@
         
         /* Adjust bear elements for short screens */
         .bear-paw {
-            top: calc(0.5rem + 10px); /* Match reduced toggle center */
-            right: calc(0.5rem + 10px); /* Match reduced toggle position */
+            top: calc(0.5rem + 8px); /* Match reduced toggle center for smaller toggle */
+            right: calc(0.5rem + 8px); /* Match reduced toggle position for smaller toggle */
         }
         
         .bear__arm-wrap {
-            top: calc(0.5rem + 10px); /* Match reduced toggle center */
+            top: calc(0.5rem + 8px); /* Match reduced toggle center for smaller toggle */
             right: 0.5rem; /* Match reduced toggle position */
         }
     }
@@ -482,12 +480,12 @@
         
         /* Adjust bear elements for mobile toggle position */
         .bear-paw {
-            top: calc(0.5rem + 10px); /* Match mobile toggle center */
-            right: calc(0.5rem + 10px); /* Match mobile toggle position */
+            top: calc(0.5rem + 8px); /* Match mobile toggle center for smaller toggle */
+            right: calc(0.5rem + 8px); /* Match mobile toggle position for smaller toggle */
         }
         
         .bear__arm-wrap {
-            top: calc(0.5rem + 10px); /* Match mobile toggle center */
+            top: calc(0.5rem + 8px); /* Match mobile toggle center for smaller toggle */
             right: 0.5rem; /* Match mobile toggle position */
         }
     }
