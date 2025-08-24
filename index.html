@@ -490,6 +490,152 @@
         }
     }
 
+    /* Password popup styles */
+    #password-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.65s ease-out, visibility 0.65s ease-out, background-color 0.65s ease-out;
+        backdrop-filter: blur(0px);
+    }
+
+    #password-overlay.show {
+        opacity: 1;
+        visibility: visible;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(4px);
+    }
+
+    #password-popup {
+        background: var(--box-bg);
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 2rem;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+        transition: transform 0.65s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                   opacity 0.65s ease-out;
+        will-change: transform, opacity;
+    }
+
+    #password-overlay.show #password-popup {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    #password-popup h2 {
+        color: var(--text-bright);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        letter-spacing: normal;
+    }
+
+    #password-input {
+        width: 100%;
+        padding: 0.75rem 0;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1rem;
+        background: transparent;
+        color: var(--text-color);
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        outline: none;
+        margin-bottom: 1.5rem;
+        text-align: left;
+        transition: border-color 0.3s ease, color 0.3s ease;
+        caret-color: transparent; /* Hide default thin cursor */
+        position: relative;
+    }
+
+    #password-input:focus {
+        border-color: var(--accent-green);
+        color: var(--text-bright);
+    }
+
+    /* Custom thick terminal cursor */
+    .password-input-container {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .terminal-cursor {
+        position: absolute;
+        width: 8px;
+        height: 1.2em;
+        background: var(--text-color);
+        top: 0.75rem;
+        left: 0;
+        animation: terminal-blink 1s infinite;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .terminal-cursor.focused {
+        background: var(--accent-green);
+    }
+
+    @keyframes terminal-blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+
+    #password-error {
+        color: #ff4444;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    #password-error.show {
+        opacity: 1;
+    }
+
+    .password-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .password-btn {
+        padding: 0.2rem 0.4rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.85rem;
+        background: transparent;
+        color: var(--text-muted);
+        border: none;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+        transition: color 0.3s ease, border-color 0.3s ease;
+        text-transform: lowercase;
+        line-height: 1;
+    }
+
+    .password-btn:hover {
+        color: var(--accent-green);
+        border-bottom-color: var(--accent-green);
+    }
+
+    .password-btn.cancel:hover {
+        color: #ff6666;
+        border-bottom-color: #ff6666;
+    }
+
   </style>
 </head>
 <body class="is-preload slide-init-left">
@@ -553,6 +699,22 @@
 
 </div>
 
+<!-- Password popup overlay -->
+<div id="password-overlay" onclick="handleOverlayClick(event)">
+  <div id="password-popup">
+    <h2>Password?</h2>
+    <div class="password-input-container">
+      <input type="password" id="password-input" autocomplete="off">
+      <div class="terminal-cursor" id="terminal-cursor"></div>
+    </div>
+    <div id="password-error">Invalid password. Try again.</div>
+    <div class="password-buttons">
+      <button class="password-btn" onclick="checkPassword()">Submit</button>
+      <button class="password-btn cancel" onclick="closePasswordPopup()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>  // Theme toggle functionality - now handled by bear-intervention.js
   // Keep basic theme management functions for compatibility
   
@@ -593,10 +755,16 @@
   }
 
   function toggle(node) {
-    // Handle navigation for 'resume' node
+    // Handle password popup for 'resume' node
     if (node.textContent.trim().toLowerCase() === 'resume') {
-        navigateToPage('cv.html');
+        showPasswordPopup();
         return; // Stop further execution for resume node
+    }
+
+    // Handle password popup for 'protected' node
+    if (node.textContent.trim().toLowerCase() === 'protected') {
+        showPasswordPopup();
+        return; // Stop further execution for protected node
     }
 
     const content = node.nextElementSibling;
@@ -750,6 +918,132 @@
         }
     }  });
 
+</script>
+
+<!-- Password functionality -->
+<script>
+  // Hash of the password "recruit" using SHA-256
+  const P_HASH = "fde2b189f66a29e29b49bfa148d2e9c5b750f6b09cbcd3967c54f858c6b11991";
+
+  // Simple SHA-256 implementation for client-side hashing
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+  }
+
+  function showPasswordPopup() {
+    const overlay = document.getElementById('password-overlay');
+    const input = document.getElementById('password-input');
+    const error = document.getElementById('password-error');
+    
+    overlay.classList.add('show');
+    error.classList.remove('show');
+    input.value = '';
+    
+    // Focus on input after animation completes
+    setTimeout(() => {
+      input.focus();
+    }, 650); // Match the animation duration
+  }
+
+  function closePasswordPopup() {
+    const overlay = document.getElementById('password-overlay');
+    const error = document.getElementById('password-error');
+    
+    overlay.classList.remove('show');
+    error.classList.remove('show');
+  }
+
+  // Close popup when clicking outside of it
+  function handleOverlayClick(event) {
+    const popup = document.getElementById('password-popup');
+    if (event.target === event.currentTarget) {
+      // Clicked on overlay, not on popup
+      closePasswordPopup();
+    }
+  }
+
+  async function checkPassword() {
+    const input = document.getElementById('password-input');
+    const error = document.getElementById('password-error');
+    const password = input.value;
+    
+    if (!password) {
+      error.textContent = "Please enter a password.";
+      error.classList.add('show');
+      return;
+    }
+    
+    const hashedPassword = await sha256(password);
+    
+    if (hashedPassword === P_HASH) {
+      // Correct password - close popup and navigate to resume
+      closePasswordPopup();
+      console.log("Access granted!");
+      
+      // Navigate to CV page
+      navigateToPage('cv.html');
+      
+    } else {
+      // Wrong password
+      error.textContent = "Invalid password. Try again.";
+      error.classList.add('show');
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  // Handle Enter key in password input
+  document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.getElementById('password-input');
+    const terminalCursor = document.getElementById('terminal-cursor');
+    
+    if (passwordInput && terminalCursor) {
+      // Update cursor position based on input content
+      function updateCursorPosition() {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        context.font = '1rem Courier New, Courier, monospace';
+        
+        // Measure the width of the current input (as asterisks)
+        const displayText = '*'.repeat(passwordInput.value.length);
+        const textWidth = context.measureText(displayText).width;
+        
+        terminalCursor.style.left = textWidth + 'px';
+      }
+      
+      // Handle input events
+      passwordInput.addEventListener('input', updateCursorPosition);
+      
+      // Handle focus/blur events
+      passwordInput.addEventListener('focus', function() {
+        terminalCursor.classList.add('focused');
+        terminalCursor.style.display = 'block';
+      });
+      
+      passwordInput.addEventListener('blur', function() {
+        terminalCursor.classList.remove('focused');
+        terminalCursor.style.display = 'none';
+      });
+      
+      // Handle key press
+      passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+      
+      // Initial cursor position
+      updateCursorPosition();
+    }
+  });
+
+  // Example: Show password popup when clicking a specific element
+  // You can call showPasswordPopup() from anywhere in your code
+  // For testing, you can call it directly: showPasswordPopup();
 </script>
 
 <!-- Bear intervention animation system -->
