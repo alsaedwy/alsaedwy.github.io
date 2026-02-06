@@ -1,0 +1,18 @@
+{
+  "@context": "https://w3id.org/openbadges/v2",
+  "id": "https://alaa.sh/openbadges/issuer.json",
+  "type": "Profile",
+  "name": "alaa.sh",
+  "url": "https://alaa.sh",
+  "email": "badges@alaa.sh",
+  "description": "Issuer of Open Badges hosted on alaa.sh.",
+  "verification": {
+    "type": "VerificationObject",
+    "allowedOrigins": [
+      "alaa.sh"
+    ],
+    "startsWith": [
+      "https://alaa.sh/openbadges/assertions/"
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "@context": "https://w3id.org/openbadges/v2",
+  "id": "https://alaa.sh/openbadges/assertions/21ba0d53-f610-4f71-af30-9a3c6ce97c92.json",
+  "type": "Assertion",
+  "recipient": {
+    "type": "email",
+    "hashed": true,
+    "salt": "EpwsVVtyQ4PkrjEd",
+    "identity": "sha256$3a507ecf1278cd2f77adb29e20d2c09fbb52883ee67344fe3c22b65257990683"
+  },
+  "issuedOn": "2026-02-06T14:07:57+00:00",
+  "verification": {
+    "type": "hosted"
+  },
+  "badge": {
+    "@context": "https://w3id.org/openbadges/v2",
+    "id": "https://alaa.sh/openbadges/badges/best-mlops-engineer.json",
+    "type": "BadgeClass",
+    "name": "Best MLOps Engineer",
+    "description": "Awarded by alaa.sh for exceptional MLOps excellence and production ML leadership.",
+    "image": "https://alaa.sh/openbadges/badges/best-mlops-engineer/image.png",
+    "criteria": {
+      "type": "Criteria",
+      "id": "https://alaa.sh/openbadges/badges/best-mlops-engineer/criteria.html",
+      "narrative": "Awarded for demonstrating exceptional MLOps capability in production: reliable ML system design, deployment automation, observability, data/model governance, and operational excellence."
+    },
+    "issuer": {
+      "@context": "https://w3id.org/openbadges/v2",
+      "id": "https://alaa.sh/openbadges/issuer.json",
+      "type": "Profile",
+      "name": "alaa.sh",
+      "url": "https://alaa.sh",
+      "email": "badges@alaa.sh",
+      "description": "Issuer of Open Badges hosted on alaa.sh.",
+      "verification": {
+        "type": "VerificationObject",
+        "allowedOrigins": [
+          "alaa.sh"
+        ],
+        "startsWith": [
+          "https://alaa.sh/openbadges/assertions/"
+        ]
+      }
+    },
+    "tags": [
+      "MLOps",
+      "Machine Learning Operations",
+      "DevOps",
+      "CI/CD",
+      "Kubernetes",
+      "AWS",
+      "Observability",
+      "Reliability"
+    ]
+  },
+  "image": "https://alaa.sh/openbadges/assertions/21ba0d53-f610-4f71-af30-9a3c6ce97c92.png",
+  "recipientProfile": {
+    "type": "Profile",
+    "name": "Alaa Saeed"
+  },
+  "evidence": [
+    {
+      "type": "Evidence",
+      "id": "https://alaa.sh/blog",
+      "name": "Evidence of achievement",
+      "narrative": "Designed and operated production-grade ML pipelines with strong reliability + governance."
+    }
+  ]
+}
