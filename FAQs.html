@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alaa Saeed | FAQs</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚫️</text></svg>">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+
+  <!-- Load theme immediately to prevent flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light-mode-loading');
+      }
+    })();
+  </script>
+
+  <style>
+    /* CSS Variables for Dark/Light Mode */
+    :root {
+      --bg-color: #000000;
+      --text-color: #d4d4d4;
+      --text-bright: #ffffff;
+      --accent-green: #00ff88;
+      --accent-blue: #00aaff;
+      --accent-cyan: #00ccff;
+      --accent-light-cyan: #33d6ff;
+      --border-color: #666;
+      --border-dashed: #666;
+      --text-muted: #b0b0b0;
+      --text-subtle: #888;
+      --text-faded: #777;
+      --text-light: #aaa;
+      --box-bg: #000000;
+    }
+
+    body.light-mode,
+    html.light-mode-loading body {
+      --bg-color: #ffffff;
+      --text-color: #2b2b2b;
+      --text-bright: #000000;
+      --accent-green: #006644;
+      --accent-blue: #0066cc;
+      --accent-cyan: #0088cc;
+      --accent-light-cyan: #0099dd;
+      --border-color: #999;
+      --border-dashed: #999;
+      --text-muted: #4f4f4f;
+      --text-subtle: #777;
+      --text-faded: #888;
+      --text-light: #555;
+      --box-bg: #ffffff;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 1rem;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    body.fade-out {
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+
+    /* Back button styling */
+    .float-back-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: var(--border-color);
+      color: var(--text-bright);
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      opacity: 0.6;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .float-back-button .fas {
+      margin-right: 5px;
+    }
+
+    .float-back-button:hover {
+      background-color: var(--text-subtle);
+      color: var(--text-bright);
+      text-decoration: none;
+      opacity: 1;
+    }
+
+    /* Floating box - matches index.html */
+    #floating-box {
+      width: 90%;
+      max-width: 700px;
+      position: fixed;
+      top: 50%;
+      left: calc(50% + 20px);
+      transform: translate(-50%, -50%);
+      padding: 0 1rem;
+      border-radius: 0.5rem;
+      border-top: 5px solid var(--border-color);
+      border-bottom: 5px solid var(--border-color);
+      max-height: 0;
+      overflow: hidden;
+      background: var(--box-bg);
+      opacity: 0;
+      transition: opacity 0.65s ease-out 0.5s,
+                  left 0.65s ease-out 0.5s,
+                  max-height 0.8s ease-out 0.3s,
+                  border-top 0.5s ease-out 0.3s,
+                  border-bottom 0.5s ease-out 0.3s,
+                  padding 0.5s ease-out 0.3s;
+      will-change: opacity, left, max-height, border-top, border-bottom, padding;
+    }
+
+    body:not(.is-preload):not(.fold-out) #floating-box {
+      opacity: 1;
+      left: 50%;
+      max-height: 85vh;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    body.fold-out #floating-box {
+      opacity: 0 !important;
+      max-height: 0 !important;
+      border-top: 5px solid var(--border-color) !important;
+      border-bottom: 5px solid var(--border-color) !important;
+      overflow: hidden !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      left: calc(50% + 20px) !important;
+      transition: opacity 0.6s ease-in,
+                  max-height 0.6s ease-in,
+                  border-top 0.6s ease-in,
+                  border-bottom 0.6s ease-in,
+                  padding 0.6s ease-in,
+                  left 0.6s ease-in !important;
+      will-change: opacity, max-height, border-top, border-bottom, padding, left;
+    }
+
+    #floating-box h1 {
+      font-size: 1.5rem;
+      text-align: center;
+      color: var(--text-bright);
+      margin-bottom: 0.2em;
+    }
+
+    #floating-box h2 {
+      font-size: 1rem;
+      color: var(--accent-green);
+      text-align: left;
+      margin: 0 0 1rem;
+      letter-spacing: normal;
+    }
+
+    .description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--border-dashed);
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      color: var(--accent-green);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-question::before {
+      content: "├──  ";
+      color: var(--text-subtle);
+    }
+
+    .faq-item:last-child .faq-question::before {
+      content: "└──  ";
+    }
+
+    .faq-answer {
+      color: var(--text-bright);
+      font-size: 1rem;
+      padding-left: 3rem;
+      position: relative;
+    }
+
+    .faq-answer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0.8rem;
+      bottom: 0;
+      border-left: 1px dashed var(--border-dashed);
+    }
+
+    #timer {
+      color: var(--text-bright);
+    }
+
+    .since-text {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Medium screens */
+    @media (min-width: 768px) {
+      #floating-box h1 { font-size: 1.8rem; }
+      #floating-box h2 { font-size: 1.1rem; }
+      .description { font-size: 1rem; }
+      .faq-question { font-size: 1.1rem; }
+      .faq-answer { font-size: 1.1rem; }
+    }
+
+    /* Large screens */
+    @media (min-width: 1024px) {
+      #floating-box h1 { font-size: 2rem; }
+      #floating-box h2 { font-size: 1.2rem; }
+      .description { font-size: 1.05rem; }
+      .faq-question { font-size: 1.15rem; }
+      .faq-answer { font-size: 1.15rem; }
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      #floating-box { width: 95%; padding: 0.8rem; }
+      #floating-box h1 { font-size: 1.3rem; }
+      .description { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+<!-- Back Button -->
+<a href="#" class="float-back-button" onclick="navigateToIndex(event)">
+  <span class="fas fa-arrow-left"></span> alaa.sh
+</a>
+
+<!-- Floating content box -->
+<div id="floating-box">
+  <h1>Frequently Asked Questions (FAQs)</h1>
+  <h2>~/alaa.sh --faqs</h2>
+
+  <p class="description">
+    While I really appreciate the effort for small talk and the interest in getting to know me, I thought it would be funnier if I share this page instead, which answers one <i>-and potentially, subsequently more-</i> of the questions you have just asked (or about to ask) me.
+  </p>
+
+  <div class="faq-item">
+    <div class="faq-question">[Question 1] How long have you been in Ireland?</div>
+    <div class="faq-answer"><span id="timer"></span><br><span id="since" class="since-text"></span></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">[Question 2] Do you like it (Ireland)?</div>
+    <div class="faq-answer">Yes. I love it! Such a beautiful country that is rich with history as much as green landscapes, and I honestly couldn't have ask for more friendly, welcoming and hospitable people to live among.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">[Question 3] But why Killarney/Kerry?</div>
+    <div class="faq-answer">As someone who currently works fully remotely, it makes much more sense for me to live a bit away from the busy, fast and very expensive capital.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">[Question 4] Where are you "orignially" from?</div>
+    <div class="faq-answer">Egypt, I'm 97.5% Egyptian 𓂀 and 2.5% Arab.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">[Question 5] So do you often go back (to Egypt)?</div>
+    <div class="faq-answer">Yep.</div>
+  </div>
+</div>
+
+<script>
+  // Load saved theme
+  (function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    document.documentElement.classList.remove('light-mode-loading');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+    }
+  })();
+
+  // Navigation back to index
+  function navigateToIndex(event) {
+    if (event) event.preventDefault();
+    document.body.classList.add('fold-out');
+    setTimeout(function() {
+      window.location.href = 'index.html';
+    }, 800);
+  }
+
+  // Page load animation
+  window.addEventListener('load', function() {
+    document.body.classList.remove('is-preload');
+  });
+
+  // Dynamic "since" timer
+  // Arrival: 9th September 2018, 11:40:23 GMT
+  // Update the year below if needed
+  var ARRIVAL = new Date(Date.UTC(2019, 8, 9, 11, 40, 23)); // Month is 0-indexed: 8 = September
+
+  function updateTimer() {
+    var now = new Date();
+    var diff = now.getTime() - ARRIVAL.getTime();
+
+    // Calculate components
+    var totalSeconds = Math.floor(diff / 1000);
+    var seconds = totalSeconds % 60;
+    var totalMinutes = Math.floor(totalSeconds / 60);
+    var minutes = totalMinutes % 60;
+    var totalHours = Math.floor(totalMinutes / 60);
+    var hours = totalHours % 24;
+    var totalDays = Math.floor(totalHours / 24);
+
+    // More accurate year/month/day calculation
+    var years = now.getFullYear() - ARRIVAL.getFullYear();
+    var months = now.getMonth() - ARRIVAL.getMonth();
+    var days = now.getDate() - ARRIVAL.getDate();
+
+    if (days < 0) {
+      months--;
+      var prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    var el = document.getElementById('timer');
+    if (el) {
+      el.textContent = years + ' years, ' + months + ' months, ' + days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds.';
+    }
+  }
+
+  // Display "Since" line in user's local timezone
+  var sinceEl = document.getElementById('since');
+  if (sinceEl) {
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var formatted = ARRIVAL.toLocaleString(undefined, {
+      year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      timeZoneName: 'short'
+    });
+    sinceEl.textContent = 'Since ' + formatted;
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+
+</body>
+</html>

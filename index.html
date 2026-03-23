@@ -666,6 +666,9 @@
       </div>
     </li>
     <li>
+      <div class="node" onclick="toggle(this)">FAQs</div>
+    </li>
+    <li>
       <div class="node" onclick="toggle(this)">resume</div>
     </li>
     <li>
@@ -759,6 +762,12 @@
     if (node.textContent.trim().toLowerCase() === 'resume') {
         showPasswordPopup();
         return; // Stop further execution for resume node
+    }
+
+    // Handle navigation for 'FAQs' node
+    if (node.textContent.trim().toLowerCase() === 'faqs') {
+        navigateToPage('FAQs.html');
+        return;
     }
 
     // Handle password popup for 'protected' node
