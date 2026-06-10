@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-Roc vs Formentor — Size Comparison</title>
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #16161a;
+    --surface2: #1e1e24;
+    --border: #2a2a32;
+    --accent-vw: #00b0f0;
+    --accent-cu: #e8612c;
+    --accent-dubai: #c8a84b;
+    --accent-italy: #3ab06e;
+    --text: #e8e8ec;
+    --muted: #7a7a88;
+    --smaller: #b0b0bc;
+    --radius: 10px;
+    --mono: 'Courier New', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    padding: 32px 24px 48px;
+    max-width: 980px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  header {
+    margin-bottom: 36px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .tag-vw  { color: var(--accent-vw); }
+  .tag-cu  { color: var(--accent-cu); }
+
+  .subtitle {
+    margin-top: 10px;
+    color: var(--smaller);
+    font-size: 13px;
+    max-width: 600px;
+  }
+
+  /* PILL LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0 32px;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .pill-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pill-vw    { background: rgba(0,176,240,0.12); color: var(--accent-vw); }
+  .pill-cu    { background: rgba(232,97,44,0.12);  color: var(--accent-cu); }
+  .pill-dubai { background: rgba(200,168,75,0.12); color: var(--accent-dubai); }
+  .pill-italy { background: rgba(58,176,110,0.12); color: var(--accent-italy); }
+
+  .dot-vw    { background: var(--accent-vw); }
+  .dot-cu    { background: var(--accent-cu); }
+  .dot-dubai { background: var(--accent-dubai); }
+  .dot-italy { background: var(--accent-italy); }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 36px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* TABLES */
+  .tbl-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  th.col-vw    { color: var(--accent-vw); }
+  th.col-cu    { color: var(--accent-cu); }
+  th.col-dubai { color: var(--accent-dubai); }
+  th.col-italy { color: var(--accent-italy); }
+  th.col-dim   { color: var(--muted); }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+  tbody tr:nth-child(odd) { background: var(--surface); }
+  tbody tr:nth-child(even) { background: var(--surface2); }
+  tbody tr:hover { background: rgba(255,255,255,0.04) !important; }
+
+  td {
+    padding: 11px 16px;
+    vertical-align: middle;
+  }
+
+  td.dim-label {
+    font-weight: 600;
+    color: var(--smaller);
+    white-space: nowrap;
+  }
+
+  td.val-vw, td.val-cu, td.val-dubai, td.val-italy {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  td.val-vw    { color: var(--accent-vw); }
+  td.val-cu    { color: var(--accent-cu); }
+  td.val-dubai { color: var(--accent-dubai); }
+  td.val-italy { color: var(--accent-italy); }
+
+  td.delta {
+    font-size: 12px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .up   { color: #e86060; } /* bigger than benchmark */
+  .down { color: #3ab06e; } /* smaller */
+  .neut { color: var(--muted); }
+
+  /* BAR CHART ROWS */
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+  }
+  .bar-label {
+    font-size: 11px;
+    width: 80px;
+    flex-shrink: 0;
+    color: var(--smaller);
+  }
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .bar-val {
+    font-family: var(--mono);
+    font-size: 11px;
+    width: 58px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* NOTE BOXES */
+  .note {
+    background: var(--surface2);
+    border-left: 3px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 12px;
+    color: var(--smaller);
+    margin: 10px 0 24px;
+    line-height: 1.6;
+  }
+  .note strong { color: var(--text); }
+
+  /* SUMMARY CARDS */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .summary-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .summary-card h3 {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .summary-card p {
+    font-size: 12.5px;
+    color: var(--smaller);
+    line-height: 1.65;
+  }
+  .summary-card p strong { color: var(--text); }
+
+  .footnotes {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .footnotes a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Size Comparison · June 2025</p>
+  <h1>
+    <span class="tag-vw">VW T-Roc 2024</span> (UAE/Dubai)
+    <span style="color:var(--muted)"> vs </span>
+    <span class="tag-cu">Cupra Formentor 2025 · 252</span> (Ireland)
+  </h1>
+  <p class="subtitle">
+    All dimensions in mm unless noted. Context benchmarks: average new car sold in Dubai (mid-size SUV, based on market leaders) and Italy (weighted across top-5 sellers, small-to-compact segment).
+  </p>
+</header>
+
+<div class="legend">
+  <div class="pill pill-vw"><div class="pill-dot dot-vw"></div>VW T-Roc 2024 (UAE)</div>
+  <div class="pill pill-cu"><div class="pill-dot dot-cu"></div>Cupra Formentor 2025 252 (IE)</div>
+  <div class="pill pill-dubai"><div class="pill-dot dot-dubai"></div>Avg Dubai new car</div>
+  <div class="pill pill-italy"><div class="pill-dot dot-italy"></div>Avg Italian new car</div>
+</div>
+
+<!-- ───────────────────── TABLE 1: VW vs Dubai avg ───────────────────── -->
+<div class="section-label">Table 1 — T-Roc 2024 vs average new car in Dubai</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th class="col-dim">Dimension</th>
+        <th class="col-vw">VW T-Roc 2024 (UAE)</th>
+        <th class="col-dubai">Avg Dubai new car ¹</th>
+        <th class="col-dim">Δ vs Dubai avg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="dim-label">Length</td>
+        <td class="val-vw">4,251 mm</td>
+        <td class="val-dubai">4,550 mm</td>
+        <td class="delta down">−299 mm shorter</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Width (excl. mirrors)</td>
+        <td class="val-vw">1,819 mm</td>
+        <td class="val-dubai">1,840 mm</td>
+        <td class="delta down">−21 mm narrower</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Height</td>
+        <td class="val-vw">1,573 mm</td>
+        <td class="val-dubai">1,660 mm</td>
+        <td class="delta down">−87 mm lower</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Wheelbase</td>
+        <td class="val-vw">2,603 mm</td>
+        <td class="val-dubai">2,680 mm</td>
+        <td class="delta down">−77 mm shorter</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Boot space</td>
+        <td class="val-vw">445 L</td>
+        <td class="val-dubai">~540 L</td>
+        <td class="delta down">−95 L less</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Ground clearance</td>
+        <td class="val-vw">160 mm</td>
+        <td class="val-dubai">~185 mm</td>
+        <td class="delta down">−25 mm lower</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Kerb weight</td>
+        <td class="val-vw">~1,360 kg</td>
+        <td class="val-dubai">~1,580 kg</td>
+        <td class="delta down">−220 kg lighter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="note">
+  <strong>¹ Dubai avg new car benchmark</strong> — derived from the dominant market segment in the UAE/Dubai: mid-size SUVs and crossovers. Top sellers include the Toyota RAV4 (4,600×1,855×1,690 mm), Toyota Corolla Cross (~4,460×1,825×1,620 mm), Nissan Qashqai (~4,425×1,838×1,625 mm), and Honda CR-V (~4,710×1,865×1,680 mm). The RAV4 is the closest direct benchmark as the #1 selling SUV in the UAE. Values represent approximate segment medians.
+</div>
+
+<!-- ───────────────────── TABLE 2: Formentor vs Italy avg ───────────────────── -->
+<div class="section-label">Table 2 — Cupra Formentor 2025 (252) vs average new car in Italy</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th class="col-dim">Dimension</th>
+        <th class="col-cu">Cupra Formentor 2025 252 (IE)</th>
+        <th class="col-italy">Avg Italian new car ²</th>
+        <th class="col-dim">Δ vs Italy avg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="dim-label">Length</td>
+        <td class="val-cu">4,451 mm</td>
+        <td class="val-italy">4,030 mm</td>
+        <td class="delta up">+421 mm longer</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Width (excl. mirrors)</td>
+        <td class="val-cu">1,839 mm</td>
+        <td class="val-italy">1,735 mm</td>
+        <td class="delta up">+104 mm wider</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Height</td>
+        <td class="val-cu">1,520 mm</td>
+        <td class="val-italy">1,510 mm</td>
+        <td class="delta up">+10 mm taller</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Wheelbase</td>
+        <td class="val-cu">2,679 mm</td>
+        <td class="val-italy">2,560 mm</td>
+        <td class="delta up">+119 mm longer</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Boot space</td>
+        <td class="val-cu">420 L (PHEV: 345 L)</td>
+        <td class="val-italy">~310 L</td>
+        <td class="delta up">+110 L more (non-PHEV)</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Ground clearance</td>
+        <td class="val-cu">~155 mm</td>
+        <td class="val-italy">~140 mm</td>
+        <td class="delta up">+15 mm higher</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Kerb weight</td>
+        <td class="val-cu">~1,650 kg (PHEV 252)</td>
+        <td class="val-italy">~1,140 kg</td>
+        <td class="delta up">+510 kg heavier</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="note">
+  <strong>² Italian avg new car benchmark</strong> — Italy's market is dominated by small/compact cars. Top sellers in 2024: Fiat Panda (3,686×1,882×1,551 mm, ~1,120 kg, 225 L boot), Dacia Sandero (4,099×1,848×1,499 mm), Jeep Avenger (~4,085 mm), Citroën C3 (~4,015 mm), Toyota Yaris Cross (~4,180 mm, ~1,210 kg). The weighted average skews firmly toward the B/sub-B segment. <strong>252 = Ireland's July–December 2025 registration plate period</strong> (see note below).
+</div>
+
+<!-- ───────────────────── TABLE 3: Head-to-head ───────────────────── -->
+<div class="section-label">Table 3 — Head-to-head: T-Roc 2024 (UAE) vs Formentor 2025 252 (Ireland)</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th class="col-dim">Dimension</th>
+        <th class="col-vw">VW T-Roc 2024 (UAE)</th>
+        <th class="col-cu">Cupra Formentor 2025 252 (IE)</th>
+        <th class="col-dim">Difference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="dim-label">Length</td>
+        <td class="val-vw">4,251 mm</td>
+        <td class="val-cu">4,451 mm</td>
+        <td class="delta up">Formentor +200 mm longer</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Width (excl. mirrors)</td>
+        <td class="val-vw">1,819 mm</td>
+        <td class="val-cu">1,839 mm</td>
+        <td class="delta up">Formentor +20 mm wider</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Height</td>
+        <td class="val-vw">1,573 mm</td>
+        <td class="val-cu">1,520 mm</td>
+        <td class="delta down">T-Roc +53 mm taller</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Wheelbase</td>
+        <td class="val-vw">2,603 mm</td>
+        <td class="val-cu">2,679 mm</td>
+        <td class="delta up">Formentor +76 mm longer</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Width incl. mirrors</td>
+        <td class="val-vw">~2,035 mm</td>
+        <td class="val-cu">~1,992 mm</td>
+        <td class="delta down">T-Roc +43 mm wider overall</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Boot space</td>
+        <td class="val-vw">445 L</td>
+        <td class="val-cu">345 L (PHEV 252)</td>
+        <td class="delta down">T-Roc +100 L more</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Ground clearance</td>
+        <td class="val-vw">160 mm</td>
+        <td class="val-cu">~155 mm</td>
+        <td class="delta down">T-Roc +5 mm higher</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Kerb weight</td>
+        <td class="val-vw">~1,360 kg</td>
+        <td class="val-cu">~1,650 kg</td>
+        <td class="delta up">Formentor +290 kg heavier</td>
+      </tr>
+      <tr>
+        <td class="dim-label">Footprint (L × W)</td>
+        <td class="val-vw">7.73 m²</td>
+        <td class="val-cu">8.19 m²</td>
+        <td class="delta up">Formentor +0.46 m² larger</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- BAR VISUAL -->
+<div class="section-label">Visual scale — Length comparison</div>
+<div style="padding: 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px;">
+
+  <div class="bar-row">
+    <span class="bar-label" style="color:var(--accent-vw)">T-Roc</span>
+    <div class="bar-track"><div class="bar-fill" style="width:65.1%;background:var(--accent-vw)"></div></div>
+    <span class="bar-val" style="color:var(--accent-vw)">4,251 mm</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label" style="color:var(--accent-cu)">Formentor</span>
+    <div class="bar-track"><div class="bar-fill" style="width:68.2%;background:var(--accent-cu)"></div></div>
+    <span class="bar-val" style="color:var(--accent-cu)">4,451 mm</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label" style="color:var(--accent-dubai)">Dubai avg</span>
+    <div class="bar-track"><div class="bar-fill" style="width:69.7%;background:var(--accent-dubai)"></div></div>
+    <span class="bar-val" style="color:var(--accent-dubai)">~4,550 mm</span>
+  </div>
+  <div class="bar-row">
+    <span class="bar-label" style="color:var(--accent-italy)">Italy avg</span>
+    <div class="bar-track"><div class="bar-fill" style="width:61.7%;background:var(--accent-italy)"></div></div>
+    <span class="bar-val" style="color:var(--accent-italy)">~4,030 mm</span>
+  </div>
+
+  <div style="margin-top:18px; border-top:1px solid var(--border); padding-top:14px;">
+    <div class="bar-row">
+      <span class="bar-label" style="font-weight:600;color:var(--muted)">Width</span>
+      <span style="font-size:11px;color:var(--muted);">T-Roc 1,819 mm · Formentor 1,839 mm · Dubai avg ~1,840 mm · Italy avg ~1,735 mm</span>
+    </div>
+    <div class="bar-row" style="margin-top:8px;">
+      <span class="bar-label" style="color:var(--accent-vw)">T-Roc</span>
+      <div class="bar-track"><div class="bar-fill" style="width:73.0%;background:var(--accent-vw)"></div></div>
+      <span class="bar-val" style="color:var(--accent-vw)">1,819 mm</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label" style="color:var(--accent-cu)">Formentor</span>
+      <div class="bar-track"><div class="bar-fill" style="width:73.8%;background:var(--accent-cu)"></div></div>
+      <span class="bar-val" style="color:var(--accent-cu)">1,839 mm</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label" style="color:var(--accent-dubai)">Dubai avg</span>
+      <div class="bar-track"><div class="bar-fill" style="width:73.9%;background:var(--accent-dubai)"></div></div>
+      <span class="bar-val" style="color:var(--accent-dubai)">~1,840 mm</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label" style="color:var(--accent-italy)">Italy avg</span>
+      <div class="bar-track"><div class="bar-fill" style="width:69.7%;background:var(--accent-italy)"></div></div>
+      <span class="bar-val" style="color:var(--accent-italy)">~1,735 mm</span>
+    </div>
+  </div>
+</div>
+
+<!-- ───────────────────── SUMMARY ───────────────────── -->
+<div class="section-label">Concise summary</div>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3 style="color:var(--accent-vw)">T-Roc vs Dubai average</h3>
+    <p>The T-Roc 2024 sold in UAE is a <strong>notably smaller car than the Dubai norm</strong>. At 4,251 mm long vs a ~4,550 mm typical mid-size SUV (RAV4, CR-V tier), it's ~300 mm shorter, 87 mm lower, and ~220 kg lighter. In Dubai's SUV-dominant market, it sits below the segment average on every primary dimension — smaller footprint, less boot, and less ground clearance. Width is the one dimension where it almost matches, trailing by only 21 mm. It's better classified as a compact crossover within a market that defaults to mid-size SUVs.</p>
+  </div>
+  <div class="summary-card">
+    <h3 style="color:var(--accent-cu)">Formentor vs Italian average</h3>
+    <p>Against Italy's car-buying habits, the Formentor 2025 252 is a <strong>substantially large car</strong>. The Italian market is led by A/B-segment cars (Panda, Sandero, Citroën C3) averaging ~4,030 mm in length. The Formentor eclipses that by over 420 mm, is ~104 mm wider, and at ~1,650 kg (252 = PHEV trim) it's more than <strong>500 kg heavier</strong> than the Italian fleet average. Height is nearly identical to the Italian norm — the Formentor's sportier coupé roofline keeps it low despite its larger overall bulk.</p>
+  </div>
+  <div class="summary-card">
+    <h3 style="color:var(--muted)">T-Roc vs Formentor (head-to-head)</h3>
+    <p>The Formentor is the <strong>longer, wider, heavier car</strong> by meaningful margins: +200 mm in length, +20 mm in width, +76 mm in wheelbase, and ~+290 kg in kerb weight (largely due to the PHEV battery in the 252). The T-Roc is the <strong>taller and more upright</strong> SUV (+53 mm), giving more headroom but a less dynamic silhouette. Crucially, the T-Roc beats the Formentor 252 on <strong>boot space (+100 L)</strong> because the PHEV battery in the Formentor's rear cuts luggage capacity from 420 L (petrol) down to 345 L.</p>
+  </div>
+  <div class="summary-card">
+    <h3 style="color:var(--muted)">What "252" means</h3>
+    <p>In Ireland, car registration plates use a <strong>YYH format</strong> since 2013: the first two digits are the year, the third is <strong>1</strong> (January–June) or <strong>2</strong> (July–December). So <strong>252</strong> = a car first registered in Ireland in the <strong>second half of 2025</strong> (July–December). It's a registration period, not a power output or trim name. Cupra Ireland specifically ran promotions targeting the 252 period for its updated PHEV Formentor models — hence "Formentor 252" as shorthand for the H2 2025 delivery wave.</p>
+  </div>
+</div>
+
+<div class="footnotes">
+  <strong>Sources & methodology:</strong><br>
+  VW T-Roc 2024 UAE: zigwheels.ae, dubicars.com, autopediame.com — UAE spec (1.4L TSI, 8-speed AT). Formentor 2025 252: automobiledimension.com, carwow.co.uk, carsguide.com.au — PHEV eHybrid 252 PS variant (1.5 e-Hybrid). Boot space shown is PHEV-specific (345 L). Non-PHEV Formentor carries 420 L.<br>
+  Dubai avg: derived from UAE market leaders (Toyota RAV4, Corolla Cross, Nissan Qashqai, Honda CR-V). Italy avg: weighted average of 2024 top-5 sellers by volume (Fiat Panda, Dacia Sandero, Jeep Avenger, Citroën C3, Toyota Yaris Cross). Registration system: citizensinformation.ie, completecar.ie.
+</div>
+
+</body>
+</html>
