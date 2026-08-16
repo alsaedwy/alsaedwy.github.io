@@ -616,6 +616,10 @@ dialog#lightbox[open]::backdrop { opacity: 1; }
   justify-content: center;
   min-height: 0;
   min-width: 0;
+  /* Horizontal drags are ours to read. Without this the browser claims
+     them as a pan, cancels the gesture, and the swipe never lands.
+     Vertical and pinch stay with the browser. */
+  touch-action: pan-y pinch-zoom;
 }
 .lb-stage img {
   max-width: 100%;

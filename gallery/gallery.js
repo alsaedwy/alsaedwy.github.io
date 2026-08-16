@@ -282,14 +282,11 @@
     return '<div class="sections">' + cards + '</div>';
   }
 
-  /* withNames prints the sitter's name under each frame, for the portraits. */
-  function photoGrid(photos, routeBase, emptyPath, withNames) {
-    if (!photos.length) {
-      return '<div class="empty-note">' +
-        'Nothing here yet.<br><br>Drop files into <code>' + esc(emptyPath) + '</code> ' +
-        'then run <code>python3 gallery/scripts/scan.py</code>.' +
-        '</div>';
-    }
+  /* 'empty' is what stands in when there are no photos yet — a note to
+     the visitor on a county page, a reminder to me everywhere else.
+     withNames prints the sitter's name under each frame. */
+  function photoGrid(photos, routeBase, empty, withNames) {
+    if (!photos.length) return '<div class="empty-note">' + empty + '</div>';
 
     return '<div class="grid">' + photos.map(function (p, i) {
       var who = withNames
@@ -320,7 +317,10 @@
     setHead([HOME], section.title, [section.title]);
 
     return (section.blurb ? '<p class="lede">' + esc(section.blurb) + '</p>' : '') +
-      photoGrid(section.photos, section.id, IMAGES + section.dir + '/');
+      photoGrid(section.photos, section.id,
+        'Nothing here yet.<br><br>Drop files into <code>' +
+          esc(IMAGES + section.dir + '/') + '</code> then run ' +
+          '<code>python3 gallery/scripts/scan.py</code>.');
   }
 
   var PROVINCES = ['All', 'Leinster', 'Munster', 'Connacht', 'Ulster'];
@@ -375,7 +375,8 @@
       '</div>' +
       '</div>' +
       photoGrid(group.photos, section.id + '/' + group.id,
-        IMAGES + section.dir + '/' + group.id + '/', true);
+        'I&rsquo;ll get pictures of ' + esc(group.name) +
+          ' faces -hopefully- soon enough, come back later!', true);
   }
 
   function viewMissing() {
@@ -585,7 +586,14 @@
 
   lightbox.addEventListener('cancel', function (e) { e.preventDefault(); closeLightbox(); });
   lightbox.addEventListener('click', function (e) {
-    if (e.target === lightbox || e.target === lbStage) closeLightbox();
+    /* A swipe ends in a click; that must not be read as "tapped outside".
+       Nor should tapping the photo itself close the viewer — on a phone
+       the photo is most of the screen, and every short swipe would shut
+       it. Tapping the surrounding dark still closes. */
+    if (Date.now() - draggedAt < 500) return;
+    if (e.target !== lightbox && e.target !== lbStage) return;
+    if (overPhoto(e)) return;
+    closeLightbox();
   });
 
   document.addEventListener('keydown', function (e) {
@@ -594,15 +602,44 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
   });
 
-  /* swipe */
-  var swipeX = null;
-  lbStage.addEventListener('pointerdown', function (e) { swipeX = e.clientX; });
-  lbStage.addEventListener('pointerup', function (e) {
-    if (swipeX == null) return;
-    var dx = e.clientX - swipeX;
-    swipeX = null;
-    if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
+  /* ---------- swipe ---------- */
+
+  var swipe = null;
+  var draggedAt = 0;
+
+  lbStage.addEventListener('pointerdown', function (e) {
+    swipe = { x: e.clientX, y: e.clientY };
   });
+
+  /* The browser takes the gesture over — a vertical pan, say — and no
+     pointerup will follow. */
+  lbStage.addEventListener('pointercancel', function () { swipe = null; });
+
+  lbStage.addEventListener('pointerup', function (e) {
+    if (!swipe) return;
+    var dx = e.clientX - swipe.x;
+    var dy = e.clientY - swipe.y;
+    swipe = null;
+
+    /* Any real drag ends in a click wherever the finger lifted, often off
+       the photo. That is a drag, not a tap outside, so never let it close
+       the viewer — a downward drag used to. */
+    if (Math.abs(dx) > 10 || Math.abs(dy) > 10) draggedAt = Date.now();
+
+    /* Far enough, and more sideways than up or down. */
+    var far = Math.max(40, lbStage.clientWidth * 0.08);
+    if (Math.abs(dx) < far || Math.abs(dx) < Math.abs(dy)) return;
+
+    step(dx < 0 ? 1 : -1);
+  });
+
+  function overPhoto(e) {
+    var img = lbStage.firstElementChild;
+    if (!img) return false;
+    var box = img.getBoundingClientRect();
+    return e.clientX >= box.left && e.clientX <= box.right &&
+      e.clientY >= box.top && e.clientY <= box.bottom;
+  }
 
   /* ---------- after each paint ---------- */
 
