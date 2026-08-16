@@ -357,6 +357,10 @@ window.GALLERY_FILES = {
    "f": "EXC_BNW_EXPORT_NON_IMG_6232-2.jpg"
   },
   {
+   "ar": "1051/768",
+   "f": "IMG_0085.jpeg"
+  },
+  {
    "ar": "1080/1080",
    "f": "IMG_0292.JPG"
   },
