@@ -666,10 +666,10 @@
       </div>
     </li>
     <li>
-      <div class="node" onclick="toggle(this)">FAQs</div>
+      <div class="node" onclick="toggle(this)">gallery</div>
     </li>
     <li>
-      <div class="node" onclick="toggle(this)">resume</div>
+      <div class="node" onclick="toggle(this)">FAQs</div>
     </li>
     <li>
       <div class="node" onclick="toggle(this)">contact</div>
@@ -767,6 +767,12 @@
     // Handle navigation for 'FAQs' node
     if (node.textContent.trim().toLowerCase() === 'faqs') {
         navigateToPage('FAQs.html');
+        return;
+    }
+
+    // Handle navigation for 'gallery' node
+    if (node.textContent.trim().toLowerCase() === 'gallery') {
+        navigateToPage('gallery.html');
         return;
     }
 

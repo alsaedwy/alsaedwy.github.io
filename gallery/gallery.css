@@ -1,0 +1,789 @@
+/* ============================================================
+   Gallery — alaa.sh
+   Layout, motion and theming for gallery.html
+   ============================================================ */
+
+/* ---------- animatable custom properties ---------- */
+@property --sweep {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: -20%;
+}
+@property --glow {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* ---------- tokens ---------- */
+:root {
+  --bg: #000000;
+  --bg-lift: #070707;
+  --fg: #d4d4d4;
+  --bright: #ffffff;
+  --accent: #00ff88;
+  --muted: #b0b0b0;
+  --subtle: #888888;
+  --line: rgba(255, 255, 255, 0.14);
+  --line-soft: rgba(255, 255, 255, 0.07);
+  --shade: rgba(0, 0, 0, 0.72);
+
+  --mono: 'Courier New', Courier, monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+}
+
+body.light-mode,
+html.light-mode-loading body {
+  --bg: #ffffff;
+  --bg-lift: #f6f6f6;
+  --fg: #2b2b2b;
+  --bright: #000000;
+  --accent: #006644;
+  --muted: #4f4f4f;
+  --subtle: #777777;
+  --line: rgba(0, 0, 0, 0.16);
+  --line-soft: rgba(0, 0, 0, 0.08);
+  --shade: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- base ---------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+body.light-mode { color-scheme: light; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: opacity 0.6s var(--ease), background-color 0.3s ease, color 0.3s ease;
+}
+
+body.is-preload { opacity: 0; }
+body.leaving { opacity: 0; }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* film grain — sits over everything, ignores pointer events */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body.light-mode::after { mix-blend-mode: multiply; opacity: 0.05; }
+
+/* ---------- chrome ---------- */
+.back {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(8px);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.75;
+  transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.back:hover {
+  opacity: 1;
+  color: var(--bright);
+  border-color: var(--accent);
+}
+.back .arrow { transition: transform 0.35s var(--ease); }
+.back:hover .arrow { transform: translateX(-3px); }
+
+.masthead {
+  padding: 5.5rem var(--gutter) 0;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+/* GALLERY | IRISH FACES | KERRY — the wordmark, then the path. Every step
+   but the last is a link back up. */
+.masthead h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bright);
+  line-height: 1.3;
+}
+.masthead h1 .home { color: var(--bright); }
+
+.masthead h1 .tag {
+  display: inline-block;
+  font-size: 0.62em;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  vertical-align: baseline;
+  animation: tag-in 0.55s var(--ease) both;
+}
+/* Each step carries its own leading bar and never splits from it. */
+.masthead h1 > * { white-space: nowrap; }
+.masthead h1 > :not(:first-child)::before {
+  content: '|';
+  color: var(--subtle);
+  margin: 0 0.5em;
+  border: 0;
+}
+
+/* the steps you can click */
+.masthead h1 a {
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.masthead h1 a:hover,
+.masthead h1 a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  outline: none;
+}
+.masthead h1 a.tag:hover { color: var(--bright); border-bottom-color: var(--bright); }
+
+@keyframes tag-in {
+  from { opacity: 0; transform: translateX(-10px); }
+}
+.rule {
+  max-width: 1600px;
+  margin: 1.6rem auto 0;
+  padding: 0 var(--gutter);
+}
+.rule i {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line), transparent);
+}
+
+main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2.5rem var(--gutter) 6rem;
+}
+
+.lede {
+  max-width: 46ch;
+  margin: 0 0 2.5rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* ---------- section index ---------- */
+.sections {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  /* fine tracks, so cards of different shapes still pack without gaps */
+  grid-auto-rows: 8px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  align-self: start;          /* height comes from the cover's shape */
+  grid-row-end: span 40;      /* replaced per card once measured */
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background: var(--bg-lift);
+  isolation: isolate;
+  transition: border-color 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.card:hover, .card:focus-visible { border-color: var(--accent); outline: none; }
+
+/* The shape is set inline per card — see 'shape' in gallery/data/gallery.js.
+   This is only the fallback when none is known. */
+.card .frame {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.35) contrast(1.05);
+  transform: scale(1.001);
+  transition: transform 0.9s var(--ease), filter 0.6s ease;
+}
+.card:hover img, .card:focus-visible img {
+  transform: scale(1.06);
+  filter: grayscale(0) contrast(1);
+}
+
+/* green sweep across the cover on hover */
+.card .frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent calc(var(--sweep) - 12%),
+    color-mix(in srgb, var(--accent) 26%, transparent) var(--sweep),
+    transparent calc(var(--sweep) + 12%)
+  );
+  transition: --sweep 0.9s var(--ease);
+}
+.card:hover .frame::after { --sweep: 120%; }
+
+.card .meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  padding: 0.95rem 1.05rem 1.1rem;
+  border-top: 1px solid var(--line-soft);
+}
+.card .name {
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bright);
+  transition: transform 0.45s var(--ease);
+}
+.card:hover .name { transform: translateX(4px); }
+.card .count {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--subtle);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+/* running total: the figure lit, the goal held back */
+.card .count em { font-style: normal; color: var(--accent); }
+.card .count i { font-style: normal; color: var(--subtle); }
+.card .blurb {
+  padding: 0 1.05rem 1.1rem;
+  margin: -0.6rem 0 0;
+  font-size: 0.78rem;
+  color: var(--subtle);
+}
+
+/* ---------- photo grid ---------- */
+/* Masonry: fine row tracks, and each tile spans however many it needs for
+   its own shape. Keeps left-to-right order, and portraits and panoramas
+   sit together without gaps. Spans are set in gallery.js. */
+.grid {
+  display: grid;
+  gap: clamp(0.5rem, 1.4vw, 1.1rem);
+  /* two up on a phone, four up on a desktop */
+  grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 40vw, 240px), 1fr));
+  grid-auto-rows: 8px;
+}
+
+.tile {
+  display: block;
+  align-self: start;          /* height comes from content, not the row span */
+  grid-row-end: span 30;      /* replaced per tile once measured */
+  cursor: zoom-in;
+}
+.tile[data-span='2'] { grid-column: span 2; }
+@media (max-width: 560px) {
+  .tile[data-span='2'] { grid-column: span 1; }
+}
+
+/* The frame. Its aspect ratio is the photo's own, set inline, so nothing
+   is cropped and the tile has a height before the image arrives. */
+.tile .shot {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-lift);
+  border: 1px solid var(--line-soft);
+  transition: border-color 0.4s var(--ease);
+}
+.tile:hover .shot, .tile:focus-visible .shot { border-color: var(--accent); }
+.tile:focus-visible { outline: none; }
+
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s var(--ease), filter 0.6s ease;
+  filter: contrast(1.02);
+}
+.tile:hover img { transform: scale(1.05); }
+
+.tile figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.5rem 0.9rem 0.75rem;
+  background: linear-gradient(transparent, var(--shade));
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--bright);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s var(--ease);
+}
+.tile:hover figcaption, .tile:focus-visible figcaption { opacity: 1; transform: none; }
+.tile figcaption span { display: block; color: var(--subtle); }
+
+/* Sitter's name, printed under the frame on the county pages. */
+.tile .who {
+  display: block;
+  padding: 0.6rem 0.1rem 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.35s ease;
+  overflow-wrap: anywhere;
+}
+.tile:hover .who, .tile:focus-visible .who { color: var(--accent); }
+
+/* ---------- county map grid ---------- */
+.counties {
+  display: grid;
+  gap: clamp(0.6rem, 1.6vw, 1.2rem);
+  /* never one-up: a full-width map per county would be a mile of scrolling */
+  grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 22vw, 190px), 1fr));
+}
+
+/* An explicit display beats the browser's own [hidden] rule, so the
+   province filter needs this to actually hide anything. */
+.county[hidden] { display: none; }
+
+.county {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background: var(--bg-lift);
+  padding: 0.9rem 0.9rem 0.8rem;
+  transition: border-color 0.45s var(--ease), background-color 0.45s var(--ease);
+}
+.county:hover, .county:focus-visible { border-color: var(--accent); outline: none; }
+.county.empty { opacity: 0.42; }
+.county.empty:hover { opacity: 0.8; }
+
+/* faint cover photo behind the line drawing */
+.county .bed {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.16;
+  filter: grayscale(1) contrast(1.15);
+  transition: opacity 0.6s ease, filter 0.6s ease, transform 0.9s var(--ease);
+}
+.county .bed img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.county:hover .bed { opacity: 0.3; transform: scale(1.05); }
+
+.county .map {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.county .map .all {
+  fill: none;
+  stroke: var(--bright);
+  stroke-opacity: 0.28;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+  transition: stroke-opacity 0.5s ease;
+}
+.county:hover .map .all { stroke-opacity: 0.45; }
+
+.county .map .hi {
+  fill: var(--accent);
+  fill-opacity: 0;
+  stroke: var(--bright);
+  stroke-width: 7;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: fill-opacity 0.5s ease, stroke 0.5s ease, filter 0.5s ease;
+}
+.county:hover .map .hi,
+.county:focus-visible .map .hi {
+  fill-opacity: 0.16;
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 65%, transparent));
+}
+/* the county outline draws itself in when the tile scrolls into view */
+.county.drawn .map .hi { stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s var(--ease); }
+
+.county .label {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.7rem;
+}
+.county .label .row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+.county .en {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bright);
+  white-space: nowrap;
+}
+.county .ga {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.66rem;
+  color: var(--subtle);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.county .n {
+  margin-left: auto;
+  font-size: 0.68rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+/* the "/10" half of the tally sits back a little */
+.county .n i {
+  font-style: normal;
+  color: var(--subtle);
+}
+.county.empty .n { color: var(--subtle); }
+
+/* province filter */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.8rem;
+}
+.filters button {
+  padding: 0.42em 0.9em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+.filters button:hover { color: var(--bright); border-color: var(--muted); }
+.filters button[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* the big map that heads a single county's page */
+.county-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  margin-bottom: 2.5rem;
+}
+.county-head .map {
+  width: clamp(120px, 20vw, 190px);
+  height: auto;
+  flex: none;
+  overflow: visible;
+}
+.county-head .map .all { fill: none; stroke: var(--bright); stroke-opacity: 0.3; stroke-width: 2.5; }
+.county-head .map .hi {
+  fill: var(--accent);
+  fill-opacity: 0.18;
+  stroke: var(--accent);
+  stroke-width: 7;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 55%, transparent));
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.3s var(--ease) 0.15s forwards;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.county-head h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bright);
+}
+.county-head .ga { color: var(--subtle); font-style: italic; letter-spacing: 0.04em; }
+.county-head .prov { color: var(--accent); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; }
+
+/* ---------- empty states ---------- */
+.empty-note {
+  border: 1px dashed var(--line);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  color: var(--subtle);
+  font-size: 0.82rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.empty-note code {
+  color: var(--accent);
+  font-size: 0.86em;
+  word-break: break-all;
+}
+
+/* placeholder shown wherever a photo has not landed yet */
+.holder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      var(--line-soft) 0 1px,
+      transparent 1px 11px
+    );
+}
+.holder::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: auto 0 0.6rem 0;
+  text-align: center;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* ---------- lightbox ---------- */
+dialog#lightbox {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  color: var(--fg);
+  overflow: hidden;
+}
+dialog#lightbox::backdrop {
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+/* discrete transitions — modern browsers animate dialog open/close */
+dialog#lightbox,
+dialog#lightbox::backdrop {
+  opacity: 0;
+  transition: opacity 0.35s var(--ease), display 0.35s allow-discrete, overlay 0.35s allow-discrete;
+}
+dialog#lightbox[open],
+dialog#lightbox[open]::backdrop { opacity: 1; }
+@starting-style {
+  dialog#lightbox[open],
+  dialog#lightbox[open]::backdrop { opacity: 0; }
+}
+
+/* Flex, not grid: a percentage max-height on a grid item resolves against
+   an auto-sized row, which just grows to the image — so a big photo
+   overflowed and showed as a zoomed crop. A flex box of definite height
+   clamps it properly, and never scales a small photo up. */
+.lb-stage {
+  position: absolute;
+  inset: 3.6rem 1rem 4.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  min-width: 0;
+}
+.lb-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Only for browsers without view transitions, or reduced motion — there
+   the photo has no morph to arrive on. Never combined with a transition:
+   suppressing it with a class and then removing the class replays it,
+   which is exactly the "it opens twice" effect. */
+.lb-stage img.fade-in { animation: lbin 0.35s var(--ease) both; }
+@keyframes lbin {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+.lb-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+.lb-bar.top { top: 0; }
+.lb-bar.bottom { bottom: 0; color: var(--subtle); }
+.lb-bar .title { color: var(--bright); text-transform: uppercase; }
+.lb-bar .where { color: var(--subtle); }
+.lb-bar .counter { margin-left: auto; color: var(--accent); }
+.lb-close {
+  margin-left: auto;
+  padding: 0.4em 0.7em;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.lb-close:hover { color: var(--bright); border-color: var(--accent); }
+
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: clamp(44px, 7vw, 68px);
+  height: clamp(44px, 7vw, 68px);
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.35s var(--ease);
+}
+.lb-nav:hover { color: var(--accent); border-color: var(--line); }
+.lb-nav.prev { left: clamp(0.25rem, 2vw, 1.5rem); }
+.lb-nav.next { right: clamp(0.25rem, 2vw, 1.5rem); }
+.lb-nav.prev:hover { transform: translateX(-3px); }
+.lb-nav.next:hover { transform: translateX(3px); }
+.lb-nav[hidden] { display: none; }
+
+/* ---------- picture protection ---------- */
+/* Blocks right-click, drag and long-press on every photo. A shield
+   sits over the image so the pointer never lands on the <img>. */
+.shielded { position: relative; }
+.shielded::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+img {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* ---------- reveal on scroll ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Modern path: scroll-driven, no JS, no jank. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 26%;
+  }
+}
+/* Fallback: IntersectionObserver flips .seen */
+@supports not (animation-timeline: view()) {
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.seen { opacity: 1; transform: none; }
+}
+
+/* ---------- view transitions ---------- */
+/* Same-document only. Cross-document transitions (@view-transition) are
+   deliberately left off: every move inside the gallery is a hash change,
+   and the other pages have their own fold-out animation. */
+
+::view-transition-old(root) {
+  animation: fade-out 0.28s var(--ease-in-out) both;
+}
+::view-transition-new(root) {
+  animation: fade-in 0.42s var(--ease) both;
+}
+@keyframes fade-out { to { opacity: 0; transform: translateY(-8px); } }
+@keyframes fade-in { from { opacity: 0; transform: translateY(12px); } }
+
+/* the clicked photo keeps its identity across the morph */
+::view-transition-group(photo) { animation-duration: 0.5s; }
+::view-transition-old(photo),
+::view-transition-new(photo) {
+  animation-duration: 0.5s;
+  mix-blend-mode: normal;
+  /* Both snapshots fill the morphing box and keep their proportions. The
+     default would stretch them as the box changes shape — the thumbnail is
+     a crop, the full photo is not. */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The dialog's own fade would run underneath the transition and show up
+   again as it ends. The transition covers it. */
+:root.morphing dialog#lightbox,
+:root.morphing dialog#lightbox::backdrop { transition: none; }
+
+/* Opening or closing the viewer: the page behind is unchanged, so it must
+   not slide — a second motion competing with the photo is what reads as a
+   double animation. Fade the surroundings only, and briefly. */
+:root.viewing::view-transition-old(root) { animation: soft-out 0.25s var(--ease-in-out) both; }
+:root.viewing::view-transition-new(root) { animation: soft-in 0.25s var(--ease) both; }
+@keyframes soft-out { to { opacity: 0; } }
+@keyframes soft-in { from { opacity: 0; } }
+
+/* Stepping from one photo to the next changes nothing but the photo, so
+   the page behind is frozen outright and only the photo cross-fades. */
+:root.stepping::view-transition-old(root),
+:root.stepping::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+:root.stepping::view-transition-group(photo),
+:root.stepping::view-transition-old(photo),
+:root.stepping::view-transition-new(photo) {
+  animation-duration: 0.32s;
+}
+
+/* ---------- motion preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

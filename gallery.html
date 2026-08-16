@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alaa Saeed | Gallery</title>
+  <meta name="description" content="Photographs — landscape, street, portraits from the 32 counties of Ireland, and live music." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚫️</text></svg>">
+  <link rel="stylesheet" href="gallery/gallery.css" />
+
+  <!-- Load theme immediately to prevent flash -->
+  <script>
+    (function () {
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light-mode-loading');
+      }
+    })();
+  </script>
+</head>
+
+<body class="is-preload">
+
+  <a href="index.html" class="back" id="back-link" data-leave>
+    <span class="arrow">&#8592;</span> <span class="where">alaa.sh</span>
+  </a>
+
+  <header class="masthead">
+    <h1 id="title">Gallery</h1>
+  </header>
+  <div class="rule"><i></i></div>
+
+  <main id="view"></main>
+
+  <!-- Full-screen viewer -->
+  <dialog id="lightbox" aria-label="Photo viewer">
+    <div class="lb-bar top">
+      <span class="title" id="lb-title"></span>
+      <span class="where" id="lb-where"></span>
+      <button class="lb-close" id="lb-close" type="button" aria-label="Close viewer">esc &#10005;</button>
+    </div>
+
+    <div class="lb-stage" id="lb-stage"></div>
+
+    <button class="lb-nav prev" id="lb-prev" type="button" aria-label="Previous photo">&#10094;</button>
+    <button class="lb-nav next" id="lb-next" type="button" aria-label="Next photo">&#10095;</button>
+
+    <div class="lb-bar bottom">
+      <span>&#8592; &#8594; to move</span>
+      <span class="counter" id="lb-counter"></span>
+    </div>
+  </dialog>
+
+  <!-- County outlines live here once and are pulled in with <use> -->
+  <svg id="map-defs" width="0" height="0" aria-hidden="true"
+       style="position:absolute;pointer-events:none"></svg>
+
+  <script src="gallery/data/ireland-map.js"></script>
+  <script src="gallery/data/photos.js"></script>
+  <script src="gallery/data/gallery.js"></script>
+  <script src="gallery/gallery.js"></script>
+
+  <script>
+    /* Theme, matched to the rest of the site */
+    (function () {
+      document.documentElement.classList.remove('light-mode-loading');
+      if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+    })();
+
+    /* Only the top of the gallery leaves the page, and it leaves the way
+       the other pages do: fade, then go. Everywhere else the back link is
+       an ordinary link one step up, handled by gallery.js. */
+    document.getElementById('back-link').addEventListener('click', function (e) {
+      if (!this.hasAttribute('data-leave')) return;
+      e.preventDefault();
+      document.body.classList.add('leaving');
+      setTimeout(function () { window.location.href = 'index.html'; }, 450);
+    });
+  </script>
+
+</body>
+</html>
