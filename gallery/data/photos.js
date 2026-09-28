@@ -52,6 +52,13 @@ window.GALLERY_FILES = {
          "f": "abyusif-5.jpg"
       }
    ],
+         "galway": [
+            {
+               "ar": "681/1080",
+               "f": "BW_DSC3770_1080.jpg",
+               "name": "HJ"
+            }
+         ],
    "allie-sherlock": [
       {
          "ar": "1080/1350",
@@ -147,6 +154,13 @@ window.GALLERY_FILES = {
       }
    ],
    "irish-faces": {
+      "galway": [
+         {
+            "ar": "681/1080",
+            "f": "BW_DSC3770_1080.jpg",
+            "name": "HJ"
+         }
+      ],
       "cork": [
          {
             "ar": "5124/5124",
